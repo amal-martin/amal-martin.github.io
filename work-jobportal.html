@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Portal · Amal Martin</title>
+<meta name="description" content="A two-sided hiring platform: a marketing site for recruiters and enterprises, and a careers site for job seekers, built to run for any organization. Case study by Amal Martin.">
+<meta name="author" content="Amal Martin">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Job Portal · Amal Martin">
+<meta property="og:description" content="A two-sided hiring platform: a marketing site for recruiters and enterprises, and a careers site for job seekers, built to run for any organization.">
+<meta property="og:url" content="https://amal-martin.github.io/work-jobportal.html">
+<meta property="og:image" content="https://amal-martin.github.io/assets/work/job-recruiter-landing.jpg">
+<link rel="canonical" href="https://amal-martin.github.io/work-jobportal.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f5f5f7' font-family='Georgia,serif' font-style='italic'%3Eam%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+  try { if (localStorage.getItem('theme') === 'dark') d.classList.add('dark'); } catch (e) {}
+})();
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Cormorant Garamond"', 'Georgia', 'Times New Roman', 'serif'],
+        sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', '"Nimbus Sans"', 'sans-serif']
+      },
+      colors: {
+        bg: 'rgb(var(--bg) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        onaccent: 'rgb(var(--on-accent) / <alpha-value>)'
+      }
+    }
+  }
+};
+</script>
+<link rel="stylesheet" href="assets/work/site.css">
+</head>
+
+<body class="bg-bg font-sans text-ink antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
+
+<header id="nav" class="fixed inset-x-0 top-0 z-50">
+  <div class="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-6 md:px-10">
+    <a href="index.html" class="font-serif text-[1.65rem] leading-none tracking-[-0.01em] md:text-[1.9rem]" aria-label="Amal Martin, home">Amal Martin</a>
+
+    <nav class="hidden items-center gap-6 text-sm md:flex lg:gap-8" aria-label="Primary">
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#experience" class="nav-link">Experience</a>
+      <a href="work.html" class="nav-link is-active" aria-current="page">Work</a>
+      <a href="index.html#education" class="nav-link">Education</a>
+      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="index.html#writing" class="nav-link">Writing</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <button id="theme" type="button" aria-label="Toggle light and dark theme"
+        class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 transition hover:border-ink hover:bg-ink hover:text-bg">
+        <svg class="h-[18px] w-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="hidden h-[18px] w-[18px] dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a href="index.html#contact" class="btn btn-solid hidden sm:inline-flex md:hidden lg:inline-flex">Let’s talk
+        <svg class="arr h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"
+        class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 md:hidden">
+        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path class="ml1" d="M4 8h16"/><path class="ml2" d="M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="menu" class="menu md:hidden" inert>
+    <div class="menu-inner">
+      <nav class="mx-auto flex max-w-[1320px] flex-col px-6 pb-7 pt-2 font-serif text-4xl" aria-label="Mobile">
+        <a href="index.html#about" style="--i:0" class="py-1.5">About</a>
+        <a href="index.html#experience" style="--i:1" class="py-1.5">Experience</a>
+        <a href="work.html" style="--i:2" class="py-1.5 text-accent">Work</a>
+        <a href="index.html#education" style="--i:3" class="py-1.5">Education</a>
+        <a href="index.html#services" style="--i:4" class="py-1.5">Services</a>
+        <a href="index.html#writing" style="--i:5" class="py-1.5">Writing &amp; Poetry</a>
+        <a href="index.html#contact" style="--i:6" class="py-1.5">Contact</a>
+        <a href="mailto:amalmartin0075@gmail.com" style="--i:7" class="mt-5 font-sans text-sm text-muted">amalmartin0075@gmail.com</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================== HEADER ============================== -->
+<section class="pb-10 pt-32 md:pb-14 md:pt-40">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <a href="work.html" class="reveal inline-flex items-center gap-2 text-sm text-muted transition hover:text-ink">
+      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      All work
+    </a>
+    <h1 class="reveal mt-6 max-w-3xl font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.02em]" style="--d:.05s">Job Portal</h1>
+    <p class="reveal mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg" style="--d:.1s">A two-sided hiring platform: a marketing site for recruiters and enterprises, and a careers site for job seekers, built to run for any organization.</p>
+
+    <dl class="reveal mt-10 flex flex-wrap gap-x-10 gap-y-6 border-t border-ink/12 pt-7 text-sm" style="--d:.15s">
+      <div><dt class="text-muted">Role</dt><dd class="mt-1">UI/UX Design</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================== BRIEF ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal max-w-2xl">
+      <h2 class="font-serif text-2xl leading-snug md:text-3xl">The brief</h2>
+      <p class="mt-4 text-base leading-relaxed text-muted md:text-lg">Most hiring platforms design for one audience and treat the other as an afterthought. This one needed two real landing experiences under a single product: one that sells recruiters and enterprises on a faster hiring pipeline, and one that sells candidates on the roles themselves, with a shared enterprise feature set underneath both. It launched with two institutions already using it, Kristu Jayanti University and Olive International School in Doha, evidence the two-sided pitch works before a single case study gets written.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 1: RECRUITER LANDING ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/job-recruiter-landing.jpg" alt="Recruiter-facing landing page, with the headline 'The New Infrastructure for Modern Hiring' and trust logos for Kristu Jayanti University and Olive International School" width="2400" height="1476" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">Sold on infrastructure, not adjectives</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">The recruiter-facing landing page opens with the product’s actual claim, “the new infrastructure for modern hiring,” backed immediately by a live product shot and a real metric, candidates hired this week, instead of a wall of feature adjectives. Trust logos from institutions already on the platform close the section before a recruiter has to take anything on faith.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 2: CANDIDATE HERO ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/job-candidate-hero.jpg" alt="Candidate-facing landing page hero, dark theme, with the headline 'Careers, Reimagined' and floating job cards" width="2400" height="649" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">A different pitch for the other side</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">Job seekers get their own landing page, not a cropped version of the recruiter one: dark, editorial, built around “Careers, Reimagined” and a stack of real open roles rather than an enterprise sales pitch. Same product, same brand, a completely different opening line.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 3: ENTERPRISE ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/job-enterprise.jpg" alt="Enterprise Solutions section, reading 'Scale Your Workforce with Precision', with three feature columns: unified talent pipeline, automated workflows, and smart candidate matching" width="2400" height="599" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">Where the pitch turns into a feature list</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">Further down the candidate-facing page, the audience shifts entirely: a dedicated enterprise section breaks the platform into three concrete capabilities, a unified talent pipeline, automated workflows, and smart candidate matching, each with its own explanation link rather than one generic features grid.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 4: CTA ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/job-cta.jpg" alt="Closing call-to-action section, reading 'Your Next Role Starts Here', with 'Get Started Now' and 'View Demo' buttons and a footer" width="2400" height="910" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">One closing line, either audience</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">The page closes the way it opened, on the candidate side, with a single direct call to action rather than a form. “Your next role starts here” reads as an invitation whether the visitor arrived to hire or to be hired.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== NEXT PROJECT / CONTACT ============================== -->
+<section class="pb-24 md:pb-36">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal flex flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-surface p-8 sm:flex-row sm:items-center md:p-12">
+      <div>
+        <h2 class="font-serif text-2xl leading-snug md:text-3xl">Have a project like this?</h2>
+        <p class="mt-2 max-w-md text-muted">I take on select freelance and contract work. Happy to talk about what you’re building.</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-solid flex-none">Let’s talk
+        <svg class="arr h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-4 px-6 py-8 text-xs text-muted sm:flex-row md:px-10">
+  <p>© <span id="year">2026</span> Amal Martin · Designed &amp; written in Bengaluru</p>
+  <a href="work.html" class="inline-flex items-center gap-2 transition hover:text-ink">All work
+    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</footer>
+
+<script src="assets/work/site.js"></script>
+</body>
+</html>
