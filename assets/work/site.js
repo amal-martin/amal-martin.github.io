@@ -1,4 +1,4 @@
-// Shared behaviour for the Work section pages: theme toggle, mobile menu, nav scroll state,
+// Shared behaviour for the Work section pages: mobile menu, nav scroll state,
 // and a simple reveal-on-scroll (no parallax/marquee — these pages stay lighter than index.html).
 (function () {
   var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -9,15 +9,6 @@
   if (window.Lenis && !reduce) {
     var lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.95, smoothWheel: true });
     requestAnimationFrame(function raf(t) { lenis.raf(t); requestAnimationFrame(raf); });
-  }
-
-  // Theme toggle (persisted; the inline head script already applied a saved 'dark' before paint)
-  var themeBtn = $('#theme');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
-      var d = document.documentElement, isDark = d.classList.toggle('dark');
-      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
-    });
   }
 
   // Mobile menu

@@ -3,15 +3,6 @@
    the same site, not a bolted-on section. */
 
 :root {
-  --bg: 255 255 255;
-  --surface: 245 245 247;
-  --ink: 29 29 31;
-  --muted: 110 110 115;
-  --accent: 0 102 204;
-  --on-accent: 255 255 255;
-  color-scheme: light;
-}
-:root.dark {
   --bg: 0 0 0;
   --surface: 28 28 30;
   --ink: 245 245 247;

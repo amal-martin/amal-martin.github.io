@@ -6,7 +6,8 @@
 <title>Amal Martin · UI/UX Designer, Writer &amp; Poet in Bengaluru</title>
 <meta name="description" content="Amal Martin is a UI/UX designer, writer and poet based in Bengaluru, and a research scholar in Computer Science (HCI). 35+ projects built from scratch, each with its own design system and brand. Available for contract and freelance work.">
 <meta name="author" content="Amal Martin">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Amal Martin · Founding Designer (UI/UX, Product & Brand) and Writer">
 <meta property="og:description" content="4+ years of experience. Research scholar in HCI. 35+ products built from scratch, each with its own design system and brand.">
@@ -52,12 +53,12 @@
 }
 </script>
 
-<!-- Light by default; apply a saved dark choice before paint to avoid a flash -->
+<!-- Dark only: applied before paint -->
 <script>
 (function () {
   var d = document.documentElement;
   d.classList.add('js');
-  try { if (localStorage.getItem('theme') === 'dark') d.classList.add('dark'); } catch (e) {}
+  d.classList.add('dark');
 })();
 </script>
 
@@ -85,17 +86,8 @@ tailwind.config = {
 </script>
 
 <style>
-  /* ---------- Design tokens (light is the base; dark overrides) ---------- */
+  /* ---------- Design tokens (dark only) ---------- */
   :root {
-    --bg: 255 255 255;
-    --surface: 245 245 247;
-    --ink: 29 29 31;
-    --muted: 110 110 115;
-    --accent: 0 102 204;
-    --on-accent: 255 255 255;
-    color-scheme: light;
-  }
-  :root.dark {
     --bg: 0 0 0;
     --surface: 28 28 30;
     --ink: 245 245 247;
@@ -118,6 +110,19 @@ tailwind.config = {
     html.js #createStage { position: sticky; }
     html.js #createCard { will-change: transform, opacity; }
   html.js #createText .w { opacity: 0; }
+  }
+  /* Wipe: the quote panel slides left off the screen and uncovers the Mona Lisa section underneath */
+  #slideTrack { overflow-x: clip; }
+  #slideUnder { display: flex; align-items: center; }
+  #slideUnder > section { width: 100%; }
+  #slideOver { background: rgb(var(--bg)); }
+  @media (prefers-reduced-motion: no-preference) {
+    html.js #slideStage { display: grid; position: sticky; }
+    html.js #slideUnder, html.js #slideOver { grid-area: 1 / 1; }
+    html.js #slideUnder { will-change: transform, opacity; }
+    html.js #slideOver { position: relative; z-index: 2; display: flex; align-items: flex-start; will-change: transform; }
+    /* soft edge on the right side only, so there is no line along the top or bottom of the panel */
+    html.js #slideOver::after { content: ""; position: absolute; top: 0; bottom: 0; left: 100%; width: 90px; pointer-events: none; background: linear-gradient(90deg, rgb(0 0 0 / .16), rgb(0 0 0 / .05) 40%, transparent); }
   }
   body { background: rgb(var(--bg)); color: rgb(var(--ink)); transition: background-color .4s ease, color .4s ease; }
   h1, h2, h3, h4, .font-serif { font-weight: 500; font-variant-numeric: lining-nums; }
@@ -349,11 +354,6 @@ tailwind.config = {
     </nav>
 
     <div class="flex items-center gap-2.5">
-      <button id="theme" type="button" aria-label="Toggle light and dark theme"
-        class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 transition hover:border-ink hover:bg-ink hover:text-bg">
-        <svg class="h-[18px] w-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
-        <svg class="hidden h-[18px] w-[18px] dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      </button>
       <a href="#contact" class="btn btn-solid hidden sm:inline-flex md:hidden lg:inline-flex">Let’s talk
         <svg class="arr h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
@@ -490,16 +490,21 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ============================== BELIEF ============================== -->
-<section id="belief" class="px-6 pb-12 pt-12 md:px-10 md:pb-[4.5rem] md:pt-[4.5rem]">
+<!-- ============================== BELIEF + SEE THE WORK (pinned wipe: the quote slides left to reveal the next section) ============================== -->
+<div id="slideTrack">
+<div id="slideStage">
+<div id="slideOver">
+<section id="belief" class="w-full px-6 pt-14 md:px-10 md:pt-0">
   <div class="mx-auto max-w-[1100px] text-center">
-    <p data-scrub class="font-serif text-[clamp(2.2rem,5.4vw,4.75rem)] leading-[1.1] tracking-[-0.02em]">In a world where AI lets everyone build, what makes a product stand apart is <em>creativity</em>, the unique magic only a human can bring.</p>
+    <p data-scrub class="font-serif text-[clamp(2.2rem,5.4vw,4.75rem)] leading-[1.1] tracking-[-0.02em]">In a world where AI lets everyone build, what makes a product stand apart is the thought behind it. Because art comes from somewhere no algorithm or AI can reach: <em>a life lived.</em></p>
     <p class="reveal mx-auto mt-10 max-w-xl text-base leading-relaxed text-muted md:text-lg">Made by a human is the new luxury</p>
   </div>
 </section>
+</div>
+<div id="slideUnder">
 
 <!-- ============================== SEE THE WORK ============================== -->
-<section id="work-cta" class="px-6 pb-4 pt-10 md:px-10">
+<section id="work-cta" class="px-6 pb-0 pt-10 md:px-10">
   <div class="mx-auto max-w-[1100px]">
     <div data-expand class="relative overflow-hidden rounded-[1.75rem] bg-[#140d07]">
       <img src="assets/monalisa-louvre.jpg" alt="The Mona Lisa hanging in the Louvre, seen over the blurred heads of the visitors gathered to look at it" width="2000" height="1333" loading="lazy" class="block h-auto w-full">
@@ -510,6 +515,10 @@ tailwind.config = {
     </div>
   </div>
 </section>
+
+</div>
+</div>
+</div>
 
 <!-- ============================== ABOUT ============================== -->
 <section id="about" class="pb-12 pt-20 md:pb-14 md:pt-24">
@@ -544,12 +553,7 @@ tailwind.config = {
         <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Also</dt><dd>Research Scholar in Computer Science · Writer · Poet</dd></div>
         <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Research</dt><dd>Human–Computer Interaction: user psychology, cognitive science &amp; technology</dd></div>
         <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Languages</dt><dd>Malayalam (mother tongue) · English · Hindi · Kannada · Tamil · Telugu</dd></div>
-        <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Toolkit</dt>
-          <dd class="flex flex-wrap gap-2">
-            <span class="chip !text-ink">Figma</span><span class="chip !text-ink">HCI Research</span><span class="chip !text-ink">Design Systems</span><span class="chip !text-ink">Branding</span><span class="chip !text-ink">Wireframing</span><span class="chip !text-ink">Prototyping</span><span class="chip !text-ink">UX Research</span><span class="chip !text-ink">User Flows</span><span class="chip !text-ink">Graphic Design</span><span class="chip !text-ink">Adobe Photoshop</span><span class="chip !text-ink">Color Theory</span>
-          </dd>
-        </div>
-      </dl>
+</dl>
 
     </div>
   </div>
@@ -939,12 +943,6 @@ tailwind.config = {
     requestAnimationFrame(function raf(t) { lenis.raf(t); requestAnimationFrame(raf); });
   }
 
-  // ───────── Theme toggle ─────────
-  $('#theme').addEventListener('click', function () {
-    var dark = root.classList.toggle('dark');
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
-  });
-
   // ───────── Mobile menu (animated open/close) ─────────
   var menu = $('#menu'), btn = $('#menuBtn'), navEl = $('#nav');
   function setMenu(open) {
@@ -1063,6 +1061,25 @@ tailwind.config = {
     createTrack.style.height = (h + createRun) + 'px';
   }
   layoutCreate();
+
+  // wipe: quote pinned, finishes lighting up, then slides left off-screen to uncover the next section
+  var slideTrack = $('#slideTrack'), slideStage = $('#slideStage'), slideOver = $('#slideOver'), slideUnder = $('#slideUnder');
+  var slideTop = 72, slideRun = 0, slideLast = -999;
+  function layoutSlide() {
+    if (reduce || !slideTrack || !slideStage) return;
+    var belief = $('#belief', slideOver);
+    slideStage.style.top = '0px'; slideTrack.style.height = 'auto'; belief.style.marginTop = '0px';
+    var h = slideStage.offsetHeight, q = $('#belief > div', slideOver);
+    slideTop = Math.max(72, (window.innerHeight - h) / 2);
+    slideRun = window.innerHeight * 1.5;
+    slideStage.style.top = slideTop + 'px';
+    slideTrack.style.height = (h + slideRun) + 'px';
+    // the stage is as tall as the next section; keep the quote near the top of its panel (never overlapping the section above)
+    // so the gap above it stays tight, and centre it only when the panel is barely taller than the quote
+    var blank = q ? (h - q.offsetHeight) / 2 : 0;
+    belief.style.marginTop = Math.max(0, Math.min(blank, 72) - parseFloat(getComputedStyle(belief).paddingTop)) + 'px';
+  }
+  layoutSlide();
 
   // ───────── Reveal + section tracking + count-up ─────────
   if ('IntersectionObserver' in window) {
@@ -1235,14 +1252,26 @@ tailwind.config = {
     });
 
     // scroll-scrubbed words: each word lights up as the block scrolls through
+    var sy = slideTrack ? slideTop - slideTrack.getBoundingClientRect().top : -1;   // px scrolled past the wipe's pin point
     scrubs.forEach(function (o) {
       var r = o.el.getBoundingClientRect();
       var p = clamp((vh * 0.9 - r.top) / (vh * 0.45 + r.height), 0, 1);
+      if (slideTrack && o.el.closest('#belief')) p += (1 - p) * clamp(sy / (vh * 0.45), 0, 1);   // while pinned, the last words finish first
       if (Math.abs(p - o.last) < 0.002) return;
       o.last = p;
       var n = o.words.length;
       o.words.forEach(function (w, i) { w.style.opacity = (0.16 + 0.84 * clamp(p * (n + 2) - i, 0, 1)).toFixed(2); });
     });
+
+    // wipe: after the quote has finished, it slides left like a curtain and the section behind it is revealed
+    if (slideTrack && slideOver && slideUnder && Math.abs(sy - slideLast) > 0.5) {
+      slideLast = sy;
+      var sp = clamp((sy - vh * 0.45) / (vh * 0.85), 0, 1);
+      var se = sp * sp * (3 - 2 * sp);
+      slideOver.style.transform = 'translate3d(' + (-se * 102).toFixed(2) + '%,0,0)';
+      slideUnder.style.transform = 'scale(' + (0.94 + 0.06 * se).toFixed(3) + ')';
+      slideUnder.style.opacity = (0.55 + 0.45 * se).toFixed(3);
+    }
 
     // manifesto: pinned at the centre of the screen while four things happen in order, all tied to scroll:
     // 1) the box grows in, 2) the hands resolve out of blur and dust, 3) the words light up one by one,
@@ -1320,7 +1349,7 @@ tailwind.config = {
     prevY = y;
     requestAnimationFrame(frame);
   }
-  function relayout() { vh = window.innerHeight; measure(); layoutCreate(); createLast = -999; lastY = -1; }
+  function relayout() { vh = window.innerHeight; measure(); layoutCreate(); layoutSlide(); createLast = -999; slideLast = -999; lastY = -1; }
   addEventListener('resize', relayout);
   measure(); frame();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
