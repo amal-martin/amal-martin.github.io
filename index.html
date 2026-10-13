@@ -111,16 +111,38 @@ tailwind.config = {
     html.js #createCard { will-change: transform, opacity; }
   html.js #createText .w { opacity: 0; }
   }
+  /* One slow band of gold light passes across "Made by a human is the new luxury" the moment the quote has finished lighting up */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    @media (prefers-reduced-motion: no-preference) {
+      .gold-sheen {
+        background-image: linear-gradient(105deg, rgb(var(--muted)) 0%, rgb(var(--muted)) 30%, #c9a95f 40%, #f6e2a6 50%, #d9b86a 60%, rgb(var(--muted)) 70%, rgb(var(--muted)) 100%);
+        background-size: 300% 100%; background-repeat: no-repeat; background-position: 100% 0;
+        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+      }
+      .gold-sheen.sheen-go { animation: goldSheenOnce 3.4s cubic-bezier(.45, .05, .25, 1) forwards; }
+    }
+  }
+  @keyframes goldSheenOnce {
+    0%   { background-position: 100% 0; filter: drop-shadow(0 0 0 rgb(233 199 122 / 0)); }
+    45%  { filter: drop-shadow(0 0 10px rgb(233 199 122 / .42)); }
+    100% { background-position: 0% 0; filter: drop-shadow(0 0 0 rgb(233 199 122 / 0)); }
+  }
+
+  /* Experience rises over About: About stays pinned (bottom edge on the bottom of the screen) while Experience slides up and covers it */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js #about { position: sticky; z-index: 0; }
+    html.js #experience { position: relative; z-index: 1; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(255 255 255 / .09); box-shadow: 0 -40px 80px -20px rgb(0 0 0 / .9); }
+  }
+
   /* Wipe: the quote panel slides left off the screen and uncovers the Mona Lisa section underneath */
   #slideTrack { overflow-x: clip; }
-  #slideUnder { display: flex; align-items: center; }
   #slideUnder > section { width: 100%; }
   #slideOver { background: rgb(var(--bg)); }
   @media (prefers-reduced-motion: no-preference) {
     html.js #slideStage { display: grid; position: sticky; }
     html.js #slideUnder, html.js #slideOver { grid-area: 1 / 1; }
     html.js #slideUnder { will-change: transform, opacity; }
-    html.js #slideOver { position: relative; z-index: 2; display: flex; align-items: flex-start; will-change: transform; }
+    html.js #slideOver { position: relative; z-index: 2; display: flex; align-items: center; will-change: transform; }
     /* soft edge on the right side only, so there is no line along the top or bottom of the panel */
     html.js #slideOver::after { content: ""; position: absolute; top: 0; bottom: 0; left: 100%; width: 90px; pointer-events: none; background: linear-gradient(90deg, rgb(0 0 0 / .16), rgb(0 0 0 / .05) 40%, transparent); }
   }
@@ -294,6 +316,7 @@ tailwind.config = {
   .svc-item { height: 100%; padding-top: 1.75rem; border-top: 1px solid rgb(var(--ink) / .12); }
   .svc-item h3 { transition: transform .4s cubic-bezier(.2,.7,.2,1), color .3s ease; }
   .svc-item:hover h3 { transform: translateX(6px); color: rgb(var(--accent)); }
+
 
   /* ---------- Writing cards (also used for Services) ---------- */
   .card { display: flex; flex-direction: column; justify-content: space-between; min-height: 19rem; border: 1px solid transparent; border-radius: 1.5rem;
@@ -494,58 +517,45 @@ tailwind.config = {
 <div id="slideTrack">
 <div id="slideStage">
 <div id="slideOver">
-<section id="belief" class="w-full px-6 pt-14 md:px-10 md:pt-0">
+<section id="belief" class="w-full px-6 md:px-10">
   <div class="mx-auto max-w-[1100px] text-center">
     <p data-scrub class="font-serif text-[clamp(2.2rem,5.4vw,4.75rem)] leading-[1.1] tracking-[-0.02em]">In a world where AI lets everyone build, what makes a product stand apart is the thought behind it. Because art comes from somewhere no algorithm or AI can reach: <em>a life lived.</em></p>
-    <p class="reveal mx-auto mt-10 max-w-xl text-base leading-relaxed text-muted md:text-lg">Made by a human is the new luxury</p>
+    <p class="reveal gold-sheen mx-auto mt-10 max-w-xl text-base leading-relaxed text-muted md:text-lg">Made by a human is the new luxury</p>
   </div>
 </section>
 </div>
 <div id="slideUnder">
 
 <!-- ============================== SEE THE WORK ============================== -->
-<section id="work-cta" class="px-6 pb-0 pt-10 md:px-10">
-  <div class="mx-auto max-w-[1100px]">
-    <div data-expand class="relative overflow-hidden rounded-[1.75rem] bg-[#140d07]">
-      <img src="assets/monalisa-louvre.jpg" alt="The Mona Lisa hanging in the Louvre, seen over the blurred heads of the visitors gathered to look at it" width="2000" height="1333" loading="lazy" class="block h-auto w-full">
+<section id="work-cta" class="relative h-[100svh] min-h-[28rem] w-full overflow-hidden bg-[#140d07]">
+      <img src="assets/monalisa-louvre.jpg" alt="The Mona Lisa hanging in the Louvre, seen over the blurred heads of the visitors gathered to look at it" width="2000" height="1333" loading="lazy" class="absolute inset-0 h-full w-full object-cover" style="object-position:50% 12%">
       <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#140d07]/70 via-transparent to-transparent"></div>
-      <a href="work.html" class="btn btn-gilt btn-compact absolute bottom-3 right-3 md:bottom-8 md:right-8">See some of my works
+      <a href="work.html" class="btn btn-gilt btn-compact absolute bottom-8 right-6 md:bottom-12 md:right-12">See some of my works
         <svg class="arr h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
-    </div>
-  </div>
 </section>
 
 </div>
 </div>
 </div>
 
+<div id="stack">
 <!-- ============================== ABOUT ============================== -->
-<section id="about" class="pb-12 pt-20 md:pb-14 md:pt-24">
-    <div class="mx-auto grid max-w-[1320px] gap-14 px-6 md:px-10 lg:grid-cols-12 lg:gap-16">
+<section id="about" class="flex min-h-[100svh] items-center pb-12 pt-28 md:pb-14 md:pt-32">
+    <div class="mx-auto grid w-full max-w-[1320px] items-center gap-12 px-6 md:px-10 lg:grid-cols-12 lg:gap-16">
 
     <div class="lg:col-span-5">
-      <div class="lg:sticky lg:top-28">
-        <div data-expand class="aspect-[3/4] overflow-hidden rounded-[1.75rem] bg-ink/5">
-          <img src="assets/amal-about.webp" alt="Amal Martin leaning against a concrete wall in a black bomber jacket, wearing sunglasses" width="941" height="1672" loading="lazy"
-            class="h-full w-full object-cover object-top">
-        </div>
+      <div data-expand class="aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-ink/5 lg:aspect-[3/4] lg:max-h-[calc(100svh-11rem)]">
+        <img src="assets/amal-about.webp" alt="Amal Martin leaning against a concrete wall in a black bomber jacket, wearing sunglasses" width="941" height="1672" loading="lazy"
+          class="h-full w-full object-cover object-top">
       </div>
     </div>
 
-    <div class="lg:col-span-7 lg:pt-4">
+    <div class="lg:col-span-7">
       <h2 data-scrub class="font-serif text-[clamp(2.4rem,5vw,4.5rem)] leading-[1.06] tracking-[-0.015em]">
         “The only way to do great work is <em>to love what you do.</em>”
       </h2>
       <p class="reveal mt-5 text-sm font-medium uppercase tracking-[.16em] text-muted">Steve Jobs</p>
-
-      <div class="reveal mt-10 max-w-2xl space-y-5 text-base leading-relaxed text-muted md:text-lg">
-        <p>I’m a UI/UX designer, writer and poet based in Bengaluru. I shape interfaces, user flows and brand systems, and alongside them I write about love, loss, wonder and the small moments that turn out to be the large ones.</p>
-        <p>Both crafts ask the same question: <span class="text-ink">what does this person need to feel, and what can I remove so they feel it sooner?</span> Design taught me structure. Writing taught me empathy. Poetry taught me to leave the right things unsaid.</p>
-        <p>I’m a research scholar in Computer Science, researching Human–Computer Interaction, where user psychology, cognitive science and technology come together. It helps me understand users more deeply, and it drives the way I design.</p>
-        <p>At Kristu Jayanti Software Development Centre I’ve built 35+ projects from the ground up, creating extensive design systems and branding for every one of them. Alongside, I take on select freelance work in UI/UX and brand.</p>
-      </div>
-
 
       <dl class="reveal mt-12 divide-y divide-ink/12 border-y border-ink/12 text-sm">
         <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Based in</dt><dd>Bengaluru, India</dd></div>
@@ -554,7 +564,6 @@ tailwind.config = {
         <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Research</dt><dd>Human–Computer Interaction: user psychology, cognitive science &amp; technology</dd></div>
         <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Languages</dt><dd>Malayalam (mother tongue) · English · Hindi · Kannada · Tamil · Telugu</dd></div>
 </dl>
-
     </div>
   </div>
 </section>
@@ -696,6 +705,7 @@ tailwind.config = {
     </ol>
   </div>
 </section>
+</div>
 
 <!-- ============================== EDUCATION ============================== -->
 <section id="education" class="py-12 md:py-14">
@@ -827,14 +837,14 @@ tailwind.config = {
 </section>
 
 <!-- ============================== MANIFESTO ============================== -->
-<section id="create" class="px-4 pt-4 md:px-6">
+<section id="create">
   <div id="createTrack">
   <div id="createStage">
-  <div id="createCard" class="relative mx-auto max-w-[1320px] overflow-hidden rounded-[2rem] bg-[#0a0806] text-center text-[#f3e9d8]">
+  <div id="createCard" class="relative h-[100svh] min-h-[28rem] w-full overflow-hidden bg-black text-center text-[#f3e9d8]">
     <img id="createBg" src="assets/amal-create.webp" alt="Two hands reaching toward each other, dissolving into dust, echoing Michelangelo's The Creation of Adam" width="1658" height="949" loading="lazy"
       class="absolute inset-0 h-full w-full object-cover">
     <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.3) 0%, rgba(0,0,0,.78) 28%, rgba(0,0,0,.78) 72%, rgba(0,0,0,.35) 100%)"></div>
-    <div class="relative z-10 flex min-h-[22rem] flex-col items-center justify-center px-5 py-20 md:min-h-[28rem] md:px-10 md:py-28">
+    <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 md:px-10">
       <p id="createText" class="mx-auto max-w-3xl font-serif text-[clamp(2.8rem,7.5vw,6rem)] italic leading-[1.1] tracking-[-0.02em]">I create, therefore I am.</p>
     </div>
   </div>
@@ -1055,7 +1065,7 @@ tailwind.config = {
   function layoutCreate() {
     if (reduce || !createTrack || !createStage) return;
     var h = createStage.offsetHeight;
-    createTop = Math.max(72, (window.innerHeight - h) / 2);
+    createTop = Math.max(0, (window.innerHeight - h) / 2);
     createRun = window.innerHeight * 2.4;
     createStage.style.top = createTop + 'px';
     createTrack.style.height = (h + createRun) + 'px';
@@ -1064,22 +1074,25 @@ tailwind.config = {
 
   // wipe: quote pinned, finishes lighting up, then slides left off-screen to uncover the next section
   var slideTrack = $('#slideTrack'), slideStage = $('#slideStage'), slideOver = $('#slideOver'), slideUnder = $('#slideUnder');
-  var slideTop = 72, slideRun = 0, slideLast = -999;
+  var slideTop = 72, slideRun = 0, slideLast = -999, sheenDone = false;
   function layoutSlide() {
     if (reduce || !slideTrack || !slideStage) return;
-    var belief = $('#belief', slideOver);
-    slideStage.style.top = '0px'; slideTrack.style.height = 'auto'; belief.style.marginTop = '0px';
-    var h = slideStage.offsetHeight, q = $('#belief > div', slideOver);
-    slideTop = Math.max(72, (window.innerHeight - h) / 2);
-    slideRun = window.innerHeight * 1.5;
+    slideStage.style.top = '0px'; slideTrack.style.height = 'auto';
+    var h = slideStage.offsetHeight;   // as tall as the full-screen section underneath
+    slideTop = Math.max(0, (window.innerHeight - h) / 2);
+    slideRun = window.innerHeight * 1.9;
     slideStage.style.top = slideTop + 'px';
     slideTrack.style.height = (h + slideRun) + 'px';
-    // the stage is as tall as the next section; keep the quote near the top of its panel (never overlapping the section above)
-    // so the gap above it stays tight, and centre it only when the panel is barely taller than the quote
-    var blank = q ? (h - q.offsetHeight) / 2 : 0;
-    belief.style.marginTop = Math.max(0, Math.min(blank, 72) - parseFloat(getComputedStyle(belief).paddingTop)) + 'px';
   }
   layoutSlide();
+
+  // Experience covers About: pin About so that its bottom edge rests on the bottom of the screen
+  var stackAbout = $('#about'), stackExp = $('#experience');
+  function layoutStack() {
+    if (reduce || !stackAbout) return;
+    stackAbout.style.top = Math.min(0, window.innerHeight - stackAbout.offsetHeight) + 'px';
+  }
+  layoutStack();
 
   // ───────── Reveal + section tracking + count-up ─────────
   if ('IntersectionObserver' in window) {
@@ -1263,29 +1276,38 @@ tailwind.config = {
       o.words.forEach(function (w, i) { w.style.opacity = (0.16 + 0.84 * clamp(p * (n + 2) - i, 0, 1)).toFixed(2); });
     });
 
+    // About fades back a little as Experience rises over it
+    if (stackAbout && stackExp) {
+      var ep = clamp((vh - stackExp.getBoundingClientRect().top) / vh, 0, 1);
+      stackAbout.style.opacity = (1 - 0.6 * ep).toFixed(3);
+    }
+
+    // once the quote is fully lit, play the gold shimmer on its subtitle (one time only)
+    if (slideTrack && !sheenDone && sy > vh * 0.4) {
+      sheenDone = true;
+      var sh = $('.gold-sheen'); if (sh) sh.classList.add('sheen-go');
+    }
+
     // wipe: after the quote has finished, it slides left like a curtain and the section behind it is revealed
     if (slideTrack && slideOver && slideUnder && Math.abs(sy - slideLast) > 0.5) {
       slideLast = sy;
-      var sp = clamp((sy - vh * 0.45) / (vh * 0.85), 0, 1);
+      var sp = clamp((sy - vh * 0.9) / (vh * 0.85), 0, 1);   // a short hold first, so the shimmer can be seen
       var se = sp * sp * (3 - 2 * sp);
       slideOver.style.transform = 'translate3d(' + (-se * 102).toFixed(2) + '%,0,0)';
-      slideUnder.style.transform = 'scale(' + (0.94 + 0.06 * se).toFixed(3) + ')';
+      slideUnder.style.transform = 'scale(' + (0.96 + 0.04 * se).toFixed(3) + ')';
       slideUnder.style.opacity = (0.55 + 0.45 * se).toFixed(3);
     }
 
     // manifesto: pinned at the centre of the screen while four things happen in order, all tied to scroll:
-    // 1) the box grows in, 2) the hands resolve out of blur and dust, 3) the words light up one by one,
+    // 1) the full-screen scene scrolls in dark, 2) the hands resolve out of blur and dust, 3) the words light up one by one,
     // 4) the stage releases and the whole thing scrolls up and away.
     if (createCard && createBg && createText) {
       var cy = createTop - createTrack.getBoundingClientRect().top;   // px scrolled past the pin point
       if (Math.abs(cy - createLast) > 0.5) {
         createLast = cy;
         var ease = function (v) { return v * v * (3 - 2 * v); };
-        var boxP = ease(clamp((cy + vh * 0.45) / (vh * 0.55), 0, 1));
-        var imgP = ease(clamp((cy - vh * 0.1) / (vh * 0.9), 0, 1));
-        var txtP = clamp((cy - vh * 1.0) / (vh * 1.0), 0, 1);
-        createCard.style.opacity = boxP.toFixed(3);
-        createCard.style.transform = 'scale(' + (0.6 + 0.4 * boxP).toFixed(3) + ')';
+        var imgP = ease(clamp((cy + vh * 0.4) / (vh * 1.3), 0, 1));
+        var txtP = clamp((cy - vh * 0.9) / (vh * 1.0), 0, 1);
         createBg.style.opacity = (0.1 + 0.9 * imgP).toFixed(3);
         createBg.style.filter = 'blur(' + ((1 - imgP) * 16).toFixed(1) + 'px)';
         createBg.style.transform = 'scale(' + (1.12 - 0.12 * imgP).toFixed(3) + ')';
@@ -1349,7 +1371,7 @@ tailwind.config = {
     prevY = y;
     requestAnimationFrame(frame);
   }
-  function relayout() { vh = window.innerHeight; measure(); layoutCreate(); layoutSlide(); createLast = -999; slideLast = -999; lastY = -1; }
+  function relayout() { vh = window.innerHeight; measure(); layoutCreate(); layoutSlide(); layoutStack(); createLast = -999; slideLast = -999; lastY = -1; }
   addEventListener('resize', relayout);
   measure(); frame();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
