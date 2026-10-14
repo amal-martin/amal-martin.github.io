@@ -20,8 +20,8 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-scrolling iframe { pointer-events: none; }
 body { background: rgb(var(--bg)); color: rgb(var(--ink)); transition: background-color .4s ease, color .4s ease; }
-h1, h2, h3, h4, .font-serif { font-weight: 300; font-variant-numeric: lining-nums; }
-em { font-style: italic; }
+h1, h2, h3, h4, .font-serif { font-weight: 200; font-variant-numeric: lining-nums; }
+em { font-style: normal; }
 :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 6px; }
 ::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
 section[id] { scroll-margin-top: 4.5rem; }
@@ -55,7 +55,7 @@ section[id] { scroll-margin-top: 4.5rem; }
 .btn { display: inline-flex; align-items: center; gap: .6rem; border-radius: 999px; padding: .85rem 1.35rem;
   font-size: .9rem; font-weight: 500; line-height: 1; white-space: nowrap; transition: transform .25s ease, background-color .25s ease, color .25s ease, border-color .25s ease, filter .25s ease; }
 .btn:active { transform: scale(.97); }
-.btn-solid { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
+.btn-solid { background: rgb(var(--ink)); color: rgb(var(--bg)); }
 .btn-solid:hover { filter: brightness(1.15); }
 .btn-ghost { border: 1px solid rgb(var(--ink) / .22); }
 .btn-ghost:hover { border-color: rgb(var(--ink)); background: rgb(var(--ink)); color: rgb(var(--bg)); }
@@ -66,7 +66,7 @@ section[id] { scroll-margin-top: 4.5rem; }
 .work-card { transition: transform .45s cubic-bezier(.2,.7,.2,1); }
 .work-card:hover { transform: translateY(-6px); }
 .work-card .go { transition: transform .35s cubic-bezier(.2,.7,.2,1), background-color .3s, color .3s, border-color .3s; }
-.work-card:hover .go { transform: rotate(45deg); background: rgb(var(--accent)); color: rgb(var(--on-accent)); border-color: rgb(var(--accent)); }
+.work-card:hover .go { transform: rotate(45deg); background: rgb(var(--ink)); color: rgb(var(--bg)); border-color: rgb(var(--ink)); }
 .work-card img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .work-card:hover img { transform: scale(1.04); }
 

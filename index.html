@@ -19,7 +19,7 @@
 <meta name="twitter:image" content="https://amal-martin.github.io/assets/amal-hero.webp">
 <link rel="canonical" href="https://amal-martin.github.io/">
 <!-- If the site ever moves to a different domain, update the four amal-martin.github.io URLs above to match. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f5f5f7' font-family='Georgia,serif' font-style='italic'%3Eam%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f5f5f7' font-family='Georgia,serif' font-style='normal'%3Eam%3C/text%3E%3C/svg%3E">
 
 <!-- Sans & display: Helvetica Neue (system font — no download). -->
 
@@ -142,8 +142,8 @@ tailwind.config = {
     html.js #slideOver::after { content: ""; position: absolute; top: 0; bottom: 0; left: 100%; width: 90px; pointer-events: none; background: linear-gradient(90deg, rgb(0 0 0 / .16), rgb(0 0 0 / .05) 40%, transparent); }
   }
   body { background: rgb(var(--bg)); color: rgb(var(--ink)); transition: background-color .4s ease, color .4s ease; }
-  h1, h2, h3, h4, .font-serif { font-weight: 300; font-variant-numeric: lining-nums; }
-  em { font-style: italic; }
+  h1, h2, h3, h4, .font-serif { font-weight: 200; font-variant-numeric: lining-nums; }
+  em { font-style: normal; }
   :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 6px; }
   ::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
   section[id] { scroll-margin-top: 4.5rem; }
@@ -210,15 +210,15 @@ tailwind.config = {
   .ctile:hover { transform: translateY(-3px); border-color: rgb(var(--accent)); }
   .ctile-main { flex: 1; min-width: 0; overflow-wrap: break-word; }
   .copy { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 999px; background: rgb(var(--bg)); color: rgb(var(--ink)); transition: transform .25s ease, background-color .25s ease, color .25s ease; }
-  .copy:hover { transform: scale(1.1); background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
+  .copy:hover { transform: scale(1.1); background: rgb(var(--ink)); color: rgb(var(--bg)); }
   .social { display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 999px; background: rgb(var(--surface)); color: rgb(var(--ink)); transition: background-color .25s, color .25s, transform .3s cubic-bezier(.2,.7,.2,1); }
-  .social:hover { background: rgb(var(--accent)); color: rgb(var(--on-accent)); transform: translateY(-3px); }
+  .social:hover { background: rgb(var(--ink)); color: rgb(var(--bg)); transform: translateY(-3px); }
 
   /* ---------- Buttons ---------- */
   .btn { display: inline-flex; align-items: center; gap: .6rem; border-radius: 999px; padding: .85rem 1.35rem;
     font-size: .9rem; font-weight: 500; line-height: 1; white-space: nowrap; transition: transform .25s ease, background-color .25s ease, color .25s ease, border-color .25s ease, filter .25s ease; }
   .btn:active { transform: scale(.97); }
-  .btn-solid { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
+  .btn-solid { background: rgb(var(--ink)); color: rgb(var(--bg)); }
   .btn-solid:hover { filter: brightness(1.15); }
   .btn-ghost { border: 1px solid rgb(var(--ink) / .22); }
   .btn-ghost:hover { border-color: rgb(var(--ink)); background: rgb(var(--ink)); color: rgb(var(--bg)); }
@@ -273,7 +273,7 @@ tailwind.config = {
   .svc-cursor.show { opacity: 1; }
   .svc-cursor.top { top: 0; }
   .svc-cursor svg { width: 18px; height: 18px; display: block; filter: drop-shadow(0 1px 2px rgb(0 0 0 / .3)); flex: none; }
-  .svc-cursor .tag { background: rgb(var(--accent)); color: rgb(var(--on-accent)); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  .svc-cursor .tag { background: rgb(var(--ink)); color: rgb(var(--bg)); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: .85rem; font-weight: 500; line-height: 1; padding: .38rem .7rem; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px rgb(0 0 0 / .18); }
   .scrollline { animation: scrollline 2.2s cubic-bezier(.6,0,.2,1) infinite; }
   @keyframes scrollline { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
@@ -319,7 +319,7 @@ tailwind.config = {
     transition: transform .45s cubic-bezier(.2,.7,.2,1), border-color .3s ease, background-color .3s ease, box-shadow .45s ease; }
   .card:hover { transform: translateY(-6px); background: rgb(var(--bg)); border-color: rgb(var(--ink) / .1); box-shadow: 0 28px 48px -28px rgb(0 0 0 / .3); }
   .card .go { transition: transform .35s cubic-bezier(.2,.7,.2,1), background-color .3s, color .3s, border-color .3s; }
-  .card:hover .go { transform: rotate(45deg); background: rgb(var(--accent)); color: rgb(var(--on-accent)); border-color: rgb(var(--accent)); }
+  .card:hover .go { transform: rotate(45deg); background: rgb(var(--ink)); color: rgb(var(--bg)); border-color: rgb(var(--ink)); }
 
   /* ---------- Contact rows ---------- */
   .contact-row { display: flex; flex-direction: column; gap: .15rem; padding: 1.1rem 0; border-top: 1px solid rgb(255 255 255 / .16);
@@ -406,11 +406,11 @@ tailwind.config = {
     <div class="lg:col-span-7">
       <h1 data-split data-step="120" data-d0="120" data-ps=".12" class="font-serif leading-[0.9] tracking-[-0.03em] text-[clamp(4.5rem,14vw,11.5rem)]">
         <span class="block">Amal</span>
-        <span class="block italic">Martin</span>
+        <span class="block">Martin</span>
       </h1>
 
       <p class="reveal mt-9 max-w-2xl font-serif text-3xl leading-[1.2] md:text-[2.6rem]" style="--d:.5s">
-        A <span class="rot italic text-accent" aria-live="off"><span class="on">UI/UX Designer</span><span>Writer</span><span>Research Scholar</span><span>Founding Designer</span><span>Interaction Designer</span><span>Product Designer</span><span>Brand Designer</span></span><br>based in&nbsp;Bengaluru.
+        A <span class="rot text-accent" aria-live="off"><span class="on">UI/UX Designer</span><span>Writer</span><span>Research Scholar</span><span>Founding Designer</span><span>Interaction Designer</span><span>Product Designer</span><span>Brand Designer</span></span><br>based in&nbsp;Bengaluru.
       </p>
 
       <p class="reveal mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg" style="--d:.6s">
@@ -453,7 +453,7 @@ tailwind.config = {
           <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
           <text font-size="9.5" font-weight="500" fill="currentColor"><textPath href="#circ" textLength="286" lengthAdjust="spacing">UI/UX · BRAND · WORDS · POETRY · </textPath></text>
         </svg>
-        <span class="absolute inset-0 m-auto grid h-11 w-11 place-items-center rounded-full bg-accent text-onaccent">
+        <span class="absolute inset-0 m-auto grid h-11 w-11 place-items-center rounded-full bg-ink text-bg">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
         </span>
       </div>
@@ -470,12 +470,12 @@ tailwind.config = {
 <!-- Scroll-driven marquee: the rows speed up and reverse with your scroll -->
 <div class="marquee select-none overflow-hidden border-y border-ink/12 py-6" aria-hidden="true">
   <div class="mq" data-dir="-1">
-    <div class="mq-track font-serif text-5xl italic md:text-7xl">
+    <div class="mq-track font-serif text-5xl md:text-7xl">
       <div class="flex shrink-0 items-center gap-10 pr-10 leading-none">
-        <span>UI/UX Design</span><span class="text-accent not-italic">✦</span><span>Product</span><span class="text-accent not-italic">✦</span><span>Brand</span><span class="text-accent not-italic">✦</span><span>Writing</span><span class="text-accent not-italic">✦</span><span>Poetry</span><span class="text-accent not-italic">✦</span>
+        <span>UI/UX Design</span><span class="text-accent">✦</span><span>Product</span><span class="text-accent">✦</span><span>Brand</span><span class="text-accent">✦</span><span>Writing</span><span class="text-accent">✦</span><span>Poetry</span><span class="text-accent">✦</span>
       </div>
       <div class="flex shrink-0 items-center gap-10 pr-10 leading-none">
-        <span>UI/UX Design</span><span class="text-accent not-italic">✦</span><span>Product</span><span class="text-accent not-italic">✦</span><span>Brand</span><span class="text-accent not-italic">✦</span><span>Writing</span><span class="text-accent not-italic">✦</span><span>Poetry</span><span class="text-accent not-italic">✦</span>
+        <span>UI/UX Design</span><span class="text-accent">✦</span><span>Product</span><span class="text-accent">✦</span><span>Brand</span><span class="text-accent">✦</span><span>Writing</span><span class="text-accent">✦</span><span>Poetry</span><span class="text-accent">✦</span>
       </div>
     </div>
   </div>
@@ -840,7 +840,7 @@ tailwind.config = {
       class="absolute inset-0 h-full w-full object-cover">
     <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.3) 0%, rgba(0,0,0,.78) 28%, rgba(0,0,0,.78) 72%, rgba(0,0,0,.35) 100%)"></div>
     <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 md:px-10">
-      <p id="createText" class="mx-auto max-w-3xl font-serif text-[clamp(2.8rem,7.5vw,6rem)] italic leading-[1.1] tracking-[-0.02em]">I create, therefore I am.</p>
+      <p id="createText" class="mx-auto max-w-3xl font-serif text-[clamp(2.8rem,7.5vw,6rem)] leading-[1.1] tracking-[-0.02em]">I create, therefore I am.</p>
     </div>
   </div>
   </div>
@@ -864,7 +864,7 @@ tailwind.config = {
     <!-- Platform links -->
     <div class="mt-14 grid gap-5 md:grid-cols-2">
       <a href="https://medium.com/@amal.martin" target="_blank" rel="noopener"
-        class="reveal group flex items-center justify-between rounded-3xl bg-[#1d1d1f] p-7 text-[#f5f5f7] transition hover:bg-accent hover:text-onaccent md:p-9">
+        class="reveal group flex items-center justify-between rounded-3xl border border-transparent bg-[#1d1d1f] p-7 text-[#f5f5f7] transition hover:border-ink/15 hover:bg-bg hover:text-ink md:p-9">
         <div>
           <p class="text-xs uppercase tracking-[.16em] opacity-60">Poems &amp; essays</p>
           <p class="mt-2 font-serif text-3xl md:text-4xl">More on Medium</p>
@@ -872,7 +872,7 @@ tailwind.config = {
         <svg class="h-8 w-8 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
       <a href="https://substack.com/@amalmartin" target="_blank" rel="noopener"
-        class="reveal group flex items-center justify-between rounded-3xl border border-ink/20 p-7 transition hover:border-accent hover:bg-accent hover:text-onaccent md:p-9" style="--d:.08s">
+        class="reveal group flex items-center justify-between rounded-3xl border border-ink/20 p-7 transition hover:border-ink hover:bg-ink hover:text-bg md:p-9" style="--d:.08s">
         <div>
           <p class="text-xs uppercase tracking-[.16em] opacity-60">Newsletter</p>
           <p class="mt-2 font-serif text-3xl md:text-4xl">Subscribe on Substack</p>
