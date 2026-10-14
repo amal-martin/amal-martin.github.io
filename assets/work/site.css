@@ -20,7 +20,7 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-scrolling iframe { pointer-events: none; }
 body { background: rgb(var(--bg)); color: rgb(var(--ink)); transition: background-color .4s ease, color .4s ease; }
-h1, h2, h3, h4, .font-serif { font-weight: 500; font-variant-numeric: lining-nums; }
+h1, h2, h3, h4, .font-serif { font-weight: 300; font-variant-numeric: lining-nums; }
 em { font-style: italic; }
 :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 6px; }
 ::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }

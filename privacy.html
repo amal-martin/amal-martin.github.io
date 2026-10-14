@@ -16,9 +16,6 @@
 <link rel="canonical" href="https://amal-martin.github.io/privacy.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f5f5f7' font-family='Georgia,serif' font-style='italic'%3Eam%3C/text%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
 (function () {
@@ -34,7 +31,7 @@ tailwind.config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Space Grotesk"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        serif: ['"Helvetica Neue"', 'Helvetica', 'Arial', '"Nimbus Sans"', 'sans-serif'],
         sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', '"Nimbus Sans"', 'sans-serif']
       },
       colors: {
@@ -141,7 +138,7 @@ tailwind.config = {
         <div class="reveal mt-10">
           <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Fonts and styling</h3>
           <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-            <p>Typefaces are loaded from Google Fonts (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">fonts.googleapis.com</code>, <code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">fonts.gstatic.com</code>), and page styling is loaded from the Tailwind CSS CDN (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">cdn.tailwindcss.com</code>). Your browser requests these files directly from Google's and Tailwind Labs' servers, each of which receives standard request metadata such as your IP address as part of normal request handling. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-ink underline underline-offset-2 hover:text-accent">Google's Privacy Policy</a> for how Google Fonts is handled.</p>
+            <p>Typefaces are not loaded from any external service — this site uses the system font already installed on your device (Helvetica Neue, or the closest equivalent), so no font files are requested beyond this page itself. Page styling is loaded from the Tailwind CSS CDN (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">cdn.tailwindcss.com</code>), which receives standard request metadata such as your IP address as part of normal request handling.</p>
           </div>
         </div>
 
@@ -154,7 +151,7 @@ tailwind.config = {
 
         <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">International transfers</h2>
         <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-          <p>GitHub, Google, and Tailwind Labs are US-based companies. Where personal data such as your IP address is transferred outside your jurisdiction as part of standard request metadata, these providers rely on their own safeguards, such as Standard Contractual Clauses and/or participation in applicable data-transfer frameworks, as described in their respective privacy policies.</p>
+          <p>GitHub and Tailwind Labs are US-based companies. Where personal data such as your IP address is transferred outside your jurisdiction as part of standard request metadata, these providers rely on their own safeguards, such as Standard Contractual Clauses and/or participation in applicable data-transfer frameworks, as described in their respective privacy policies.</p>
         </div>
 
         <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Retention</h2>
