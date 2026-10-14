@@ -191,17 +191,6 @@ tailwind.config = {
   .js [data-expand].expand-lg { clip-path: inset(calc((1 - var(--e, 1)) * 18%) calc((1 - var(--e, 1)) * 18%) round 1.75rem); }
   .js [data-expand].expand-lg img { transform: scale(calc(1.35 - .35 * var(--e, 1))); }
 
-  /* Clicking "Read more" on the Philosophy card morphs that image into philosophy.html's hero image
-     as the browser navigates there (native cross-document View Transitions — unsupported browsers just
-     navigate normally, no fallback code needed). Both pages opt in and share a view-transition-name on
-     just the <img> itself (not its text/gradient overlay), so only the photo morphs across the
-     navigation while the rest of the old page fades out normally; the radius is set on the img directly
-     since a transitioning element's own corner rounding is what gets captured, not an ancestor's. */
-  @media (prefers-reduced-motion: no-preference) {
-    @view-transition { navigation: auto; }
-  }
-  #philosophy [data-expand] img { view-transition-name: philosophy-img; border-radius: 1.75rem; }
-
   [data-ps], [data-pc], [data-scale] { will-change: transform; }
 
   /* ---------- Section markers ---------- */
@@ -1277,10 +1266,14 @@ tailwind.config = {
       el.style.setProperty('--f', clamp(1.3 - d * 1.7, 0, 1).toFixed(3));
     });
 
-    // timeline: line draws itself, dots light up
+    // timeline: line draws itself, dots light up. The scroll distance needed to fill is now a fixed
+    // amount, not tied to the entry's own height — Experience pins near the end of its own content (see
+    // the cascading-stack rule above), and a tall entry whose fill scaled with r.height needed more
+    // scroll to finish than was still left once pinned, freezing it part-drawn. A fixed budget finishes
+    // well within that regardless of how long any one entry is.
     tlItems.forEach(function (li, i) {
       var r = tlRects[i];
-      var f = clamp((vh * 0.65 - r.top) / r.height, 0, 1);
+      var f = clamp((vh * 0.9 - r.top) / (vh * 0.35), 0, 1);
       li.style.setProperty('--fill', f.toFixed(3));
       li.classList.toggle('lit', f > 0.02);
     });
@@ -1324,6 +1317,34 @@ tailwind.config = {
         el.style.transform = 'translate(' + ((e.clientX - (r.left + r.width / 2)) * 0.25).toFixed(1) + 'px,' + ((e.clientY - (r.top + r.height / 2)) * 0.35).toFixed(1) + 'px)';
       });
       el.addEventListener('pointerleave', function () { el.style.transform = ''; });
+    });
+  }
+
+  // ───────── Philosophy card: "Read more" expands the photo to fill the screen, then navigates ─────────
+  // Hand-rolled rather than left to the browser's native cross-document View Transitions API (which this
+  // page also opts into via CSS) because that API's actual activation can't be reliably depended on across
+  // browsers/contexts; this version works everywhere and finishes with a real navigation either way.
+  var philLink = $('#philosophy a[href="philosophy.html"]'), philImg = $('#philosophy [data-expand] img');
+  if (philLink && philImg && !reduce) {
+    philLink.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // let modified/middle clicks open normally
+      e.preventDefault();
+      var r = philImg.getBoundingClientRect();
+      var clone = philImg.cloneNode(true);
+      clone.style.cssText = 'position:fixed;top:' + r.top + 'px;left:' + r.left + 'px;width:' + r.width + 'px;height:' + r.height +
+        'px;margin:0;object-fit:cover;border-radius:1.75rem;z-index:999;pointer-events:none;' +
+        'transition:top .6s cubic-bezier(.65,0,.35,1),left .6s cubic-bezier(.65,0,.35,1),width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1),border-radius .6s cubic-bezier(.65,0,.35,1);';
+      document.body.appendChild(clone);
+      clone.getBoundingClientRect();   // force layout so the transition below starts from the rect above, not the end state
+      requestAnimationFrame(function () {
+        clone.style.top = '0px'; clone.style.left = '0px';
+        clone.style.width = '100vw'; clone.style.height = '100vh';
+        clone.style.borderRadius = '0px';
+      });
+      var navigated = false;
+      function go() { if (navigated) return; navigated = true; window.location.href = philLink.href; }
+      clone.addEventListener('transitionend', go);
+      setTimeout(go, 700);   // in case transitionend doesn't fire for some reason
     });
   }
 
