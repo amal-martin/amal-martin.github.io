@@ -138,11 +138,21 @@ tailwind.config = {
      a matching negative margin on that next section (Education, Create) cancels the push back out.
      Each pinned section also needs min-height: 100svh — without it, a section whose own content is
      shorter than the screen leaves a gap below it once pinned, and the next section (Create, black)
-     peeks through that gap before it's supposed to start covering anything. */
+     peeks through that gap before it's supposed to start covering anything.
+     Experience is black, for a white → black → white rhythm against About and Education on either side.
+     Every color in this site runs through --bg/--ink/--muted/--surface custom properties, consumed at
+     paint time by Tailwind's arbitrary-value utilities (text-ink, border-ink/12, bg-surface, .chip, etc.)
+     — so re-declaring just those four variables, scoped to #experience, flips everything inside it
+     (chips, borders, the timeline, the LinkedIn button) to the dark equivalents for free, with no
+     per-element classes to touch. --accent/--on-accent are left alone; that blue reads fine on both. */
   .pin-buffer { height: 0; }
   @media (prefers-reduced-motion: no-preference) {
     html.js #about { position: sticky; z-index: 0; }
-    html.js #experience { position: sticky; z-index: 1; min-height: 100svh; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #experience {
+      position: sticky; z-index: 1; min-height: 100svh;
+      --bg: 0 0 0; --ink: 245 245 247; --muted: 152 152 157; --surface: 28 28 30;
+      background: rgb(var(--bg)); color: rgb(var(--ink)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16);
+    }
     html.js #education { position: sticky; z-index: 2; min-height: 100svh; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); margin-top: -100svh; }
     html.js #services { position: sticky; z-index: 3; min-height: 100svh; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
     html.js #create { position: relative; z-index: 4; margin-top: -100svh; }
