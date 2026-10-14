@@ -536,30 +536,21 @@ tailwind.config = {
 <div id="stack">
 <!-- ============================== ABOUT ============================== -->
 <section id="about" class="flex min-h-[100svh] items-center pb-12 pt-28 md:pb-14 md:pt-32">
-    <div class="mx-auto grid w-full max-w-[1320px] items-center gap-12 px-6 md:px-10 lg:grid-cols-12 lg:gap-16">
+    <div class="mx-auto w-full max-w-[1320px] px-6 md:px-10">
 
-    <div class="lg:col-span-5">
-      <div data-expand class="aspect-[5/4] overflow-hidden rounded-[1.75rem] bg-ink/5 lg:aspect-[3/4] lg:max-h-[calc(100svh-11rem)]">
-        <img src="assets/amal-about.webp" alt="Amal Martin leaning against a concrete wall in a black bomber jacket, wearing sunglasses" width="941" height="1672" loading="lazy"
-          class="h-full w-full object-cover object-top">
-      </div>
+    <h2 data-scrub class="max-w-4xl font-serif text-[clamp(2.6rem,6vw,5.5rem)] leading-[1.06] tracking-[-0.015em]">
+      “The only way to do great work is <em>to love what you do.</em>”
+    </h2>
+    <p class="reveal mt-5 text-sm font-medium uppercase tracking-[.16em] text-muted">Steve Jobs</p>
+
+    <dl class="reveal mt-14 grid gap-x-10 gap-y-8 border-t border-ink/12 pt-10 text-sm sm:grid-cols-2 lg:grid-cols-3">
+      <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Based in</dt><dd class="mt-2 text-base">Bengaluru, India</dd></div>
+      <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Currently</dt><dd class="mt-2 text-base">UI/UX Designer, Kristu Jayanti Software Development Centre</dd></div>
+      <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Also</dt><dd class="mt-2 text-base">Research Scholar in Computer Science · Writer · Poet</dd></div>
+      <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Research</dt><dd class="mt-2 text-base">Human–Computer Interaction: user psychology, cognitive science &amp; technology</dd></div>
+      <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Languages</dt><dd class="mt-2 text-base">Malayalam (mother tongue) · English · Hindi · Kannada · Tamil · Telugu</dd></div>
+    </dl>
     </div>
-
-    <div class="lg:col-span-7">
-      <h2 data-scrub class="font-serif text-[clamp(2.4rem,5vw,4.5rem)] leading-[1.06] tracking-[-0.015em]">
-        “The only way to do great work is <em>to love what you do.</em>”
-      </h2>
-      <p class="reveal mt-5 text-sm font-medium uppercase tracking-[.16em] text-muted">Steve Jobs</p>
-
-      <dl class="reveal mt-12 divide-y divide-ink/12 border-y border-ink/12 text-sm">
-        <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Based in</dt><dd>Bengaluru, India</dd></div>
-        <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Currently</dt><dd>UI/UX Designer, Kristu Jayanti Software Development Centre</dd></div>
-        <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Also</dt><dd>Research Scholar in Computer Science · Writer · Poet</dd></div>
-        <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Research</dt><dd>Human–Computer Interaction: user psychology, cognitive science &amp; technology</dd></div>
-        <div class="grid grid-cols-[7rem_1fr] gap-4 py-4 sm:grid-cols-[9rem_1fr]"><dt class="text-muted">Languages</dt><dd>Malayalam (mother tongue) · English · Hindi · Kannada · Tamil · Telugu</dd></div>
-</dl>
-    </div>
-  </div>
 </section>
 
 <!-- ============================== EXPERIENCE ============================== -->
@@ -1317,34 +1308,6 @@ tailwind.config = {
         el.style.transform = 'translate(' + ((e.clientX - (r.left + r.width / 2)) * 0.25).toFixed(1) + 'px,' + ((e.clientY - (r.top + r.height / 2)) * 0.35).toFixed(1) + 'px)';
       });
       el.addEventListener('pointerleave', function () { el.style.transform = ''; });
-    });
-  }
-
-  // ───────── Philosophy card: "Read more" expands the photo to fill the screen, then navigates ─────────
-  // Hand-rolled rather than left to the browser's native cross-document View Transitions API (which this
-  // page also opts into via CSS) because that API's actual activation can't be reliably depended on across
-  // browsers/contexts; this version works everywhere and finishes with a real navigation either way.
-  var philLink = $('#philosophy a[href="philosophy.html"]'), philImg = $('#philosophy [data-expand] img');
-  if (philLink && philImg && !reduce) {
-    philLink.addEventListener('click', function (e) {
-      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;   // let modified/middle clicks open normally
-      e.preventDefault();
-      var r = philImg.getBoundingClientRect();
-      var clone = philImg.cloneNode(true);
-      clone.style.cssText = 'position:fixed;top:' + r.top + 'px;left:' + r.left + 'px;width:' + r.width + 'px;height:' + r.height +
-        'px;margin:0;object-fit:cover;border-radius:1.75rem;z-index:999;pointer-events:none;' +
-        'transition:top .6s cubic-bezier(.65,0,.35,1),left .6s cubic-bezier(.65,0,.35,1),width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1),border-radius .6s cubic-bezier(.65,0,.35,1);';
-      document.body.appendChild(clone);
-      clone.getBoundingClientRect();   // force layout so the transition below starts from the rect above, not the end state
-      requestAnimationFrame(function () {
-        clone.style.top = '0px'; clone.style.left = '0px';
-        clone.style.width = '100vw'; clone.style.height = '100vh';
-        clone.style.borderRadius = '0px';
-      });
-      var navigated = false;
-      function go() { if (navigated) return; navigated = true; window.location.href = philLink.href; }
-      clone.addEventListener('transitionend', go);
-      setTimeout(go, 700);   // in case transitionend doesn't fire for some reason
     });
   }
 
