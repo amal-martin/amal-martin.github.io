@@ -123,10 +123,18 @@ tailwind.config = {
     100% { background-position: 0% 0; filter: drop-shadow(0 0 0 rgb(233 199 122 / 0)); }
   }
 
-  /* Experience rises over About: About stays pinned (bottom edge on the bottom of the screen) while Experience slides up and covers it */
+  /* Cascading stack: each section pins (bottom edge on the bottom of the screen) while the next one
+     rises over it with a rounded top edge and a lip of shadow, instead of scrolling past it normally.
+     About → Experience → Education → Services, then (after the manifesto's own pinned sequence,
+     left untouched) Writing → Contact continue the same cascade. */
   @media (prefers-reduced-motion: no-preference) {
     html.js #about { position: sticky; z-index: 0; }
-    html.js #experience { position: relative; z-index: 1; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #experience { position: sticky; z-index: 1; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #education { position: sticky; z-index: 2; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #services { position: sticky; z-index: 3; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #create { position: relative; z-index: 4; }
+    html.js #writing { position: sticky; z-index: 5; }
+    html.js #contact { position: relative; z-index: 6; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
   }
 
   /* Wipe: the quote panel slides left off the screen and uncovers the Mona Lisa section underneath */
@@ -167,6 +175,9 @@ tailwind.config = {
   /* Image that expands from an inset frame as it enters ([data-expand]) */
   .js [data-expand] { clip-path: inset(calc((1 - var(--e, 1)) * 9%) calc((1 - var(--e, 1)) * 9%) round 1.75rem); }
   .js [data-expand] img { transform: scale(calc(1.2 - .2 * var(--e, 1))); will-change: transform; }
+  /* Philosophy teaser: a more dramatic version of the same expand, since the card starts more tightly cropped */
+  .js [data-expand].expand-lg { clip-path: inset(calc((1 - var(--e, 1)) * 18%) calc((1 - var(--e, 1)) * 18%) round 1.75rem); }
+  .js [data-expand].expand-lg img { transform: scale(calc(1.35 - .35 * var(--e, 1))); }
 
   [data-ps], [data-pc], [data-scale] { will-change: transform; }
 
@@ -224,8 +235,8 @@ tailwind.config = {
   .btn-ghost:hover { border-color: rgb(var(--ink)); background: rgb(var(--ink)); color: rgb(var(--bg)); }
   .btn-ghost-dark { border: 1px solid rgb(255 255 255 / .28); color: #f5f5f7; }
   .btn-ghost-dark:hover { border-color: #f5f5f7; background: #f5f5f7; color: #1d1d1f; }
-  .btn-gilt { border: 1px solid rgb(246 235 210 / .45); color: #f6ebd2; background: rgb(20 13 7 / .35); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-  .btn-gilt:hover { border-color: #f6ebd2; background: #f6ebd2; color: #1a1109; }
+  .btn-gilt { border: 1px solid rgb(255 255 255 / .45); color: #fff; background: rgb(20 13 7 / .35); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .btn-gilt:hover { border-color: #fff; background: #fff; color: #1a1109; }
   .btn-compact { padding: .6rem 1rem; font-size: .8rem; }
   @media (min-width: 768px) { .btn-compact { padding: .85rem 1.35rem; font-size: .9rem; } }
 
@@ -494,7 +505,7 @@ tailwind.config = {
 <!-- ============================== PHILOSOPHY TEASER ============================== -->
 <section id="philosophy" class="px-6 pb-10 pt-14 md:px-10 md:pb-10 md:pt-[4.5rem]">
   <div class="mx-auto max-w-[1100px]">
-    <div data-expand class="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-ink/5 sm:aspect-[3/2] md:aspect-[2/1]">
+    <div data-expand class="expand-lg relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-ink/5 sm:aspect-[3/2] md:aspect-[2/1]">
       <img src="assets/philosophy-socrates.webp" alt="A marble statue of a seated philosopher, chin resting on his hand, deep in thought against a clear blue sky" width="1600" height="1066" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
       <div class="relative flex h-full flex-col justify-end p-7 md:p-12 lg:p-14">
@@ -702,6 +713,7 @@ tailwind.config = {
 </section>
 </div>
 
+<div id="stack2">
 <!-- ============================== EDUCATION ============================== -->
 <section id="education" class="py-12 md:py-14">
     <div class="mx-auto max-w-[1320px] px-6 md:px-10">
@@ -830,6 +842,7 @@ tailwind.config = {
     </div>
   </div>
 </section>
+</div>
 
 <!-- ============================== MANIFESTO ============================== -->
 <section id="create">
@@ -840,13 +853,14 @@ tailwind.config = {
       class="absolute inset-0 h-full w-full object-cover">
     <div class="pointer-events-none absolute inset-0" style="background:linear-gradient(to bottom, rgba(0,0,0,.3) 0%, rgba(0,0,0,.78) 28%, rgba(0,0,0,.78) 72%, rgba(0,0,0,.35) 100%)"></div>
     <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 md:px-10">
-      <p id="createText" class="mx-auto max-w-3xl font-serif text-[clamp(2.8rem,7.5vw,6rem)] leading-[1.1] tracking-[-0.02em]">I create, therefore I am.</p>
+      <p id="createText" class="mx-auto max-w-5xl font-serif text-[clamp(2rem,6vw,5rem)] leading-[1.1] tracking-[-0.02em] md:whitespace-nowrap">I create, therefore I am.</p>
     </div>
   </div>
   </div>
   </div>
 </section>
 
+<div id="stack3">
 <!-- ============================== WRITING ============================== -->
 <section id="writing" class="pt-16 pb-16 md:pt-24 md:pb-24">
     <div class="mx-auto max-w-[1320px] px-6 md:px-10">
@@ -918,6 +932,7 @@ tailwind.config = {
     </div>
   </div>
 </section>
+</div>
 
 </main>
 
@@ -1081,11 +1096,13 @@ tailwind.config = {
   }
   layoutSlide();
 
-  // Experience covers About: pin About so that its bottom edge rests on the bottom of the screen
+  // Cascading stack: pin each section so its bottom edge rests on the bottom of the screen,
+  // so the next one in the chain rises up and covers it instead of scrolling past normally
   var stackAbout = $('#about'), stackExp = $('#experience');
+  var stackEls = $$('#about, #experience, #education, #services, #writing');
   function layoutStack() {
-    if (reduce || !stackAbout) return;
-    stackAbout.style.top = Math.min(0, window.innerHeight - stackAbout.offsetHeight) + 'px';
+    if (reduce) return;
+    stackEls.forEach(function (el) { el.style.top = Math.min(0, window.innerHeight - el.offsetHeight) + 'px'; });
   }
   layoutStack();
 
@@ -1278,8 +1295,15 @@ tailwind.config = {
     var sy = slideTrackRect ? slideTop - slideTrackRect.top : -1;   // px scrolled past the wipe's pin point
     scrubs.forEach(function (o, i) {
       var r = scrubRects[i];
-      var p = clamp((vh * 0.9 - r.top) / (vh * 0.45 + r.height), 0, 1);
-      if (slideTrack && o.el.closest('#belief')) p += (1 - p) * clamp(sy / (vh * 0.45), 0, 1);   // while pinned, the last words finish first
+      var p;
+      if (slideTrack && o.el.closest('#belief')) {
+        // sy is negative while the stage is still approaching its pin point, and crosses 0 exactly
+        // as it locks in place — driving off it (not the inner paragraph's own rect) means this
+        // reaches 1 right as the section pins, with no extra "dead" scroll needed to finish
+        p = clamp(1 + sy / (vh * 0.7), 0, 1);
+      } else {
+        p = clamp((vh * 0.9 - r.top) / (vh * 0.45 + r.height), 0, 1);
+      }
       if (Math.abs(p - o.last) < 0.002) return;
       o.last = p;
       var n = o.words.length;
@@ -1292,8 +1316,9 @@ tailwind.config = {
       stackAbout.style.opacity = (1 - 0.6 * ep).toFixed(3);
     }
 
-    // once the quote is fully lit, play the gold shimmer on its subtitle (one time only)
-    if (slideTrack && !sheenDone && sy > vh * 0.4) {
+    // the gold shimmer plays right at the end of the pin's hold, just before the wipe begins —
+    // the last beat of this section, same as the quote above finishing right as it locks in place
+    if (slideTrack && !sheenDone && sy > vh * 0.8) {
       sheenDone = true;
       var sh = $('.gold-sheen'); if (sh) sh.classList.add('sheen-go');
     }
