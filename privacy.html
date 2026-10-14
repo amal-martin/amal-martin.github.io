@@ -98,87 +98,94 @@ tailwind.config = {
 
 <main id="main">
 
-<!-- ============================== HEADER ============================== -->
-<section class="pb-10 pt-32 md:pb-14 md:pt-40">
+<!-- ============================== POLICY ============================== -->
+<section class="pb-24 pt-32 md:pb-36 md:pt-40">
   <div class="mx-auto max-w-[1320px] px-6 md:px-10">
-    <a href="index.html" class="reveal inline-flex items-center gap-2 text-sm text-muted transition hover:text-ink">
-      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-      Back home
-    </a>
-    <h1 class="reveal mt-6 max-w-3xl font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.02em]" style="--d:.05s">Privacy Policy</h1>
-    <p class="reveal mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg" style="--d:.1s">Last updated: 14 October 2026</p>
-  </div>
-</section>
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
 
-<!-- ============================== POLICY BODY ============================== -->
-<section class="pb-24 md:pb-36">
-  <div class="mx-auto max-w-[820px] px-6 md:px-10">
-    <div class="reveal space-y-5 text-base leading-relaxed text-muted md:text-lg">
-      <p>This page explains what personal data is processed when you visit this portfolio site, why, and what rights you have over it.</p>
-    </div>
-
-    <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Data controller</h2>
-    <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-      <p>Amal Martin, an independent UI/UX designer based in Bengaluru, India. The simplest way to reach me is by email at <a href="mailto:amalmartin0075@gmail.com" class="text-ink underline underline-offset-2 hover:text-accent">amalmartin0075@gmail.com</a>.</p>
-    </div>
-
-    <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">What data is processed, and why</h2>
-
-    <div class="reveal mt-6">
-      <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Contact</h3>
-      <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-        <p>This site has no contact form and runs no server of its own. The “Email” and “Work” links on the <a href="index.html#contact" class="text-ink underline underline-offset-2 hover:text-accent">Contact</a> section are plain <code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">mailto:</code> links — they open your own email client, addressed to <a href="mailto:amalmartin0075@gmail.com" class="text-ink underline underline-offset-2 hover:text-accent">amalmartin0075@gmail.com</a> or <a href="mailto:amal.m@kristujayanti.com" class="text-ink underline underline-offset-2 hover:text-accent">amal.m@kristujayanti.com</a>. Nothing is captured by this site when you click one. Whatever you choose to send arrives as a normal email, stored in my Gmail inbox, and the lawful basis for that processing is legitimate interest (Art. 6(1)(f) GDPR, where applicable) — you initiated contact, and only what you send is collected.</p>
+      <!-- Sticky title column -->
+      <div class="lg:col-span-4">
+        <div class="reveal lg:sticky lg:top-32">
+          <div class="inline-flex items-center gap-2 text-sm uppercase tracking-[.16em] text-muted">
+            <span class="grid h-5 w-5 flex-none place-items-center rounded-full border border-ink/30" aria-hidden="true"></span>
+            Legal
+          </div>
+          <h1 class="mt-4 font-serif text-[clamp(2.8rem,6vw,4.5rem)] leading-[1.02] tracking-[-0.02em]">Privacy Policy</h1>
+          <p class="mt-4 text-sm text-muted">Last updated: 14 October 2026</p>
+        </div>
       </div>
-    </div>
 
-    <div class="reveal mt-10">
-      <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Hosting</h3>
-      <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-        <p>This site is hosted on GitHub Pages (GitHub, Inc. / GitHub B.V.). Loading any page sends standard request metadata — IP address, timestamp, user agent, requested path — to GitHub's servers, which is needed to deliver the site and keep it secure. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener" class="text-ink underline underline-offset-2 hover:text-accent">GitHub's Privacy Statement</a> for how they handle this.</p>
+      <!-- Content column -->
+      <div class="lg:col-span-7 lg:col-start-6">
+        <div class="reveal space-y-5 text-base leading-relaxed text-muted md:text-lg">
+          <p>This page explains what personal data is processed when you visit this portfolio site, why, and what rights you have over it.</p>
+        </div>
+
+        <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Data controller</h2>
+        <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+          <p>Amal Martin, an independent UI/UX designer based in Bengaluru, India. The simplest way to reach me is by email at <a href="mailto:amalmartin0075@gmail.com" class="text-ink underline underline-offset-2 hover:text-accent">amalmartin0075@gmail.com</a>.</p>
+        </div>
+
+        <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">What data is processed, and why</h2>
+
+        <div class="reveal mt-6">
+          <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Contact</h3>
+          <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+            <p>This site has no contact form and runs no server of its own. The “Email” and “Work” links on the <a href="index.html#contact" class="text-ink underline underline-offset-2 hover:text-accent">Contact</a> section are plain <code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">mailto:</code> links — they open your own email client, addressed to <a href="mailto:amalmartin0075@gmail.com" class="text-ink underline underline-offset-2 hover:text-accent">amalmartin0075@gmail.com</a> or <a href="mailto:amal.m@kristujayanti.com" class="text-ink underline underline-offset-2 hover:text-accent">amal.m@kristujayanti.com</a>. Nothing is captured by this site when you click one. Whatever you choose to send arrives as a normal email, stored in my Gmail inbox, and the lawful basis for that processing is legitimate interest (Art. 6(1)(f) GDPR, where applicable) — you initiated contact, and only what you send is collected.</p>
+          </div>
+        </div>
+
+        <div class="reveal mt-10">
+          <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Hosting</h3>
+          <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+            <p>This site is hosted on GitHub Pages (GitHub, Inc. / GitHub B.V.). Loading any page sends standard request metadata — IP address, timestamp, user agent, requested path — to GitHub's servers, which is needed to deliver the site and keep it secure. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener" class="text-ink underline underline-offset-2 hover:text-accent">GitHub's Privacy Statement</a> for how they handle this.</p>
+          </div>
+        </div>
+
+        <div class="reveal mt-10">
+          <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Fonts and styling</h3>
+          <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+            <p>Typefaces are loaded from Google Fonts (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">fonts.googleapis.com</code>, <code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">fonts.gstatic.com</code>), and page styling is loaded from the Tailwind CSS CDN (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">cdn.tailwindcss.com</code>). Your browser requests these files directly from Google's and Tailwind Labs' servers, each of which receives standard request metadata such as your IP address as part of normal request handling. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-ink underline underline-offset-2 hover:text-accent">Google's Privacy Policy</a> for how Google Fonts is handled.</p>
+          </div>
+        </div>
+
+        <div class="reveal mt-10">
+          <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Analytics &amp; cookies</h3>
+          <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+            <p>This site does not use any analytics tool, tracking pixel, advertising script, or cookie. No visitor behaviour is logged, measured, or stored by me in any form.</p>
+          </div>
+        </div>
+
+        <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">International transfers</h2>
+        <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+          <p>GitHub, Google, and Tailwind Labs are US-based companies. Where personal data such as your IP address is transferred outside your jurisdiction as part of standard request metadata, these providers rely on their own safeguards, such as Standard Contractual Clauses and/or participation in applicable data-transfer frameworks, as described in their respective privacy policies.</p>
+        </div>
+
+        <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Retention</h2>
+        <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+          <p>This site does not collect or store any personal data itself, so there is nothing retained on my end beyond what's described above. An email you choose to send me is kept for as long as useful to our conversation and any reasonable follow-up, and no longer than 24 months from the last interaction — unless a legal obligation requires longer. You can ask for earlier deletion at any time.</p>
+        </div>
+
+        <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Your rights</h2>
+        <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+          <p>If you're in the EU/EEA, UK, India, or another jurisdiction with similar protections, you may have rights such as:</p>
+          <ul class="list-disc space-y-2 pl-5">
+            <li>access to the data I hold about you;</li>
+            <li>correction of inaccurate data;</li>
+            <li>erasure (“right to be forgotten”);</li>
+            <li>restriction of, or objection to, processing;</li>
+            <li>receiving your data in a portable format;</li>
+            <li>lodging a complaint with your local data protection authority.</li>
+          </ul>
+          <p>Since this site itself doesn't collect personal data, these rights apply mainly to any email you send me directly. To exercise any of them, email <a href="mailto:amalmartin0075@gmail.com" class="text-ink underline underline-offset-2 hover:text-accent">amalmartin0075@gmail.com</a>.</p>
+        </div>
+
+        <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Changes</h2>
+        <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+          <p>This policy may be updated from time to time. The “Last updated” date at the top reflects the current version.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="reveal mt-10">
-      <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Fonts and styling</h3>
-      <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-        <p>Typefaces are loaded from Google Fonts (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">fonts.googleapis.com</code>, <code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">fonts.gstatic.com</code>), and page styling is loaded from the Tailwind CSS CDN (<code class="rounded bg-surface px-1.5 py-0.5 text-[0.9em]">cdn.tailwindcss.com</code>). Your browser requests these files directly from Google's and Tailwind Labs' servers, each of which receives standard request metadata such as your IP address as part of normal request handling. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-ink underline underline-offset-2 hover:text-accent">Google's Privacy Policy</a> for how Google Fonts is handled.</p>
-      </div>
-    </div>
-
-    <div class="reveal mt-10">
-      <h3 class="font-serif text-xl leading-snug text-ink md:text-2xl">Analytics &amp; cookies</h3>
-      <div class="mt-3 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-        <p>This site does not use any analytics tool, tracking pixel, advertising script, or cookie. No visitor behaviour is logged, measured, or stored by me in any form.</p>
-      </div>
-    </div>
-
-    <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">International transfers</h2>
-    <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-      <p>GitHub, Google, and Tailwind Labs are US-based companies. Where personal data such as your IP address is transferred outside your jurisdiction as part of standard request metadata, these providers rely on their own safeguards, such as Standard Contractual Clauses and/or participation in applicable data-transfer frameworks, as described in their respective privacy policies.</p>
-    </div>
-
-    <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Retention</h2>
-    <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-      <p>This site does not collect or store any personal data itself, so there is nothing retained on my end beyond what's described above. An email you choose to send me is kept for as long as useful to our conversation and any reasonable follow-up, and no longer than 24 months from the last interaction — unless a legal obligation requires longer. You can ask for earlier deletion at any time.</p>
-    </div>
-
-    <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Your rights</h2>
-    <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-      <p>If you're in the EU/EEA, UK, India, or another jurisdiction with similar protections, you may have rights such as:</p>
-      <ul class="list-disc space-y-2 pl-5">
-        <li>access to the data I hold about you;</li>
-        <li>correction of inaccurate data;</li>
-        <li>erasure (“right to be forgotten”);</li>
-        <li>restriction of, or objection to, processing;</li>
-        <li>receiving your data in a portable format;</li>
-        <li>lodging a complaint with your local data protection authority.</li>
-      </ul>
-      <p>Since this site itself doesn't collect personal data, these rights apply mainly to any email you send me directly. To exercise any of them, email <a href="mailto:amalmartin0075@gmail.com" class="text-ink underline underline-offset-2 hover:text-accent">amalmartin0075@gmail.com</a>.</p>
-    </div>
-
-    <h2 class="reveal mt-14 font-serif text-2xl leading-snug text-ink md:text-3xl">Changes</h2>
-    <div class="reveal mt-5 space-y-5 text-base leading-relaxed text-muted md:text-lg">
-      <p>This policy may be updated from time to time. The “Last updated” date at the top reflects the current version.</p>
     </div>
   </div>
 </section>
