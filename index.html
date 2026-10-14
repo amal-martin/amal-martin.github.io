@@ -125,16 +125,25 @@ tailwind.config = {
 
   /* Cascading stack: each section pins (bottom edge on the bottom of the screen) while the next one
      rises over it with a rounded top edge and a lip of shadow, instead of scrolling past it normally.
-     About → Experience → Education → Services, then (after the manifesto's own pinned sequence,
-     left untouched) Writing → Contact continue the same cascade. */
+     About → Experience → Education → Services. The manifesto after it has its own pinned sequence,
+     left untouched; Writing and Contact after that scroll normally.
+     A sticky element only holds its pinned position for as long as its own containing block gives it
+     room to — with nothing after it in the same wrapper, it releases the instant it reaches that
+     position instead of holding through the next section's climb-in, which is what made Experience and
+     Services look like they were "just scrolling" instead of staying put to be covered. .pin-buffer is
+     a full viewport-height spacer placed after the LAST pinned element in each wrapper (Experience,
+     Services) purely to give it that room; the first element in each pair (About, Education) already
+     gets it for free from its sibling. The buffer would otherwise also push whatever comes next (the
+     section meant to climb in and cover it) later by the same amount, breaking the sync between the two —
+     a matching negative margin on that next section (Education, Create) cancels the push back out. */
+  .pin-buffer { height: 0; }
   @media (prefers-reduced-motion: no-preference) {
     html.js #about { position: sticky; z-index: 0; }
     html.js #experience { position: sticky; z-index: 1; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
-    html.js #education { position: sticky; z-index: 2; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #education { position: sticky; z-index: 2; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); margin-top: -100svh; }
     html.js #services { position: sticky; z-index: 3; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
-    html.js #create { position: relative; z-index: 4; }
-    html.js #writing { position: sticky; z-index: 5; }
-    html.js #contact { position: relative; z-index: 6; background: rgb(var(--bg)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #create { position: relative; z-index: 4; margin-top: -100svh; }
+    html.js .pin-buffer { height: 100svh; }
   }
 
   /* Wipe: the quote panel slides left off the screen and uncovers the Mona Lisa section underneath */
@@ -263,29 +272,6 @@ tailwind.config = {
   .js .rot > span:not(:first-child) { display: block; }
   .spin { animation: spin 26s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .type-caret { display: inline-block; width: 2px; height: .8em; margin-left: .08em; vertical-align: -0.06em; background: rgb(var(--accent)); animation: caret-blink 1s step-end infinite; }
-  @keyframes caret-blink { 50% { opacity: 0; } }
-
-  /* ---------- Services heading: cursor draws a box, then types (Figma-style) ---------- */
-  .svc-measure { position: absolute; visibility: hidden; pointer-events: none; max-width: calc(100% - 7.5rem); }
-  .svc-box { position: relative; display: inline-block; overflow: visible; vertical-align: top; max-width: calc(100% - 7.5rem); }
-  .svc-box::before { content: ""; position: absolute; inset: 0; border-radius: .35rem;
-    box-shadow: inset 0 0 0 1.5px rgb(var(--accent) / 0); transition: box-shadow .2s ease; pointer-events: none; }
-  .svc-box.resizing { transition: width .46s cubic-bezier(.3,.66,.24,1), height .46s cubic-bezier(.3,.66,.24,1); }
-  .svc-box.selected::before { box-shadow: inset 0 0 0 1.5px rgb(var(--accent) / .85); }
-  .svc-box .svc-text { display: inline; transition: opacity .4s ease, font-size .46s cubic-bezier(.3,.66,.24,1); }
-  .type-caret { transition: font-size .46s cubic-bezier(.3,.66,.24,1), opacity .4s ease; }
-  .svc-handle { position: absolute; width: 7px; height: 7px; margin: -3.5px; background: rgb(var(--bg)); border: 1.5px solid rgb(var(--accent));
-    opacity: 0; transition: opacity .2s ease; pointer-events: none; }
-  .svc-handle.tl { left: 0; top: 0; } .svc-handle.tr { left: 100%; top: 0; } .svc-handle.bl { left: 0; top: 100%; } .svc-handle.br { left: 100%; top: 100%; }
-  .svc-box.selected .svc-handle { opacity: 1; }
-  .svc-cursor { position: absolute; left: 100%; top: 100%; display: flex; align-items: center; gap: .4rem;
-    opacity: 0; pointer-events: none; color: rgb(var(--accent)); transition: opacity .2s ease, top .46s cubic-bezier(.3,.66,.24,1); }
-  .svc-cursor.show { opacity: 1; }
-  .svc-cursor.top { top: 0; }
-  .svc-cursor svg { width: 18px; height: 18px; display: block; filter: drop-shadow(0 1px 2px rgb(0 0 0 / .3)); flex: none; }
-  .svc-cursor .tag { background: rgb(var(--ink)); color: rgb(var(--bg)); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: .85rem; font-weight: 500; line-height: 1; padding: .38rem .7rem; border-radius: 999px; white-space: nowrap; box-shadow: 0 2px 8px rgb(0 0 0 / .18); }
   .scrollline { animation: scrollline 2.2s cubic-bezier(.6,0,.2,1) infinite; }
   @keyframes scrollline { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
 
@@ -348,8 +334,7 @@ tailwind.config = {
     html { scroll-behavior: auto !important; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
     .js [data-split] .sw-i { transform: none; transition: none; }
-    .spin, .scrollline, .type-caret { animation: none; }
-    .svc-box::before, .svc-handle, .svc-cursor { display: none; }
+    .spin, .scrollline { animation: none; }
     .card, .card:hover, .tl-title, .tl-item:hover .tl-title, .edu-t, .edu-row:hover .edu-t, .svc-item h3, .svc-item:hover h3 { transition: none; transform: none; }
     .js .rot > span, .menu, .menu a, .stat, .lt, .ctile { transition: none; }
     .js .sec-rule { transform: none; transition: none; }
@@ -504,8 +489,8 @@ tailwind.config = {
 
 <!-- ============================== PHILOSOPHY TEASER ============================== -->
 <section id="philosophy" class="px-6 pb-10 pt-14 md:px-10 md:pb-10 md:pt-[4.5rem]">
-  <div class="mx-auto max-w-[1100px]">
-    <div data-expand class="expand-lg relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-ink/5 sm:aspect-[3/2] md:aspect-[2/1]">
+  <div class="mx-auto max-w-[1320px]">
+    <div data-expand class="expand-lg relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-ink/5 sm:aspect-[3/2] md:aspect-[16/9]">
       <img src="assets/philosophy-socrates.webp" alt="A marble statue of a seated philosopher, chin resting on his hand, deep in thought against a clear blue sky" width="1600" height="1066" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
       <div class="relative flex h-full flex-col justify-end p-7 md:p-12 lg:p-14">
@@ -711,6 +696,7 @@ tailwind.config = {
     </ol>
   </div>
 </section>
+<div class="pin-buffer" aria-hidden="true"></div>
 </div>
 
 <div id="stack2">
@@ -777,8 +763,8 @@ tailwind.config = {
     <div class="mx-auto max-w-[1320px] px-6 md:px-10">
 
     <div class="max-w-2xl reveal">
-      <h2 id="svcHeading" class="relative font-serif text-[clamp(2rem,4.2vw,3.6rem)] leading-[1.1] tracking-[-0.02em]" aria-label="Work You Can Hire Me For.">
-        <span id="svcMeasure" class="svc-measure" aria-hidden="true">Work You Can Hire Me For.</span><span id="svcBox" class="svc-box"><span id="svcType" class="svc-text" aria-hidden="true">Work You Can Hire Me For.</span><span id="svcCaret" class="type-caret" aria-hidden="true"></span><i class="svc-handle tl" aria-hidden="true"></i><i class="svc-handle tr" aria-hidden="true"></i><i class="svc-handle bl" aria-hidden="true"></i><i class="svc-handle br" aria-hidden="true"></i><span id="svcCursor" class="svc-cursor" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-2 6-6-16z" fill="currentColor" stroke="rgb(var(--bg))" stroke-width="1.5" stroke-linejoin="round"/></svg><span class="tag">Amal</span></span></span>
+      <h2 data-split class="font-serif text-[clamp(2rem,4.2vw,3.6rem)] leading-[1.1] tracking-[-0.02em]">
+        Work You Can Hire Me For.
       </h2>
       <p class="reveal mt-7 max-w-md text-base leading-relaxed text-muted md:text-lg" style="--d:.1s">
         Need a brand from zero, a research sprint, a fresh pair of eyes on what you’ve already built, or a voice on stage? Let’s scope it together.
@@ -842,6 +828,7 @@ tailwind.config = {
     </div>
   </div>
 </section>
+<div class="pin-buffer" aria-hidden="true"></div>
 </div>
 
 <!-- ============================== MANIFESTO ============================== -->
@@ -860,7 +847,6 @@ tailwind.config = {
   </div>
 </section>
 
-<div id="stack3">
 <!-- ============================== WRITING ============================== -->
 <section id="writing" class="pt-16 pb-16 md:pt-24 md:pb-24">
     <div class="mx-auto max-w-[1320px] px-6 md:px-10">
@@ -932,7 +918,6 @@ tailwind.config = {
     </div>
   </div>
 </section>
-</div>
 
 </main>
 
@@ -1090,7 +1075,7 @@ tailwind.config = {
     slideStage.style.top = '0px'; slideTrack.style.height = 'auto';
     var h = slideStage.offsetHeight;   // as tall as the full-screen section underneath
     slideTop = Math.max(0, (window.innerHeight - h) / 2);
-    slideRun = window.innerHeight * 1.9;
+    slideRun = window.innerHeight * 0.75;
     slideStage.style.top = slideTop + 'px';
     slideTrack.style.height = (h + slideRun) + 'px';
   }
@@ -1099,7 +1084,7 @@ tailwind.config = {
   // Cascading stack: pin each section so its bottom edge rests on the bottom of the screen,
   // so the next one in the chain rises up and covers it instead of scrolling past normally
   var stackAbout = $('#about'), stackExp = $('#experience');
-  var stackEls = $$('#about, #experience, #education, #services, #writing');
+  var stackEls = $$('#about, #experience, #education, #services');
   function layoutStack() {
     if (reduce) return;
     stackEls.forEach(function (el) { el.style.top = Math.min(0, window.innerHeight - el.offsetHeight) + 'px'; });
@@ -1148,99 +1133,6 @@ tailwind.config = {
       wi = (wi + 1) % words.length;
       words[wi].classList.add('on');
     }, 2400);
-  }
-
-  // ───────── Services heading: cursor draws the full (smaller) box first, types inside it, then moves to the
-  // top-right corner and enlarges the box and text together, evenly, before fading and looping ─────────
-  var svcBox = $('#svcBox'), svcType = $('#svcType'), svcCursor = $('#svcCursor'), svcMeasure = $('#svcMeasure'),
-      svcHeading = $('#svcHeading'), svcCaret = $('#svcCaret');
-  if (svcBox && svcType && svcCursor && svcMeasure && svcHeading && svcCaret && !reduce) {
-    var svcWord = svcType.textContent;
-    var svcWait = function (ms) { return new Promise(function (res) { setTimeout(res, ms); }); };
-    var svcSizeAt = function (n) {
-      svcMeasure.textContent = svcWord.slice(0, n);
-      // +10px reserves room for the blinking caret so it never wraps onto a phantom next line
-      return { w: svcMeasure.offsetWidth + 10, h: svcMeasure.offsetHeight };
-    };
-    var svcSetFont = function (px) {
-      svcType.style.fontSize = px + 'px';
-      svcCaret.style.fontSize = px + 'px';
-      svcMeasure.style.fontSize = px + 'px';
-    };
-    svcType.textContent = '';
-    svcBox.style.width = '0px';
-    svcBox.style.height = '0px';
-    async function svcCycle() {
-      for (;;) {
-        var fullPx = parseFloat(getComputedStyle(svcHeading).fontSize);
-        var smallPx = fullPx * 0.83;
-        // reset
-        svcType.textContent = '';
-        svcType.style.opacity = '1';
-        svcCaret.style.opacity = '1';
-        svcCaret.style.animation = '';
-        svcSetFont(smallPx);
-        svcBox.classList.remove('resizing');
-        svcBox.style.width = '0px';
-        svcBox.style.height = '0px';
-        svcCursor.classList.remove('top');
-        svcCursor.classList.add('show');
-        svcBox.classList.add('resizing');
-        await svcWait(60);
-        // draw the box to fit the complete phrase at the smaller size first — cursor rides the bottom-right
-        // corner out; the box is complete and empty before any typing happens
-        var small = svcSizeAt(svcWord.length);
-        svcBox.style.width = small.w + 'px';
-        svcBox.style.height = small.h + 'px';
-        svcBox.classList.add('selected');
-        await svcWait(520);
-        // now type inside the already-drawn, static box — the caret rides along with the text since it's
-        // real inline content, not repositioned separately
-        for (var i = 1; i <= svcWord.length; i++) {
-          svcType.textContent = svcWord.slice(0, i);
-          await svcWait(58);
-        }
-        await svcWait(300);
-        // after typing: cursor moves up to the top-right corner first, on its own
-        svcCursor.classList.add('top');
-        await svcWait(460);
-        // it holds there briefly
-        await svcWait(280);
-        // then, separately, the box and text enlarge
-        svcMeasure.style.fontSize = fullPx + 'px';
-        var full = svcSizeAt(svcWord.length);
-        var rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        var maxAvail = svcHeading.clientWidth - 7.5 * rootPx;
-        svcSetFont(fullPx);
-        svcBox.style.width = Math.min(full.w * 1.08, maxAvail) + 'px';
-        svcBox.style.height = (full.h * 1.08) + 'px';
-        await svcWait(520);
-        // hold
-        await svcWait(1300);
-        // fade the text and caret out together (no backspacing) — stop the caret's own blink animation
-        // so it can't fight the opacity transition and get left visibly blinking on its own
-        svcType.style.opacity = '0';
-        svcCaret.style.animation = 'none';
-        svcCaret.style.opacity = '0';
-        await svcWait(420);
-        // now that both are invisible, clear the text so nothing has to reflow/wrap while the box collapses
-        svcType.textContent = '';
-        svcBox.classList.remove('selected');
-        svcCursor.classList.remove('show');
-        svcBox.style.width = '0px';
-        svcBox.style.height = '0px';
-        await svcWait(600);
-        svcBox.classList.remove('resizing');
-        await svcWait(500);
-      }
-    }
-    var svcStarted = false;
-    var svcObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !svcStarted) { svcStarted = true; svcCycle(); svcObserver.disconnect(); }
-      });
-    }, { threshold: .4 });
-    svcObserver.observe(svcBox);
   }
 
   // ───────── Footer year ─────────
@@ -1316,17 +1208,16 @@ tailwind.config = {
       stackAbout.style.opacity = (1 - 0.6 * ep).toFixed(3);
     }
 
-    // the gold shimmer plays right at the end of the pin's hold, just before the wipe begins —
-    // the last beat of this section, same as the quote above finishing right as it locks in place
-    if (slideTrack && !sheenDone && sy > vh * 0.8) {
+    // the gold shimmer plays right as the quote above finishes filling — no extra dead scroll in between
+    if (slideTrack && !sheenDone && sy > vh * 0.02) {
       sheenDone = true;
       var sh = $('.gold-sheen'); if (sh) sh.classList.add('sheen-go');
     }
 
-    // wipe: after the quote has finished, it slides left like a curtain and the section behind it is revealed
+    // wipe: right behind the shimmer, it slides left like a curtain and the section behind it is revealed
     if (slideTrack && slideOver && slideUnder && Math.abs(sy - slideLast) > 0.5) {
       slideLast = sy;
-      var sp = clamp((sy - vh * 0.9) / (vh * 0.85), 0, 1);   // a short hold first, so the shimmer can be seen
+      var sp = clamp((sy - vh * 0.08) / (vh * 0.55), 0, 1);
       var se = sp * sp * (3 - 2 * sp);
       slideOver.style.transform = 'translate3d(' + (-se * 102).toFixed(2) + '%,0,0)';
       slideUnder.style.transform = 'scale(' + (0.96 + 0.04 * se).toFixed(3) + ')';
