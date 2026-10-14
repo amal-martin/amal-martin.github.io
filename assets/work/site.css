@@ -3,13 +3,13 @@
    the same site, not a bolted-on section. */
 
 :root {
-  --bg: 0 0 0;
-  --surface: 28 28 30;
-  --ink: 245 245 247;
-  --muted: 152 152 157;
+  --bg: 255 255 255;
+  --surface: 243 243 245;
+  --ink: 29 29 31;
+  --muted: 110 110 115;
   --accent: 41 151 255;
   --on-accent: 0 0 0;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
