@@ -317,16 +317,37 @@ tailwind.config = {
   .edu-row:hover .edu-t { transform: translateX(6px); }
   .edu-row:hover .chip { border-color: rgb(var(--ink) / .3); color: rgb(var(--ink)); }
 
-  /* ---------- Services (borderless, typographic rows) ---------- */
-  .svc-cat { border-top: 1px solid rgb(var(--ink) / .12); padding-block: 2.25rem; }
+  /* ---------- Services (hover/tap-expand category rows) ---------- */
+  .svc-cat { position: relative; border-top: 1px solid rgb(var(--ink) / .12); padding: 2.75rem 0 2.75rem 1.9rem; }
   .svc-cat:last-child { border-bottom: 1px solid rgb(var(--ink) / .12); }
+  .svc-cat::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgb(var(--accent));
+    transform: scaleY(0); transform-origin: top; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+  .svc-cat.is-open::before { transform: scaleY(1); }
   .svc-cat-head { display: block; width: 100%; background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; }
-  .svc-cat-title { transition: color .3s ease; }
-  .svc-cat.is-open .svc-cat-title, .svc-cat-head:hover .svc-cat-title { color: rgb(var(--accent)); }
-  .svc-cat-body { margin-top: 1.5rem; }
+  .svc-cat-title { transition: color .3s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
+  .svc-cat.is-open .svc-cat-title, .svc-cat-head:hover .svc-cat-title { color: rgb(var(--accent)); transform: translateX(10px); }
+  .svc-cat-icon { display: grid; flex: none; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 999px;
+    border: 1px solid rgb(var(--ink) / .18); color: rgb(var(--ink));
+    transition: background-color .35s ease, border-color .35s ease, color .35s ease, transform .55s cubic-bezier(.34,1.56,.64,1); }
+  .svc-cat.is-open .svc-cat-icon, .svc-cat-head:hover .svc-cat-icon { background: rgb(var(--ink)); border-color: rgb(var(--ink)); color: rgb(var(--bg)); }
+  .svc-cat.is-open .svc-cat-icon { transform: rotate(45deg); }
+  .svc-cat-body { margin-top: 1.75rem; }
+  .svc-cat-lead { opacity: 1; transform: none; }
+  .svc-list { display: flex; flex-direction: column; }
+  .svc-list li { padding: .9rem 0; border-top: 1px solid rgb(var(--ink) / .1); font-size: 1rem; color: rgb(var(--muted));
+    transition: color .25s ease, padding-left .25s ease; }
+  .svc-list li:first-child { border-top: 0; padding-top: 0; }
+  .svc-list li:hover { color: rgb(var(--ink)); padding-left: .5rem; }
   html.js .svc-cat-body { margin-top: 0; max-height: 0; opacity: 0; overflow: hidden;
     transition: max-height .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease, margin-top .55s cubic-bezier(.2,.7,.2,1); }
-  html.js .svc-cat.is-open .svc-cat-body { margin-top: 1.5rem; opacity: 1; }
+  html.js .svc-cat.is-open .svc-cat-body { margin-top: 1.75rem; opacity: 1; }
+  html.js .svc-cat-lead { opacity: 0; transform: translateY(8px);
+    transition: opacity .5s ease .05s, transform .5s cubic-bezier(.2,.7,.2,1) .05s; }
+  html.js .svc-cat.is-open .svc-cat-lead { opacity: 1; transform: none; }
+  html.js .svc-list li { opacity: 0; transform: translateX(-12px);
+    transition: opacity .4s ease, transform .5s cubic-bezier(.2,.7,.2,1), color .25s ease, padding-left .25s ease;
+    transition-delay: calc(var(--i, 0) * 55ms), calc(var(--i, 0) * 55ms), 0s, 0s; }
+  html.js .svc-cat.is-open .svc-list li { opacity: 1; transform: none; }
 
 
   /* ---------- Writing cards (also used for Services) ---------- */
@@ -354,7 +375,7 @@ tailwind.config = {
     .js .reveal { opacity: 1; transform: none; transition: none; }
     .js [data-split] .sw-i { transform: none; transition: none; }
     .spin, .scrollline { animation: none; }
-    .card, .card:hover, .tl-title, .tl-item:hover .tl-title, .edu-t, .edu-row:hover .edu-t, .svc-cat-title, .svc-cat-head:hover .svc-cat-title, .svc-cat-body { transition: none; transform: none; }
+    .card, .card:hover, .tl-title, .tl-item:hover .tl-title, .edu-t, .edu-row:hover .edu-t, .svc-cat-title, .svc-cat-head:hover .svc-cat-title, .svc-cat-body, .svc-cat::before, .svc-cat-icon, .svc-cat-lead, .svc-list li { transition: none; transform: none; transition-delay: 0s; }
     .js .rot > span, .menu, .menu a, .stat, .lt, .ctile { transition: none; }
     .js .sec-rule { transform: none; transition: none; }
     .js [data-expand] { clip-path: none; }
@@ -778,65 +799,56 @@ tailwind.config = {
     <div class="reveal mt-12 md:mt-16" id="svcCats" style="--d:.1s">
       <div class="svc-cat is-open" data-idx="1">
         <button type="button" class="svc-cat-head" aria-expanded="true" aria-controls="svcBody1">
-          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <div>
-              <p class="text-xs text-muted">#<span class="text-accent">01</span></p>
-              <h3 class="svc-cat-title mt-3 font-serif text-2xl leading-[1.12] md:text-[2rem]">Product &amp; Experience</h3>
-            </div>
-            <p class="max-w-xs text-sm text-muted md:text-right">For businesses building or improving digital products.</p>
+          <div class="flex items-center justify-between gap-6">
+            <h3 class="svc-cat-title font-serif text-[clamp(1.85rem,3.6vw,2.75rem)] leading-[1.08]">Product &amp; Experience</h3>
+            <span class="svc-cat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></span>
           </div>
         </button>
         <div id="svcBody1" class="svc-cat-body">
-          <p class="max-w-xl text-sm leading-relaxed text-muted md:text-base">Help teams turn complex requirements into useful, intuitive digital experiences.</p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="chip">UX Design</span>
-            <span class="chip">UI Design</span>
-            <span class="chip">UI/UX Audit</span>
-            <span class="chip">High-Stakes UX</span>
-            <span class="chip">Design Systems</span>
-          </div>
+          <p class="svc-cat-lead max-w-2xl text-base leading-relaxed text-muted md:text-lg">For businesses building or improving digital products, I help teams turn complex requirements into useful, intuitive digital experiences.</p>
+          <ul class="svc-list mt-7">
+            <li style="--i:0">UX Design</li>
+            <li style="--i:1">UI Design</li>
+            <li style="--i:2">UI/UX Audit</li>
+            <li style="--i:3">High-Stakes UX</li>
+            <li style="--i:4">Design Systems</li>
+          </ul>
         </div>
       </div>
       <div class="svc-cat" data-idx="2">
         <button type="button" class="svc-cat-head" aria-expanded="false" aria-controls="svcBody2">
-          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <div>
-              <p class="text-xs text-muted">#<span class="text-accent">02</span></p>
-              <h3 class="svc-cat-title mt-3 font-serif text-2xl leading-[1.12] md:text-[2rem]">Digital Identity</h3>
-            </div>
-            <p class="max-w-xs text-sm text-muted md:text-right">For businesses creating a distinctive, consistent identity across their digital products.</p>
+          <div class="flex items-center justify-between gap-6">
+            <h3 class="svc-cat-title font-serif text-[clamp(1.85rem,3.6vw,2.75rem)] leading-[1.08]">Digital Identity</h3>
+            <span class="svc-cat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></span>
           </div>
         </button>
         <div id="svcBody2" class="svc-cat-body">
-          <p class="max-w-xl text-sm leading-relaxed text-muted md:text-base">Develop a visual language that makes digital products recognisable, cohesive, and accessible.</p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="chip">Brand Colours</span>
-            <span class="chip">Typography &amp; Visual Language</span>
-            <span class="chip">Digital Brand Guidelines</span>
-            <span class="chip">UI Branding &amp; Consistency</span>
-          </div>
+          <p class="svc-cat-lead max-w-2xl text-base leading-relaxed text-muted md:text-lg">For businesses creating a distinctive, consistent identity across their digital products, I develop a visual language that makes them recognisable, cohesive, and accessible.</p>
+          <ul class="svc-list mt-7">
+            <li style="--i:0">Brand Colours</li>
+            <li style="--i:1">Typography &amp; Visual Language</li>
+            <li style="--i:2">Digital Brand Guidelines</li>
+            <li style="--i:3">UI Branding &amp; Consistency</li>
+          </ul>
         </div>
       </div>
       <div class="svc-cat" data-idx="3">
         <button type="button" class="svc-cat-head" aria-expanded="false" aria-controls="svcBody3">
-          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <div>
-              <p class="text-xs text-muted">#<span class="text-accent">03</span></p>
-              <h3 class="svc-cat-title mt-3 font-serif text-2xl leading-[1.12] md:text-[2rem]">Research &amp; Collaboration</h3>
-            </div>
-            <p class="max-w-xs text-sm text-muted md:text-right">For teams and individuals seeking insight, guidance, or a fresh perspective.</p>
+          <div class="flex items-center justify-between gap-6">
+            <h3 class="svc-cat-title font-serif text-[clamp(1.85rem,3.6vw,2.75rem)] leading-[1.08]">Research &amp; Collaboration</h3>
+            <span class="svc-cat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></span>
           </div>
         </button>
         <div id="svcBody3" class="svc-cat-body">
-          <p class="max-w-xl text-sm leading-relaxed text-muted md:text-base">Bring research, structured thinking, and practical design experience into the decisions behind products and creative work.</p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="chip">User Research</span>
-            <span class="chip">Market Research</span>
-            <span class="chip">Design Thinking</span>
-            <span class="chip">Consulting</span>
-            <span class="chip">Talks &amp; Workshops</span>
-            <span class="chip">Mentoring <span class="text-accent">· Free</span></span>
-          </div>
+          <p class="svc-cat-lead max-w-2xl text-base leading-relaxed text-muted md:text-lg">For teams and individuals seeking insight, guidance, or a fresh perspective, I bring research, structured thinking, and practical design experience into the decisions behind products and creative work.</p>
+          <ul class="svc-list mt-7">
+            <li style="--i:0">User Research</li>
+            <li style="--i:1">Market Research</li>
+            <li style="--i:2">Design Thinking</li>
+            <li style="--i:3">Consulting</li>
+            <li style="--i:4">Talks &amp; Workshops</li>
+            <li style="--i:5">Mentoring <span class="text-accent">· Free</span></li>
+          </ul>
         </div>
       </div>
     </div>
