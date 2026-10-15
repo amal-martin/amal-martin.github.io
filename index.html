@@ -227,12 +227,12 @@ tailwind.config = {
 
   /* ---------- Starry Night card (Research Scholar) ---------- */
   /* The painting as a darkened, desaturated backdrop; cream text, muted gold accents */
-  .sky { position: relative; margin-inline: auto; max-width: 1320px; overflow: hidden; border-radius: 2rem; background: #070d1f; color: #f4ecd8; }
+  .sky { position: relative; margin-inline: auto; max-width: 1320px; overflow: hidden; border-radius: 2rem; background: #070d1f; color: #fff; }
   .sky-art { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; filter: saturate(.72); pointer-events: none; }
   .sky-veil { position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(180deg, rgb(5 9 24 / .78) 0%, rgb(5 9 24 / .68) 45%, rgb(5 9 24 / .84) 100%); }
   .edu-sky h3, .edu-sky p { text-shadow: 0 2px 18px rgb(3 7 20 / .6); }
-  .edu-sky .chip { border-color: rgb(232 217 174 / .4); color: rgb(244 236 216 / .85); }
+  .edu-sky .chip { border-color: rgb(255 255 255 / .4); color: rgb(255 255 255 / .85); }
 
   /* ---------- Contact ---------- */
   .lt { display: inline-block; transform-origin: 50% 90%; color: color-mix(in srgb, var(--hi, #2997FF) calc(var(--p, 0) * 100%), var(--base, #fff));
@@ -716,9 +716,9 @@ tailwind.config = {
       <img class="sky-art" src="assets/starry-night.webp" alt="" aria-hidden="true" width="1600" height="1000" loading="lazy">
       <div class="sky-veil" aria-hidden="true"></div>
       <div class="relative max-w-3xl">
-        <h3 class="font-serif text-3xl leading-[1.08] tracking-[-0.01em] text-[#f4ecd8] md:text-5xl">Research Scholar, Computer Science</h3>
-        <p class="mt-3 text-base text-[#f4ecd8]/80 md:text-lg">Kristu Jayanti University</p>
-        <p class="mt-6 max-w-xl text-sm leading-relaxed text-[#f4ecd8]/80 md:text-base">Research in Human–Computer Interaction, where user psychology, cognitive science and technology come together to shape how people use what we build.</p>
+        <h3 class="font-serif text-3xl leading-[1.08] tracking-[-0.01em] text-white md:text-5xl">Research Scholar, Computer Science</h3>
+        <p class="mt-3 text-base text-white/80 md:text-lg">Kristu Jayanti University</p>
+        <p class="mt-6 max-w-xl text-sm leading-relaxed text-white/80 md:text-base">Research in Human–Computer Interaction, where user psychology, cognitive science and technology come together to shape how people use what we build.</p>
         <div class="mt-6 flex flex-wrap gap-2"><span class="chip">HCI</span><span class="chip">User Psychology</span><span class="chip">Cognitive Science</span></div>
       </div>
     </div>
