@@ -318,9 +318,15 @@ tailwind.config = {
   .edu-row:hover .chip { border-color: rgb(var(--ink) / .3); color: rgb(var(--ink)); }
 
   /* ---------- Services (borderless, typographic rows) ---------- */
-  .svc-item { height: 100%; padding-top: 1.75rem; border-top: 1px solid rgb(var(--ink) / .12); }
-  .svc-item h3 { transition: transform .4s cubic-bezier(.2,.7,.2,1), color .3s ease; }
-  .svc-item:hover h3 { transform: translateX(6px); color: rgb(var(--accent)); }
+  .svc-cat { border-top: 1px solid rgb(var(--ink) / .12); padding-block: 2.25rem; }
+  .svc-cat:last-child { border-bottom: 1px solid rgb(var(--ink) / .12); }
+  .svc-cat-head { display: block; width: 100%; background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+  .svc-cat-title { transition: color .3s ease; }
+  .svc-cat.is-open .svc-cat-title, .svc-cat-head:hover .svc-cat-title { color: rgb(var(--accent)); }
+  .svc-cat-body { margin-top: 1.5rem; }
+  html.js .svc-cat-body { margin-top: 0; max-height: 0; opacity: 0; overflow: hidden;
+    transition: max-height .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease, margin-top .55s cubic-bezier(.2,.7,.2,1); }
+  html.js .svc-cat.is-open .svc-cat-body { margin-top: 1.5rem; opacity: 1; }
 
 
   /* ---------- Writing cards (also used for Services) ---------- */
@@ -348,7 +354,7 @@ tailwind.config = {
     .js .reveal { opacity: 1; transform: none; transition: none; }
     .js [data-split] .sw-i { transform: none; transition: none; }
     .spin, .scrollline { animation: none; }
-    .card, .card:hover, .tl-title, .tl-item:hover .tl-title, .edu-t, .edu-row:hover .edu-t, .svc-item h3, .svc-item:hover h3 { transition: none; transform: none; }
+    .card, .card:hover, .tl-title, .tl-item:hover .tl-title, .edu-t, .edu-row:hover .edu-t, .svc-cat-title, .svc-cat-head:hover .svc-cat-title, .svc-cat-body { transition: none; transform: none; }
     .js .rot > span, .menu, .menu a, .stat, .lt, .ctile { transition: none; }
     .js .sec-rule { transform: none; transition: none; }
     .js [data-expand] { clip-path: none; }
@@ -769,70 +775,70 @@ tailwind.config = {
       </p>
     </div>
 
-    <div class="mt-12 grid gap-x-8 gap-y-0 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
-      <div class="reveal" style="--d:0s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">01</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Brand Colors</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Considered palettes with clear rules for contrast, usage and accessibility, built to hold up across screens and print.</p>
-      </div></div>
-      <div class="reveal" style="--d:.06s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">02</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Brand Identity</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Logo, typography and visual language that make a brand instantly recognisable, plus the guidelines that keep it consistent.</p>
-      </div></div>
-      <div class="reveal" style="--d:.12s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">03</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">User Research</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Interviews, usability tests and synthesis, grounded in HCI and user psychology, that turn what people say and do into clear design decisions.</p>
-      </div></div>
-      <div class="reveal" style="--d:0s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">04</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Market Research</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Competitor and landscape analysis that shows where your product can stand apart.</p>
-      </div></div>
-      <div class="reveal" style="--d:.06s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">05</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">UX Design</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">User flows, information architecture, wireframes and prototypes: structure before surface.</p>
-      </div></div>
-      <div class="reveal" style="--d:.12s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">06</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">UI Design</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Polished, accessible interfaces and scalable design systems, ready for a smooth hand-off to developers.</p>
-      </div></div>
-      <div class="reveal" style="--d:0s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">07</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">UI/UX Audit</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">A clear review of an existing product: usability issues, inconsistencies and quick wins, prioritised.</p>
-      </div></div>
-      <div class="reveal" style="--d:.06s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">08</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Consultant</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">On-call design guidance for teams, from product direction and process to hand-off.</p>
-      </div></div>
-      <div class="reveal" style="--d:.12s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">09</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Talks</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Talks and workshops on design, creative practice and writing, for teams, campuses and events.</p>
-      </div></div>
-      <div class="reveal" style="--d:0s"><div class="svc-item">
-        <div class="flex items-center justify-between">
-          <p class="text-xs text-muted">#<span class="text-accent">10</span></p>
-          <span class="rounded-full bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">Free</span>
+    <div class="reveal mt-12 md:mt-16" id="svcCats" style="--d:.1s">
+      <div class="svc-cat is-open" data-idx="1">
+        <button type="button" class="svc-cat-head" aria-expanded="true" aria-controls="svcBody1">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <div>
+              <p class="text-xs text-muted">#<span class="text-accent">01</span></p>
+              <h3 class="svc-cat-title mt-3 font-serif text-2xl leading-[1.12] md:text-[2rem]">Product &amp; Experience</h3>
+            </div>
+            <p class="max-w-xs text-sm text-muted md:text-right">For businesses building or improving digital products.</p>
+          </div>
+        </button>
+        <div id="svcBody1" class="svc-cat-body">
+          <p class="max-w-xl text-sm leading-relaxed text-muted md:text-base">Help teams turn complex requirements into useful, intuitive digital experiences.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="chip">UX Design</span>
+            <span class="chip">UI Design</span>
+            <span class="chip">UI/UX Audit</span>
+            <span class="chip">High-Stakes UX</span>
+            <span class="chip">Design Systems</span>
+          </div>
         </div>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Mentoring</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Portfolio reviews, career advice, or just a conversation. Free, for anyone starting out in design. Reach out any time.</p>
-      </div></div>
-      <div class="reveal" style="--d:.06s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">11</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">Design Thinking</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Facilitated ideation, problem framing and rapid prototyping that turn vague briefs into testable concepts, fast.</p>
-      </div></div>
-      <div class="reveal" style="--d:.12s"><div class="svc-item">
-        <p class="text-xs text-muted">#<span class="text-accent">12</span></p>
-        <h3 class="mt-4 font-serif text-2xl leading-[1.12] md:text-[1.7rem]">High-Stakes UX</h3>
-        <p class="mt-3 pb-8 text-sm leading-relaxed text-muted">Interfaces for finance, healthcare and enterprise tools, designed for clarity and trust when mistakes are expensive.</p>
-      </div></div>
+      </div>
+      <div class="svc-cat" data-idx="2">
+        <button type="button" class="svc-cat-head" aria-expanded="false" aria-controls="svcBody2">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <div>
+              <p class="text-xs text-muted">#<span class="text-accent">02</span></p>
+              <h3 class="svc-cat-title mt-3 font-serif text-2xl leading-[1.12] md:text-[2rem]">Digital Identity</h3>
+            </div>
+            <p class="max-w-xs text-sm text-muted md:text-right">For businesses creating a distinctive, consistent identity across their digital products.</p>
+          </div>
+        </button>
+        <div id="svcBody2" class="svc-cat-body">
+          <p class="max-w-xl text-sm leading-relaxed text-muted md:text-base">Develop a visual language that makes digital products recognisable, cohesive, and accessible.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="chip">Brand Colours</span>
+            <span class="chip">Typography &amp; Visual Language</span>
+            <span class="chip">Digital Brand Guidelines</span>
+            <span class="chip">UI Branding &amp; Consistency</span>
+          </div>
+        </div>
+      </div>
+      <div class="svc-cat" data-idx="3">
+        <button type="button" class="svc-cat-head" aria-expanded="false" aria-controls="svcBody3">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <div>
+              <p class="text-xs text-muted">#<span class="text-accent">03</span></p>
+              <h3 class="svc-cat-title mt-3 font-serif text-2xl leading-[1.12] md:text-[2rem]">Research &amp; Collaboration</h3>
+            </div>
+            <p class="max-w-xs text-sm text-muted md:text-right">For teams and individuals seeking insight, guidance, or a fresh perspective.</p>
+          </div>
+        </button>
+        <div id="svcBody3" class="svc-cat-body">
+          <p class="max-w-xl text-sm leading-relaxed text-muted md:text-base">Bring research, structured thinking, and practical design experience into the decisions behind products and creative work.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="chip">User Research</span>
+            <span class="chip">Market Research</span>
+            <span class="chip">Design Thinking</span>
+            <span class="chip">Consulting</span>
+            <span class="chip">Talks &amp; Workshops</span>
+            <span class="chip">Mentoring <span class="text-accent">· Free</span></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1141,6 +1147,44 @@ tailwind.config = {
       wi = (wi + 1) % words.length;
       words[wi].classList.add('on');
     }, 2400);
+  }
+
+  // ───────── Services: category accordion (hover opens on desktop, tap toggles on touch) ─────────
+  var svcWrap = $('#svcCats');
+  if (svcWrap) {
+    var svcCats = $$('.svc-cat', svcWrap);
+    var openCat = function (cat) {
+      svcCats.forEach(function (c) {
+        var body = $('.svc-cat-body', c), head = $('.svc-cat-head', c);
+        var open = c === cat;
+        c.classList.toggle('is-open', open);
+        head.setAttribute('aria-expanded', String(open));
+        body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+      });
+    };
+    var closeCat = function (cat) {
+      var body = $('.svc-cat-body', cat), head = $('.svc-cat-head', cat);
+      cat.classList.remove('is-open');
+      head.setAttribute('aria-expanded', 'false');
+      body.style.maxHeight = '0px';
+    };
+    openCat(svcCats[0]);
+    svcCats.forEach(function (cat) {
+      var head = $('.svc-cat-head', cat);
+      if (fine) {
+        cat.addEventListener('mouseenter', function () { openCat(cat); });
+        head.addEventListener('click', function () { openCat(cat); });
+        head.addEventListener('focus', function () { openCat(cat); });
+      } else {
+        head.addEventListener('click', function () {
+          if (cat.classList.contains('is-open')) closeCat(cat); else openCat(cat);
+        });
+      }
+    });
+    addEventListener('resize', function () {
+      var open = svcCats.filter(function (c) { return c.classList.contains('is-open'); })[0];
+      if (open) $('.svc-cat-body', open).style.maxHeight = $('.svc-cat-body', open).scrollHeight + 'px';
+    });
   }
 
   // ───────── Footer year ─────────
