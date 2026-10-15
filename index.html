@@ -325,11 +325,11 @@ tailwind.config = {
   .svc-cat.is-open::before { transform: scaleY(1); }
   .svc-cat-head { display: block; width: 100%; background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; }
   .svc-cat-title { transition: color .3s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
-  .svc-cat.is-open .svc-cat-title, .svc-cat-head:hover .svc-cat-title { color: rgb(var(--accent)); transform: translateX(10px); }
+  .svc-cat.is-open .svc-cat-title { color: rgb(var(--accent)); transform: translateX(10px); }
   .svc-cat-icon { display: grid; flex: none; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 999px;
     border: 1px solid rgb(var(--ink) / .18); color: rgb(var(--ink));
     transition: background-color .35s ease, border-color .35s ease, color .35s ease, transform .55s cubic-bezier(.34,1.56,.64,1); }
-  .svc-cat.is-open .svc-cat-icon, .svc-cat-head:hover .svc-cat-icon { background: rgb(var(--ink)); border-color: rgb(var(--ink)); color: rgb(var(--bg)); }
+  .svc-cat.is-open .svc-cat-icon { background: rgb(var(--ink)); border-color: rgb(var(--ink)); color: rgb(var(--bg)); }
   .svc-cat.is-open .svc-cat-icon { transform: rotate(45deg); }
   .svc-cat-body { margin-top: 1.75rem; }
   .svc-cat-lead { opacity: 1; transform: none; }
@@ -337,7 +337,14 @@ tailwind.config = {
   .svc-list li { padding: .9rem 0; border-top: 1px solid rgb(var(--ink) / .1); font-size: 1rem; color: rgb(var(--muted));
     transition: color .25s ease, padding-left .25s ease; }
   .svc-list li:first-child { border-top: 0; padding-top: 0; }
-  .svc-list li:hover { color: rgb(var(--ink)); padding-left: .5rem; }
+  /* :hover rules gated to true hover/fine-pointer devices only — on touch, an
+     element with a :hover style needs a first tap to enter :hover and a second
+     to actually click, so untagged :hover here would force a double-tap to open. */
+  @media (hover: hover) and (pointer: fine) {
+    .svc-cat-head:hover .svc-cat-title { color: rgb(var(--accent)); transform: translateX(10px); }
+    .svc-cat-head:hover .svc-cat-icon { background: rgb(var(--ink)); border-color: rgb(var(--ink)); color: rgb(var(--bg)); }
+    .svc-list li:hover { color: rgb(var(--ink)); padding-left: .5rem; }
+  }
   html.js .svc-cat-body { margin-top: 0; max-height: 0; opacity: 0; overflow: hidden;
     transition: max-height .95s cubic-bezier(.16,1,.3,1), opacity .7s ease .1s, margin-top .95s cubic-bezier(.16,1,.3,1); }
   html.js .svc-cat.is-open .svc-cat-body { margin-top: 1.75rem; opacity: 1; }
