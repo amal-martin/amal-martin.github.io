@@ -1184,8 +1184,12 @@ tailwind.config = {
       var head = $('.svc-cat-head', cat);
       if (fine) {
         cat.addEventListener('mouseenter', function () { openCat(cat); });
-        head.addEventListener('click', function () { openCat(cat); });
+        cat.addEventListener('mouseleave', function () { if (cat.classList.contains('is-open')) closeCat(cat); });
+        head.addEventListener('click', function () {
+          if (cat.classList.contains('is-open')) closeCat(cat); else openCat(cat);
+        });
         head.addEventListener('focus', function () { openCat(cat); });
+        head.addEventListener('blur', function () { if (cat.classList.contains('is-open')) closeCat(cat); });
       } else {
         head.addEventListener('click', function () {
           if (cat.classList.contains('is-open')) closeCat(cat); else openCat(cat);
