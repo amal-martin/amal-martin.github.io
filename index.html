@@ -106,7 +106,7 @@ tailwind.config = {
     html.js #createCard { will-change: transform, opacity; }
   html.js #createText .w { opacity: 0; }
   }
-  /* One slow band of gold light passes across "Made by a human is the new luxury" the moment the quote has finished lighting up */
+  /* A slow band of gold light passes across "Made by a human is the new luxury". Each pass always finishes before the next one begins, and it keeps coming for as long as the quote is on screen */
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
     @media (prefers-reduced-motion: no-preference) {
       .gold-sheen {
@@ -114,7 +114,7 @@ tailwind.config = {
         background-size: 300% 100%; background-repeat: no-repeat; background-position: 100% 0;
         -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
       }
-      .gold-sheen.sheen-go { animation: goldSheenOnce 3.4s cubic-bezier(.45, .05, .25, 1) forwards; }
+      .gold-sheen.sheen-run { animation: goldSheenOnce 3.4s cubic-bezier(.45, .05, .25, 1) forwards; }
     }
   }
   @keyframes goldSheenOnce {
@@ -125,7 +125,7 @@ tailwind.config = {
 
   /* Cascading stack: each section pins (bottom edge on the bottom of the screen) while the next one
      rises over it with a rounded top edge and a lip of shadow, instead of scrolling past it normally.
-     About → Experience → Education → Services. The manifesto after it has its own pinned sequence,
+     About → Experience → Education, with Services rising over Education and then scrolling normally (it holds an accordion that opens taller than a laptop screen, so it must not be pinned). The manifesto after it has its own pinned sequence,
      left untouched; Writing and Contact after that scroll normally.
      A sticky element only holds its pinned position for as long as its own containing block gives it
      room to — with nothing after it in the same wrapper, it releases the instant it reaches that
@@ -154,8 +154,8 @@ tailwind.config = {
       background: rgb(var(--bg)); color: rgb(var(--ink)); border-radius: 2rem 2rem 0 0; border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16);
     }
     html.js #education { position: sticky; z-index: 2; min-height: 100svh; background: rgb(var(--bg)); border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); margin-top: -100svh; }
-    html.js #services { position: sticky; z-index: 3; min-height: 100svh; background: rgb(var(--bg)); border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
-    html.js #create { position: relative; z-index: 4; margin-top: -100svh; }
+    html.js #services { position: relative; z-index: 3; min-height: 100svh; background: rgb(var(--bg)); border-top: 1px solid rgb(var(--ink) / .08); box-shadow: 0 -30px 60px -24px rgb(0 0 0 / .16); }
+    html.js #create { position: relative; z-index: 4; }
     html.js .pin-buffer { height: 100svh; }
   }
 
@@ -457,7 +457,7 @@ tailwind.config = {
       </p>
 
       <p class="reveal mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg" style="--d:.6s">
-        An interdisciplinary designer exploring how people think, behave, and interact with technology. My work spans UI/UX, product, graphic design, and brand identity, shaped by an interest in psychology, philosophy, and writing.
+        An interdisciplinary designer exploring how people think, behave, and interact with technology. I design complex ERPs and heavy systems, and my work spans UI/UX, product, graphic design, and brand identity, shaped by an interest in psychology, philosophy, and writing.
       </p>
 
       <div class="reveal mt-9 flex flex-wrap gap-3" style="--d:.7s">
@@ -585,7 +585,7 @@ tailwind.config = {
     <h2 data-scrub class="max-w-4xl font-serif text-[clamp(2.6rem,6vw,5.5rem)] leading-[1.06] tracking-[-0.015em]">
       “The only way to do great work is <em>to love what you do.</em>”
     </h2>
-    <p class="reveal mt-5 text-right text-sm font-medium uppercase tracking-[.16em] text-muted">— Steve Jobs</p>
+    <p class="reveal mt-5 text-right text-sm font-medium uppercase tracking-[.16em] text-muted">Steve Jobs</p>
 
     <dl class="reveal mt-14 grid gap-x-10 gap-y-8 border-t border-ink/12 pt-10 text-sm sm:grid-cols-2 lg:grid-cols-3">
       <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Based in</dt><dd class="mt-2 text-base">Bengaluru, India</dd></div>
@@ -593,6 +593,7 @@ tailwind.config = {
       <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Also</dt><dd class="mt-2 text-base">Research Scholar in Computer Science · Writer · Poet</dd></div>
       <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Research</dt><dd class="mt-2 text-base">Human–Computer Interaction: user psychology, cognitive science &amp; technology</dd></div>
       <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Languages</dt><dd class="mt-2 text-base">Malayalam (mother tongue) · English · Hindi · Kannada · Tamil · Telugu</dd></div>
+      <div class="border-b border-ink/12 pb-6"><dt class="text-xs uppercase tracking-[.16em] text-muted">Focus</dt><dd class="mt-2 text-base">Complex ERPs and heavy systems</dd></div>
     </dl>
     </div>
 </section>
@@ -879,7 +880,7 @@ tailwind.config = {
     </div>
   </div>
 </section>
-<div class="pin-buffer" aria-hidden="true"></div>
+
 </div>
 
 <!-- ============================== MANIFESTO ============================== -->
@@ -1120,7 +1121,17 @@ tailwind.config = {
 
   // wipe: quote pinned, finishes lighting up, then slides left off-screen to uncover the next section
   var slideTrack = $('#slideTrack'), slideStage = $('#slideStage'), slideOver = $('#slideOver'), slideUnder = $('#slideUnder');
-  var slideTop = 72, slideRun = 0, slideLast = -999, sheenDone = false;
+  // the shimmer: one full pass, then a short breath, then the next pass, as long as the quote is wanted on screen
+  function sheenPlay() {
+    sheenEl = sheenEl || $('.gold-sheen'); if (!sheenEl) return;
+    sheenBusy = true; sheenEl.classList.remove('sheen-run'); void sheenEl.offsetWidth; sheenEl.classList.add('sheen-run');
+  }
+  document.addEventListener('animationend', function (e) {
+    if (e.animationName !== 'goldSheenOnce') return;
+    e.target.classList.remove('sheen-run'); sheenBusy = false;
+    sheenWait = setTimeout(function () { sheenWait = 0; if (sheenWanted) sheenPlay(); }, 1400);
+  });
+  var slideTop = 72, slideRun = 0, slideLast = -999, sheenWanted = false, sheenBusy = false, sheenWait = 0, sheenEl = null;
   function layoutSlide() {
     if (reduce || !slideTrack || !slideStage) return;
     slideStage.style.top = '0px'; slideTrack.style.height = 'auto';
@@ -1135,7 +1146,7 @@ tailwind.config = {
   // Cascading stack: pin each section so its bottom edge rests on the bottom of the screen,
   // so the next one in the chain rises up and covers it instead of scrolling past normally
   var stackAbout = $('#about'), stackExp = $('#experience');
-  var stackEls = $$('#about, #experience, #education, #services');
+  var stackEls = $$('#about, #experience, #education');
   function layoutStack() {
     if (reduce) return;
     stackEls.forEach(function (el) { el.style.top = Math.min(0, window.innerHeight - el.offsetHeight) + 'px'; });
@@ -1300,12 +1311,6 @@ tailwind.config = {
       stackAbout.style.opacity = (1 - 0.6 * ep).toFixed(3);
     }
 
-    // the gold shimmer plays right as the quote above finishes filling — no extra dead scroll in between
-    if (slideTrack && !sheenDone && sy > vh * 0.02) {
-      sheenDone = true;
-      var sh = $('.gold-sheen'); if (sh) sh.classList.add('sheen-go');
-    }
-
     // wipe: right behind the shimmer, it slides left like a curtain and the section behind it is revealed
     if (slideTrack && slideOver && slideUnder && Math.abs(sy - slideLast) > 0.5) {
       slideLast = sy;
@@ -1314,6 +1319,9 @@ tailwind.config = {
       slideOver.style.transform = 'translate3d(' + (-se * 102).toFixed(2) + '%,0,0)';
       slideUnder.style.transform = 'scale(' + (0.96 + 0.04 * se).toFixed(3) + ')';
       slideUnder.style.opacity = (0.55 + 0.45 * se).toFixed(3);
+      // the shimmer keeps coming for as long as the quote is on screen, and starts afresh each time it comes back
+      sheenWanted = sy > -vh * 0.5 && se < 0.55;
+      if (sheenWanted && !sheenBusy && !sheenWait) sheenPlay();
     }
 
     // manifesto: pinned at the centre of the screen while four things happen in order, all tied to scroll:

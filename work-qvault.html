@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QVault · Amal Martin</title>
+<meta name="description" content="QVault is a question paper archive: browse, filter and download semester-wise papers, with a manage view for staff and an analytics page. Case study by Amal Martin.">
+<meta name="author" content="Amal Martin">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QVault · Amal Martin">
+<meta property="og:description" content="A question paper archive: browse, filter and download semester-wise papers, with a manage view for staff and an analytics page.">
+<meta property="og:url" content="https://amal-martin.github.io/work-qvault.html">
+<meta property="og:image" content="https://amal-martin.github.io/assets/work/qvault-home.webp">
+<link rel="canonical" href="https://amal-martin.github.io/work-qvault.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f5f5f7' font-family='Georgia,serif' font-style='normal'%3Eam%3C/text%3E%3C/svg%3E">
+
+
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+})();
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Helvetica Neue"', 'Helvetica', 'Arial', '"Nimbus Sans"', 'sans-serif'],
+        sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', '"Nimbus Sans"', 'sans-serif']
+      },
+      colors: {
+        bg: 'rgb(var(--bg) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        onaccent: 'rgb(var(--on-accent) / <alpha-value>)'
+      }
+    }
+  }
+};
+</script>
+<link rel="stylesheet" href="assets/work/site.css">
+</head>
+
+<body class="bg-bg font-sans text-ink antialiased">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-bg">Skip to content</a>
+
+<header id="nav" class="fixed inset-x-0 top-0 z-50">
+  <div class="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-6 md:px-10">
+    <a href="index.html" class="font-serif text-[1.65rem] leading-none tracking-[-0.01em] md:text-[1.9rem]" aria-label="Amal Martin, home">Amal Martin</a>
+
+    <nav class="hidden items-center gap-6 text-sm md:flex lg:gap-8" aria-label="Primary">
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#experience" class="nav-link">Experience</a>
+      <a href="work.html" class="nav-link is-active" aria-current="page">Work</a>
+      <a href="index.html#education" class="nav-link">Education</a>
+      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="index.html#writing" class="nav-link">Writing</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <a href="index.html#contact" class="btn btn-solid hidden sm:inline-flex md:hidden lg:inline-flex">Let’s talk
+        <svg class="arr h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"
+        class="grid h-10 w-10 place-items-center rounded-full border border-ink/15 md:hidden">
+        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path class="ml1" d="M4 8h16"/><path class="ml2" d="M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="menu" class="menu md:hidden" inert>
+    <div class="menu-inner">
+      <nav class="mx-auto flex max-w-[1320px] flex-col px-6 pb-7 pt-2 font-serif text-4xl" aria-label="Mobile">
+        <a href="index.html#about" style="--i:0" class="py-1.5">About</a>
+        <a href="index.html#experience" style="--i:1" class="py-1.5">Experience</a>
+        <a href="work.html" style="--i:2" class="py-1.5 text-accent">Work</a>
+        <a href="index.html#education" style="--i:3" class="py-1.5">Education</a>
+        <a href="index.html#services" style="--i:4" class="py-1.5">Services</a>
+        <a href="index.html#writing" style="--i:5" class="py-1.5">Writing &amp; Poetry</a>
+        <a href="index.html#contact" style="--i:6" class="py-1.5">Contact</a>
+        <a href="mailto:amalmartin0075@gmail.com" style="--i:7" class="mt-5 font-sans text-sm text-muted">amalmartin0075@gmail.com</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================== HEADER ============================== -->
+<section class="pb-10 pt-32 md:pb-14 md:pt-40">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <a href="work.html" class="reveal inline-flex items-center gap-2 text-sm text-muted transition hover:text-ink">
+      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      All work
+    </a>
+    <h1 class="reveal mt-6 max-w-3xl font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.02em]" style="--d:.05s">QVault</h1>
+    <p class="reveal mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg" style="--d:.1s">A question paper archive for exam prep: browse, filter and download semester-wise papers, with a manage view for the people who run it and an analytics page showing how it is used.</p>
+
+    <dl class="reveal mt-10 flex flex-wrap gap-x-10 gap-y-6 border-t border-ink/12 pt-7 text-sm" style="--d:.15s">
+      <div><dt class="text-muted">Role</dt><dd class="mt-1">UI/UX Design</dd></div>
+      <div><dt class="text-muted">Status</dt><dd class="mt-1">Live</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================== BRIEF ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal max-w-2xl">
+      <h2 class="font-serif text-2xl leading-snug md:text-3xl">The brief</h2>
+      <p class="mt-4 text-base leading-relaxed text-muted md:text-lg">QVault's promise is written on its own home page: browse, filter and download semester-wise question papers that are organised, verified and ready for your prep. The design had to make that feel like one search away for students, and give the people who run the archive a simple way to keep it in order.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 1: HOME ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/qvault-home.webp" alt="QVault home page, with a large Q mark, the line Question papers. One search away., a search box, a grid of recently uploaded papers and a dark request panel" width="2000" height="1653" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">A home page that starts with the search</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">The home page opens on a large Q mark and the line “Question papers. One search away.”, with a search for course codes or titles right beside it. Below, the most recently uploaded papers sit in a tidy grid, and a dark panel at the bottom offers a way to request a missing paper or contact support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 2: SEARCH ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/qvault-search.webp" alt="QVault search results, with a search box, year, semester and exam type dropdowns, and a grid of paper cards with view, download and favourite actions" width="2000" height="1018" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">Narrowing the archive</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">A search box and three dropdowns for year, semester and exam type narrow the archive down. Each paper card shows its course code, title, exam type, semester and year, with a clear View button, a download and a favourite, and the figures beneath the icons show how often each has been used.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 3: MANAGE ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/qvault-manage.webp" alt="QVault manage view, the same paper grid with its own search and a delete action on each card, and Manage and Upload tabs in the navigation" width="2000" height="1018" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">A manage view for the people who run it</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">Staff get a separate Manage view with the same grid and its own search. The favourite on each card is swapped for a delete action, and the navigation gains Manage and Upload tabs, so keeping the archive in order sits in the same place as using it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SECTION 4: ANALYTICS ============================== -->
+<section class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal overflow-hidden rounded-[1.75rem] bg-surface">
+      <img src="assets/work/qvault-analytics.webp" alt="QVault analytics page, with four headline figures, an activity chart, a popular subjects bar chart, a trending papers list and a dark most favourited panel" width="2000" height="1198" loading="lazy" class="w-full">
+    </div>
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <h3 class="reveal md:col-span-4 font-serif text-2xl leading-snug md:text-3xl">Seeing how the archive is used</h3>
+      <p class="reveal md:col-span-7 md:col-start-6 text-base leading-relaxed text-muted md:text-lg" style="--d:.05s">An analytics page gathers total downloads, active users, search queries and total papers into four headline figures, with an activity chart that switches between daily, weekly and monthly. It also lists the most popular subjects, the trending papers and, in a dark panel that stands apart from the rest, the most favourited.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== NEXT PROJECT / CONTACT ============================== -->
+<section class="pb-24 md:pb-36">
+  <div class="mx-auto max-w-[1320px] px-6 md:px-10">
+    <div class="reveal flex flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-surface p-8 sm:flex-row sm:items-center md:p-12">
+      <div>
+        <h2 class="font-serif text-2xl leading-snug md:text-3xl">Have a project like this?</h2>
+        <p class="mt-2 max-w-md text-muted">I take on select freelance and contract work. Happy to talk about what you’re building.</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-solid flex-none">Let’s talk
+        <svg class="arr h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-4 px-6 py-8 text-xs text-muted sm:flex-row md:px-10">
+  <p>© <span id="year">2026</span> Amal Martin · Designed &amp; written in Bengaluru · <a href="privacy.html" class="transition hover:text-ink">Privacy Policy</a></p>
+  <a href="work.html" class="inline-flex items-center gap-2 transition hover:text-ink">All work
+    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</footer>
+
+<script src="assets/lenis.min.js"></script>
+<script src="assets/work/site.js"></script>
+</body>
+</html>
