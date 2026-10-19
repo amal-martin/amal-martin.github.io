@@ -32,6 +32,12 @@
 
   .halo { --u: calc(100cqw / 834); position: relative; width: 100%; height: calc(3148 * var(--u)); overflow: hidden; background: #fff; }
   .halo img { position: absolute; display: block; object-fit: cover; }
+  /* A parallaxed image needs its own exact-position box so the scroll-driven shift can never
+     bleed into a neighboring image/section: the box keeps the original Figma left/top/width/
+     height untouched and clips overflow, while the image inside it is oversized with slack in
+     both directions (top: -6%; height: 112%) for the transform to move within. */
+  .halo .pbox { position: absolute; overflow: hidden; }
+  .halo .pbox img { position: absolute; left: 0; top: -6%; width: 100%; height: 112%; }
   .halo .t { position: absolute; margin: 0; line-height: normal; white-space: nowrap; font-weight: normal; }
 
   .wm { font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 100; font-size: calc(120.669 * var(--u)); width: calc(318 * var(--u)); height: calc(119 * var(--u)); }
@@ -60,8 +66,9 @@
 <main class="halo" id="top">
 
   <!-- 1. hero portrait with the white wordmark -->
-  <img data-reveal="img" data-parallax="0.07" src="assets/halo/hero.webp" alt="A model with a platinum bob and dark sunglasses, in an orange high-neck outfit and a white belt, standing between terracotta walls under a blue sky" width="2560" height="1752"
-    style="left: calc(-6 * var(--u)); top: 0; width: calc(846 * var(--u)); height: calc(579 * var(--u));">
+  <div class="pbox" style="left: calc(-6 * var(--u)); top: 0; width: calc(846 * var(--u)); height: calc(579 * var(--u));">
+    <img data-reveal="img" data-parallax="0.07" src="assets/halo/hero.webp" alt="A model with a platinum bob and dark sunglasses, in an orange high-neck outfit and a white belt, standing between terracotta walls under a blue sky" width="2560" height="1752">
+  </div>
   <h1 class="t wm" data-reveal style="left: calc(494 * var(--u)); top: 0; color: #fff;">HALO</h1>
 
   <!-- 2. close-up with the first tagline -->
@@ -77,13 +84,15 @@
   </p>
 
   <!-- 4. flowers portrait -->
-  <img data-reveal="img" data-parallax="0.06" src="assets/halo/flowers.webp" alt="A dark portrait of a person with the light falling across half of their face, framed by deep red and pale white flowers" width="2560" height="1707"
-    style="left: 0; top: calc(1456 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
+  <div class="pbox" style="left: 0; top: calc(1456 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
+    <img data-reveal="img" data-parallax="0.06" src="assets/halo/flowers.webp" alt="A dark portrait of a person with the light falling across half of their face, framed by deep red and pale white flowers" width="2560" height="1707">
+  </div>
   <p class="t avenir" data-reveal style="left: calc(84 * var(--u)); top: calc(1923 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 200; color: #e0e0e0;">Shop Tomorrow, Today</p>
 
   <!-- 5. eye in the light -->
-  <img data-reveal="img" data-parallax="0.06" src="assets/halo/eye.webp" alt="A face turned toward a single beam of light, one eye lit and the rest of the frame in deep shadow" width="2560" height="1707"
-    style="left: 0; top: calc(2011 * var(--u)); width: calc(836 * var(--u)); height: calc(557 * var(--u));">
+  <div class="pbox" style="left: 0; top: calc(2011 * var(--u)); width: calc(836 * var(--u)); height: calc(557 * var(--u));">
+    <img data-reveal="img" data-parallax="0.06" src="assets/halo/eye.webp" alt="A face turned toward a single beam of light, one eye lit and the rest of the frame in deep shadow" width="2560" height="1707">
+  </div>
   <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2396 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.9999991456416deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%);">Own the Light</p>
   <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2473 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.99999902075191deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%); --d: .1s;">with Confidence</p>
 

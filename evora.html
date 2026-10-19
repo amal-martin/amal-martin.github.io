@@ -31,6 +31,12 @@
 
   .frame { --u: calc(100cqw / 834); position: relative; width: 100%; height: calc(3776 * var(--u)); overflow: hidden; background: #fff; }
   .frame img { position: absolute; display: block; object-fit: cover; }
+  /* A parallaxed image needs its own exact-position box so the scroll-driven shift can never
+     bleed into a neighboring image/section: the box keeps the original Figma left/top/width/
+     height untouched and clips overflow, while the image inside it is oversized with slack in
+     both directions (top: -6%; height: 112%) for the transform to move within. */
+  .frame .pbox { position: absolute; overflow: hidden; }
+  .frame .pbox img { position: absolute; left: 0; top: -6%; width: 100%; height: 112%; }
   .frame .clip-box { position: absolute; overflow: hidden; }
   .frame .ov { position: absolute; }
   .frame .t { position: absolute; margin: 0; line-height: normal; white-space: nowrap; }
@@ -76,7 +82,9 @@
   <img data-reveal="img" src="assets/evora/cat1.webp" alt="A black and white portrait of a person in a striped shirt with a small cat perched on their shoulder" width="1200" height="1754" loading="lazy" style="left: calc(44 * var(--u)); top: calc(1378 * var(--u)); width: calc(239 * var(--u)); height: calc(349 * var(--u));">
   <img data-reveal="img" src="assets/evora/cat2.webp" alt="A black and white portrait of a person with curly hair holding a black cat on their shoulder" width="1200" height="1754" loading="lazy" style="left: calc(304 * var(--u)); top: calc(1529 * var(--u)); width: calc(233 * var(--u)); height: calc(340 * var(--u)); --d: .08s;">
   <img data-reveal="img" src="assets/evora/man.webp" alt="A black and white portrait of a man in a leather jacket, one arm raised behind his head, against a pale column" width="1200" height="1800" loading="lazy" style="left: calc(558 * var(--u)); top: calc(1378 * var(--u)); width: calc(233 * var(--u)); height: calc(350 * var(--u)); --d: .16s;">
-  <img data-reveal="img" data-parallax="0.06" src="assets/evora/woman.webp" alt="A black and white photograph of a woman sitting in a chair in a waiting area, framed by blurred leaves" width="2560" height="1707" loading="lazy" style="left: calc(0 * var(--u)); top: calc(2043 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
+  <div class="pbox" style="left: calc(0 * var(--u)); top: calc(2043 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
+    <img data-reveal="img" data-parallax="0.06" src="assets/evora/woman.webp" alt="A black and white photograph of a woman sitting in a chair in a waiting area, framed by blurred leaves" width="2560" height="1707" loading="lazy">
+  </div>
   <p class="t" data-reveal aria-hidden="true" style="left: calc(597 * var(--u)); top: calc(2483 * var(--u)); font-size: calc(63.187 * var(--u)); font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 400; color: #fff;">ÉVORA</p>
   <p class="t" data-reveal style="left: calc(29 * var(--u)); top: calc(1934 * var(--u)); font-size: calc(63.187 * var(--u)); font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 400; color: #bbb9b9;">Minimalism</p>
   <p class="t" data-reveal style="left: calc(386 * var(--u)); top: calc(1979 * var(--u)); font-size: calc(22.02 * var(--u)); font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 400; color: #bbb9b9; --d: .1s;"><span style="color:#c6a66a">as</span> <span>expression</span></p>
