@@ -30,9 +30,31 @@
   html, body { margin: 0; background: #fff; -webkit-text-size-adjust: 100%; }
   body { -webkit-font-smoothing: antialiased; }
 
-  .halo { --u: calc(100cqw / 834); position: relative; width: 100%; height: calc(3148 * var(--u)); overflow: hidden; background: #fff; }
+  .halo { --u: calc(100cqw / 834); position: relative; width: 100%; background: #fff; }
   .halo img { position: absolute; display: block; object-fit: cover; }
   .halo .t { position: absolute; margin: 0; line-height: normal; white-space: nowrap; font-weight: normal; }
+
+  /* Each scene is capped to exactly one screen, so a tall full-bleed image never forces extra
+     scroll on its own. .scene-inner keeps every element's original Figma top/left untouched -
+     it just carries the whole scene up by its own start offset (--sy), so nothing needed
+     recalculating by hand and nothing can drift out of sync between scenes.
+     --u is normally width-driven (100cqw / 834), but that alone would let text positioned by
+     --u drift below a 100svh box on a wide-but-short viewport (width-scaling keeps growing
+     while the box height is capped). Re-deriving --u per scene as whichever is smaller - the
+     width-based scale, or 100svh spread over that scene's own natural unit-height (--n) -
+     keeps every element inside the visible box on any aspect ratio, at the cost of some
+     letterboxing on extreme ratios instead of clipping. */
+  .scene { position: relative; width: 100%; height: 100svh; overflow: hidden;
+    --u: min(calc(100cqw / 834), calc(100svh / var(--n, 834))); }
+  /* Full-bleed scene backgrounds are a direct child of .scene (never .scene-inner), so they
+     simply fill it edge to edge with no --sy math involved at all. */
+  .scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* A parallaxed bg needs slack to shift into without exposing the scene edge behind it -
+     oversized by more than the max possible scroll-driven offset in either direction. */
+  .scene-bg[data-parallax] { top: -6%; height: 112%; }
+  .scene-inner { position: absolute; left: 0; top: calc(-1 * var(--sy, 0) * var(--u)); width: 100%; height: 100%; }
+  .scene-center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    gap: calc(28 * var(--u)); padding: calc(40 * var(--u)) calc(24 * var(--u)); }
 
   .wm { font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 100; font-size: calc(120.669 * var(--u)); width: calc(318 * var(--u)); height: calc(119 * var(--u)); }
   .avenir { font-family: "Avenir Next", "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -60,42 +82,59 @@
 <main class="halo" id="top">
 
   <!-- 1. hero portrait with the white wordmark -->
-  <img data-reveal="img" data-parallax="0.07" src="assets/halo/hero.webp" alt="A model with a platinum bob and dark sunglasses, in an orange high-neck outfit and a white belt, standing between terracotta walls under a blue sky" width="2560" height="1752"
-    style="left: calc(-6 * var(--u)); top: 0; width: calc(846 * var(--u)); height: calc(579 * var(--u));">
-  <h1 class="t wm" data-reveal style="left: calc(494 * var(--u)); top: 0; color: #fff;">HALO</h1>
+  <section class="scene" style="--n: 579;">
+    <img class="scene-bg" data-reveal="img" data-parallax="0.07" src="assets/halo/hero.webp" alt="A model with a platinum bob and dark sunglasses, in an orange high-neck outfit and a white belt, standing between terracotta walls under a blue sky" width="2560" height="1752">
+    <div class="scene-inner" style="--sy: 0;">
+      <h1 class="t wm" data-reveal style="left: calc(494 * var(--u)); top: 0; color: #fff;">HALO</h1>
+    </div>
+  </section>
 
   <!-- 2. close-up with the first tagline -->
-  <img data-reveal="img" src="assets/halo/closeup.webp" alt="A black and white close-up of a face, with glittering flecks scattered across the cheekbone" width="2560" height="1707"
-    style="left: 0; top: calc(579 * var(--u)); width: calc(834 * var(--u)); height: calc(559 * var(--u)); object-position: 0 0;">
-  <p class="t avenir" data-reveal style="left: calc(39 * var(--u)); top: calc(1088 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 400; color: #e0e0e0;">Futuristic. Fearless. Halo.</p>
+  <section class="scene" style="--n: 559;">
+    <img class="scene-bg" data-reveal="img" src="assets/halo/closeup.webp" alt="A black and white close-up of a face, with glittering flecks scattered across the cheekbone" width="2560" height="1707" style="object-position: 0 0;">
+    <div class="scene-inner" style="--sy: 579;">
+      <p class="t avenir" data-reveal style="left: calc(39 * var(--u)); top: calc(1088 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 400; color: #e0e0e0;">Futuristic. Fearless. Halo.</p>
+    </div>
+  </section>
 
   <!-- 3. gradient wordmark and the brand line, on white -->
-  <p class="t wm clip" data-reveal aria-hidden="true" style="left: calc(31 * var(--u)); top: calc(1184 * var(--u)); background-image: linear-gradient(to bottom, #000, #c40003 113.87%);">HALO</p>
-  <p class="t" data-reveal style="left: calc(39 * var(--u)); top: calc(1341 * var(--u)); width: calc(457 * var(--u)); font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 200; font-size: calc(22.32 * var(--u)); color: #000; white-space: normal;">
-    <span style="display: block;">Halo is precision in beauty —</span>
-    <span style="display: block;">flawless, deliberate, and <span style="font-weight: 400;">ahead of its time.</span></span>
-  </p>
+  <section class="scene scene-center" style="--n: 318;">
+    <p class="t wm clip" data-reveal aria-hidden="true" style="position: static; background-image: linear-gradient(to bottom, #000, #c40003 113.87%);">HALO</p>
+    <p class="t" data-reveal style="position: static; width: calc(457 * var(--u)); font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 200; font-size: calc(22.32 * var(--u)); color: #000; white-space: normal;">
+      <span style="display: block;">Halo is precision in beauty —</span>
+      <span style="display: block;">flawless, deliberate, and <span style="font-weight: 400;">ahead of its time.</span></span>
+    </p>
+  </section>
 
   <!-- 4. flowers portrait -->
-  <img data-reveal="img" data-parallax="0.06" src="assets/halo/flowers.webp" alt="A dark portrait of a person with the light falling across half of their face, framed by deep red and pale white flowers" width="2560" height="1707"
-    style="left: 0; top: calc(1456 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
-  <p class="t avenir" data-reveal style="left: calc(84 * var(--u)); top: calc(1923 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 200; color: #e0e0e0;">Shop Tomorrow, Today</p>
+  <section class="scene" style="--n: 556;">
+    <img class="scene-bg" data-reveal="img" data-parallax="0.06" src="assets/halo/flowers.webp" alt="A dark portrait of a person with the light falling across half of their face, framed by deep red and pale white flowers" width="2560" height="1707">
+    <div class="scene-inner" style="--sy: 1456;">
+      <p class="t avenir" data-reveal style="left: calc(84 * var(--u)); top: calc(1923 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 200; color: #e0e0e0;">Shop Tomorrow, Today</p>
+    </div>
+  </section>
 
   <!-- 5. eye in the light -->
-  <img data-reveal="img" data-parallax="0.06" src="assets/halo/eye.webp" alt="A face turned toward a single beam of light, one eye lit and the rest of the frame in deep shadow" width="2560" height="1707"
-    style="left: 0; top: calc(2011 * var(--u)); width: calc(836 * var(--u)); height: calc(557 * var(--u));">
-  <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2396 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.9999991456416deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%);">Own the Light</p>
-  <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2473 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.99999902075191deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%); --d: .1s;">with Confidence</p>
+  <section class="scene" style="--n: 557;">
+    <img class="scene-bg" data-reveal="img" data-parallax="0.06" src="assets/halo/eye.webp" alt="A face turned toward a single beam of light, one eye lit and the rest of the frame in deep shadow" width="2560" height="1707">
+    <div class="scene-inner" style="--sy: 2011;">
+      <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2396 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.9999991456416deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%);">Own the Light</p>
+      <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2473 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.99999902075191deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%); --d: .1s;">with Confidence</p>
+    </div>
+  </section>
 
   <!-- 6. two black and white portraits -->
-  <img data-reveal="img" src="assets/halo/left.webp" alt="A black and white portrait of a young woman holding a small branch of delicate flowers in front of her" width="1600" height="2400"
-    style="left: 0; top: calc(2568 * var(--u)); width: calc(418 * var(--u)); height: calc(627 * var(--u));">
-  <img data-reveal="img" src="assets/halo/right.webp" alt="A black and white profile portrait of a man with his eyes closed and his face tilted up" width="1600" height="2400"
-    style="left: calc(421 * var(--u)); top: calc(2568 * var(--u)); width: calc(414 * var(--u)); height: calc(622 * var(--u)); --d: .1s;">
-  <p class="t avenir" data-reveal style="left: calc(128 * var(--u)); top: calc(2588 * var(--u)); font-size: calc(23.79 * var(--u)); font-weight: 200; color: #000;">Beyond Trends. </p>
-  <p class="t avenir" data-reveal style="left: calc(575 * var(--u)); top: calc(2588 * var(--u)); font-size: calc(23.79 * var(--u)); font-weight: 200; color: #fff; --d: .1s;">Beyond Time.</p>
-
-  <button type="button" class="join" data-reveal>Join the HALO Movement</button>
+  <section class="scene" style="--n: 580;">
+    <img class="scene-bg" data-reveal="img" src="assets/halo/left.webp" alt="A black and white portrait of a young woman holding a small branch of delicate flowers in front of her" width="1600" height="2400"
+      style="left: 0; width: calc(418 * var(--u)); right: auto;">
+    <img class="scene-bg" data-reveal="img" src="assets/halo/right.webp" alt="A black and white profile portrait of a man with his eyes closed and his face tilted up" width="1600" height="2400"
+      style="left: calc(421 * var(--u)); width: calc(414 * var(--u)); right: auto; --d: .1s;">
+    <div class="scene-inner" style="--sy: 2568;">
+    <p class="t avenir" data-reveal style="left: calc(128 * var(--u)); top: calc(2588 * var(--u)); font-size: calc(23.79 * var(--u)); font-weight: 200; color: #000;">Beyond Trends. </p>
+    <p class="t avenir" data-reveal style="left: calc(575 * var(--u)); top: calc(2588 * var(--u)); font-size: calc(23.79 * var(--u)); font-weight: 200; color: #fff; --d: .1s;">Beyond Time.</p>
+    <button type="button" class="join" data-reveal>Join the HALO Movement</button>
+    </div>
+  </section>
 </main>
 </div>
 

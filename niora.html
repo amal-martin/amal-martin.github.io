@@ -30,13 +30,20 @@
   html, body { margin: 0; background: #fff; -webkit-text-size-adjust: 100%; }
   body { -webkit-font-smoothing: antialiased; }
 
-  .frame { --u: calc(100cqw / 834); position: relative; width: 100%; height: calc(4806 * var(--u)); overflow: hidden; background: #fff; }
+  .frame { --u: calc(100cqw / 834); position: relative; width: 100%; background: #fff; }
   .frame img { position: absolute; display: block; object-fit: cover; }
   .frame .clip-box { position: absolute; overflow: hidden; }
   .frame .ov { position: absolute; }
   .frame .t { position: absolute; margin: 0; line-height: normal; white-space: nowrap; }
   .frame .t.wrap { white-space: normal; }
   .clip { -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+  /* Each scene is capped to exactly one screen - see halo.html for the full rationale. */
+  .scene { position: relative; width: 100%; height: 100svh; overflow: hidden;
+    --u: min(calc(100cqw / 834), calc(100svh / var(--n, 834))); }
+  .scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .scene-bg[data-parallax] { top: -6%; height: 112%; }
+  .scene-inner { position: absolute; left: 0; top: calc(-1 * var(--sy, 0) * var(--u)); width: 100%; height: 100%; }
 
   /* a small way back to the portfolio; not part of the design */
   .back { position: fixed; left: 14px; top: 14px; z-index: 5; display: inline-flex; align-items: center; gap: 6px; padding: 9px 13px; border-radius: 999px;
@@ -54,40 +61,86 @@
 
 <div class="stage">
 <main class="frame" id="top">
-  <div class="clip-box" data-reveal="img" data-parallax="0.06" style="left: calc(0 * var(--u)); top: calc(556 * var(--u)); width: calc(834 * var(--u)); height: calc(449 * var(--u));">
-    <img src="assets/niora/resort.webp" alt="A curved, arched interior with sofas and a bed, opening onto woodland through a large window" width="2560" height="1435" loading="lazy" style="left: 0%; top: -0.06%; width: 100%; height: 104.12%; object-fit: fill;">
-  </div>
-  <div class="ov" style="left: calc(0 * var(--u)); top: calc(556 * var(--u)); width: calc(834 * var(--u)); height: calc(449 * var(--u)); background: rgba(0,0,0,0.41);"></div>
-  <img data-reveal="img" data-parallax="0.05" src="assets/niora/hero.webp" alt="A small timber tree house set high in a green tree canopy above misty forest" width="2560" height="1707" loading="lazy" style="left: calc(0 * var(--u)); top: calc(0 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
-  <p class="t" data-reveal style="left: calc(42 * var(--u)); top: calc(96 * var(--u)); font-size: calc(23.911 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 400; color: #000;">Where Nature Meets Design.</p>
-  <h1 class="t" data-reveal style="left: calc(42 * var(--u)); top: calc(33 * var(--u)); font-size: calc(48.023 * var(--u)); font-family: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: #000; letter-spacing: -0.0109em;">NIORA</h1>
-  <div class="ov" data-reveal style="left: calc(42 * var(--u)); top: calc(204 * var(--u)); width: calc(120 * var(--u)); height: calc(31 * var(--u)); background: #c9a368; --d: .1s;"></div>
-  <p class="t" data-reveal style="left: calc(54 * var(--u)); top: calc(212 * var(--u)); font-size: calc(13.192 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: #fff; letter-spacing: -0.0536em; --d: .16s;">Explore Our Work</p>
-  <p class="t" data-reveal style="left: calc(294 * var(--u)); top: calc(766 * var(--u)); font-size: calc(23.911 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #fff; letter-spacing: -0.0142em;">Architecture Beyond Walls</p>
-  <p class="t" data-reveal style="left: calc(296 * var(--u)); top: calc(1062 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0116em;">Stone. Light. Air. Flow.</p>
-  <p class="t" data-reveal style="left: calc(94 * var(--u)); top: calc(3161 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0093em;">Purity</p>
-  <p class="t" data-reveal style="left: calc(632 * var(--u)); top: calc(3542 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0112em;">Balance</p>
-  <p class="t" data-reveal style="left: calc(81 * var(--u)); top: calc(3928 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0105em;">Elegance</p>
-  <p class="t wrap" data-reveal style="left: calc(115 * var(--u)); top: calc(1528 * var(--u)); width: calc(606 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0116em;">At Niora, we believe architecture is not about building over nature, but with it. Each project is a dialogue between human experience, natural materials, and timeless aesthetics.</p>
-  <img data-reveal="img" data-parallax="0.05" src="assets/niora/office.webp" alt="A sculptural stone reception desk with angled faces in a pale, sunlit concrete lobby" width="2560" height="1706" loading="lazy" style="left: calc(0 * var(--u)); top: calc(1142 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
-  <p class="t wrap" data-reveal style="left: calc(163 * var(--u)); top: calc(1771 * var(--u)); width: calc(509 * var(--u)); font-size: calc(14 * var(--u)); font-family: 'Lora', Georgia, 'Times New Roman', serif; font-weight: 400; color: #1e1e1e;">At Niora, we believe architecture is not about building over nature, but with it. </p>
-  <img data-reveal="img" src="assets/niora/entry-wide.webp" alt="A terracotta-walled entry hall with a bench, a round wooden wall piece and tall plants in diagonal sunlight" width="2560" height="1707" loading="lazy" style="left: calc(0 * var(--u)); top: calc(2340 * var(--u)); width: calc(835 * var(--u)); height: calc(556 * var(--u));">
-  <div class="clip-box" data-reveal="img" style="left: calc(20 * var(--u)); top: calc(1862 * var(--u)); width: calc(250 * var(--u)); height: calc(331 * var(--u));">
-    <img src="assets/niora/entry-crop.webp" alt="A warm timber-clad entryway with an arched opening, a console table and small ceramic vases" width="2560" height="1707" loading="lazy" style="left: -22.4%; top: -47.49%; width: 299.6%; height: 150.87%; object-fit: fill;">
-  </div>
-  <div class="clip-box" data-reveal="img" style="left: calc(283 * var(--u)); top: calc(1862 * var(--u)); width: calc(530 * var(--u)); height: calc(331 * var(--u)); --d: .08s;">
-    <img src="assets/niora/office-crop.webp" alt="A sculptural concrete reception desk with a warm glow beneath it, in a dark office with a city view" width="2560" height="1435" loading="lazy" style="left: 0%; top: -0.04%; width: 111.51%; height: 100.09%; object-fit: fill;">
-  </div>
-  <p class="t wrap" data-reveal style="left: calc(102 * var(--u)); top: calc(2258 * var(--u)); width: calc(631 * var(--u)); font-size: calc(14 * var(--u)); font-family: 'Lora', Georgia, 'Times New Roman', serif; font-weight: 400; color: #1e1e1e;">Each project is a dialogue between human experience, natural materials, and timeless aesthetics.</p>
-  <p class="t" data-reveal style="left: calc(452 * var(--u)); top: calc(2835 * var(--u)); font-size: calc(21.412 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #fff; letter-spacing: -0.0211em;">Step inside our world of timeless spaces.</p>
-  <p class="t wrap" data-reveal style="left: calc(28 * var(--u)); top: calc(2933 * var(--u)); width: calc(423.824 * var(--u)); font-size: calc(15.098 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 400; color: #000;">We believe spaces should not dominate nature but live with it. Our philosophy is rooted in dialogue — between stone and sky, light and shadow, human and earth.</p>
-  <img data-reveal="img" src="assets/niora/monstera.webp" alt="A bright room with a large monstera plant in a basket, a green armchair and a round mirror" width="2560" height="1707" loading="lazy" style="left: calc(278 * var(--u)); top: calc(3024 * var(--u)); width: calc(516 * var(--u)); height: calc(344 * var(--u));">
-  <img data-reveal="img" src="assets/niora/room.webp" alt="A sunlit room full of plants, with a rope hammock chair hanging by a large window" width="2560" height="1709" loading="lazy" style="left: calc(32 * var(--u)); top: calc(3406 * var(--u)); width: calc(492 * var(--u)); height: calc(328 * var(--u)); --d: .08s;">
-  <img data-reveal="img" src="assets/niora/entry-low.webp" alt="A light, plant-filled entry with sunlight falling in dappled shapes across a white wall" width="2560" height="1707" loading="lazy" style="left: calc(272 * var(--u)); top: calc(3772 * var(--u)); width: calc(522 * var(--u)); height: calc(348 * var(--u));">
-  <img data-reveal="img" data-parallax="0.05" src="assets/niora/cabin.webp" alt="A curved, organic cabin with glowing windows, set among trees and mist in a cloud forest" width="2560" height="1707" loading="lazy" style="left: calc(0 * var(--u)); top: calc(4250 * var(--u)); width: calc(834 * var(--u)); height: calc(556 * var(--u));">
-  <p class="t" data-reveal style="left: calc(274 * var(--u)); top: calc(4176 * var(--u)); font-size: calc(24.216 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 400; color: #555;">Modernism, Rooted in Nature</p>
-  <p class="t" data-reveal aria-hidden="true" style="left: calc(555 * var(--u)); top: calc(4705 * var(--u)); font-size: calc(48.023 * var(--u)); font-family: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: #fff; letter-spacing: -0.0109em;">NIORA</p>
-  <p class="t" data-reveal style="left: calc(555 * var(--u)); top: calc(4763 * var(--u)); font-size: calc(20.929 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #fff; letter-spacing: -0.0276em; --d: .1s;">Built for life, designed for eternity.</p>
+
+  <!-- 1: hero treehouse -->
+  <section class="scene" style="--n: 556;">
+    <img class="scene-bg" data-reveal="img" data-parallax="0.05" src="assets/niora/hero.webp" alt="A small timber tree house set high in a green tree canopy above misty forest" width="2560" height="1707" loading="lazy">
+    <div class="scene-inner" style="--sy: 0;">
+      <p class="t" data-reveal style="left: calc(42 * var(--u)); top: calc(96 * var(--u)); font-size: calc(23.911 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 400; color: #000;">Where Nature Meets Design.</p>
+      <h1 class="t" data-reveal style="left: calc(42 * var(--u)); top: calc(33 * var(--u)); font-size: calc(48.023 * var(--u)); font-family: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: #000; letter-spacing: -0.0109em;">NIORA</h1>
+      <div class="ov" data-reveal style="left: calc(42 * var(--u)); top: calc(204 * var(--u)); width: calc(120 * var(--u)); height: calc(31 * var(--u)); background: #c9a368; --d: .1s;"></div>
+      <p class="t" data-reveal style="left: calc(54 * var(--u)); top: calc(212 * var(--u)); font-size: calc(13.192 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: #fff; letter-spacing: -0.0536em; --d: .16s;">Explore Our Work</p>
+    </div>
+  </section>
+
+  <!-- 2: resort interior -->
+  <section class="scene" style="--n: 535;">
+    <div class="scene-bg clip-box" data-reveal="img" data-parallax="0.06">
+      <img src="assets/niora/resort.webp" alt="A curved, arched interior with sofas and a bed, opening onto woodland through a large window" width="2560" height="1435" loading="lazy" style="left: 0%; top: -0.06%; width: 100%; height: 104.12%; object-fit: fill;">
+    </div>
+    <div class="scene-bg" data-reveal style="background: rgba(0,0,0,0.41);"></div>
+    <div class="scene-inner" style="--sy: 556;">
+      <p class="t" data-reveal style="left: calc(294 * var(--u)); top: calc(766 * var(--u)); font-size: calc(23.911 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #fff; letter-spacing: -0.0142em;">Architecture Beyond Walls</p>
+      <p class="t" data-reveal style="left: calc(296 * var(--u)); top: calc(1062 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0116em;">Stone. Light. Air. Flow.</p>
+    </div>
+  </section>
+
+  <!-- 3: office reception desk -->
+  <section class="scene" style="--n: 690;">
+    <img class="scene-bg" data-reveal="img" data-parallax="0.05" src="assets/niora/office.webp" alt="A sculptural stone reception desk with angled faces in a pale, sunlit concrete lobby" width="2560" height="1706" loading="lazy">
+    <div class="scene-inner" style="--sy: 1142;">
+      <p class="t wrap" data-reveal style="left: calc(115 * var(--u)); top: calc(1528 * var(--u)); width: calc(606 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0116em;">At Niora, we believe architecture is not about building over nature, but with it. Each project is a dialogue between human experience, natural materials, and timeless aesthetics.</p>
+      <p class="t wrap" data-reveal style="left: calc(163 * var(--u)); top: calc(1771 * var(--u)); width: calc(509 * var(--u)); font-size: calc(14 * var(--u)); font-family: 'Lora', Georgia, 'Times New Roman', serif; font-weight: 400; color: #1e1e1e;">At Niora, we believe architecture is not about building over nature, but with it. </p>
+    </div>
+  </section>
+
+  <!-- 4: entry crop collage -->
+  <section class="scene" style="--n: 496;"><div class="scene-inner" style="--sy: 1862;">
+    <div class="clip-box" data-reveal="img" style="left: calc(20 * var(--u)); top: calc(1862 * var(--u)); width: calc(250 * var(--u)); height: calc(331 * var(--u));">
+      <img src="assets/niora/entry-crop.webp" alt="A warm timber-clad entryway with an arched opening, a console table and small ceramic vases" width="2560" height="1707" loading="lazy" style="left: -22.4%; top: -47.49%; width: 299.6%; height: 150.87%; object-fit: fill;">
+    </div>
+    <div class="clip-box" data-reveal="img" style="left: calc(283 * var(--u)); top: calc(1862 * var(--u)); width: calc(530 * var(--u)); height: calc(331 * var(--u)); --d: .08s;">
+      <img src="assets/niora/office-crop.webp" alt="A sculptural concrete reception desk with a warm glow beneath it, in a dark office with a city view" width="2560" height="1435" loading="lazy" style="left: 0%; top: -0.04%; width: 111.51%; height: 100.09%; object-fit: fill;">
+    </div>
+    <p class="t wrap" data-reveal style="left: calc(102 * var(--u)); top: calc(2258 * var(--u)); width: calc(631 * var(--u)); font-size: calc(14 * var(--u)); font-family: 'Lora', Georgia, 'Times New Roman', serif; font-weight: 400; color: #1e1e1e;">Each project is a dialogue between human experience, natural materials, and timeless aesthetics.</p>
+  </div></section>
+
+  <!-- 5: terracotta entry hall -->
+  <section class="scene" style="--n: 663;">
+    <img class="scene-bg" data-reveal="img" src="assets/niora/entry-wide.webp" alt="A terracotta-walled entry hall with a bench, a round wooden wall piece and tall plants in diagonal sunlight" width="2560" height="1707" loading="lazy">
+    <div class="scene-inner" style="--sy: 2340;">
+      <p class="t" data-reveal style="left: calc(452 * var(--u)); top: calc(2835 * var(--u)); font-size: calc(21.412 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #fff; letter-spacing: -0.0211em;">Step inside our world of timeless spaces.</p>
+      <p class="t wrap" data-reveal style="left: calc(28 * var(--u)); top: calc(2933 * var(--u)); width: calc(423.824 * var(--u)); font-size: calc(15.098 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 400; color: #000;">We believe spaces should not dominate nature but live with it. Our philosophy is rooted in dialogue — between stone and sky, light and shadow, human and earth.</p>
+    </div>
+  </section>
+
+  <!-- 6: Purity -->
+  <section class="scene" style="--n: 344;"><div class="scene-inner" style="--sy: 3024;">
+    <img data-reveal="img" src="assets/niora/monstera.webp" alt="A bright room with a large monstera plant in a basket, a green armchair and a round mirror" width="2560" height="1707" loading="lazy" style="left: calc(278 * var(--u)); top: calc(3024 * var(--u)); width: calc(516 * var(--u)); height: calc(344 * var(--u));">
+    <p class="t" data-reveal style="left: calc(94 * var(--u)); top: calc(3161 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0093em;">Purity</p>
+  </div></section>
+
+  <!-- 7: Balance -->
+  <section class="scene" style="--n: 328;"><div class="scene-inner" style="--sy: 3406;">
+    <img data-reveal="img" src="assets/niora/room.webp" alt="A sunlit room full of plants, with a rope hammock chair hanging by a large window" width="2560" height="1709" loading="lazy" style="left: calc(32 * var(--u)); top: calc(3406 * var(--u)); width: calc(492 * var(--u)); height: calc(328 * var(--u));">
+    <p class="t" data-reveal style="left: calc(632 * var(--u)); top: calc(3542 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0112em;">Balance</p>
+  </div></section>
+
+  <!-- 8: Elegance -->
+  <section class="scene" style="--n: 408;"><div class="scene-inner" style="--sy: 3772;">
+    <img data-reveal="img" src="assets/niora/entry-low.webp" alt="A light, plant-filled entry with sunlight falling in dappled shapes across a white wall" width="2560" height="1707" loading="lazy" style="left: calc(272 * var(--u)); top: calc(3772 * var(--u)); width: calc(522 * var(--u)); height: calc(348 * var(--u));">
+    <p class="t" data-reveal style="left: calc(81 * var(--u)); top: calc(3928 * var(--u)); font-size: calc(29.683 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #000; letter-spacing: -0.0105em;">Elegance</p>
+    <p class="t" data-reveal style="left: calc(274 * var(--u)); top: calc(4176 * var(--u)); font-size: calc(24.216 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 400; color: #555; --d: .1s;">Modernism, Rooted in Nature</p>
+  </div></section>
+
+  <!-- 9: cloud-forest cabin footer -->
+  <section class="scene" style="--n: 556;">
+    <img class="scene-bg" data-reveal="img" data-parallax="0.05" src="assets/niora/cabin.webp" alt="A curved, organic cabin with glowing windows, set among trees and mist in a cloud forest" width="2560" height="1707" loading="lazy">
+    <div class="scene-inner" style="--sy: 4250;">
+      <p class="t" data-reveal aria-hidden="true" style="left: calc(555 * var(--u)); top: calc(4705 * var(--u)); font-size: calc(48.023 * var(--u)); font-family: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: #fff; letter-spacing: -0.0109em;">NIORA</p>
+      <p class="t" data-reveal style="left: calc(555 * var(--u)); top: calc(4763 * var(--u)); font-size: calc(20.929 * var(--u)); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; color: #fff; letter-spacing: -0.0276em; --d: .1s;">Built for life, designed for eternity.</p>
+    </div>
+  </section>
 </main>
 </div>
 
