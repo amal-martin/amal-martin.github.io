@@ -38,14 +38,15 @@
      scroll on its own. .scene-inner keeps every element's original Figma top/left untouched -
      it just carries the whole scene up by its own start offset (--sy), so nothing needed
      recalculating by hand and nothing can drift out of sync between scenes.
-     --u is normally width-driven (100cqw / 834), but that alone would let text positioned by
-     --u drift below a 100svh box on a wide-but-short viewport (width-scaling keeps growing
-     while the box height is capped). Re-deriving --u per scene as whichever is smaller - the
-     width-based scale, or 100svh spread over that scene's own natural unit-height (--n) -
-     keeps every element inside the visible box on any aspect ratio, at the cost of some
-     letterboxing on extreme ratios instead of clipping. */
+     --u stays purely width-driven, exactly like the original single-canvas design - every
+     element (full-bleed images included) was positioned/sized off this same scale, so a
+     height-based clamp here would shrink text/partial-width images without shrinking a
+     width:100% background to match, pulling them out of their Figma-exact alignment. A
+     section's own height is simply fixed at 100svh regardless; on an extreme aspect ratio
+     that just means a full-bleed image's top/bottom gets cropped a little more, same as it
+     already does at any width via object-fit: cover. */
   .scene { position: relative; width: 100%; height: 100svh; overflow: hidden;
-    --u: min(calc(100cqw / 834), calc(100svh / var(--n, 834))); }
+    --u: calc(100cqw / 834); }
   /* Full-bleed scene backgrounds are a direct child of .scene (never .scene-inner), so they
      simply fill it edge to edge with no --sy math involved at all. */
   .scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -82,7 +83,7 @@
 <main class="halo" id="top">
 
   <!-- 1. hero portrait with the white wordmark -->
-  <section class="scene" style="--n: 579;">
+  <section class="scene">
     <img class="scene-bg" data-reveal="img" data-parallax="0.07" src="assets/halo/hero.webp" alt="A model with a platinum bob and dark sunglasses, in an orange high-neck outfit and a white belt, standing between terracotta walls under a blue sky" width="2560" height="1752">
     <div class="scene-inner" style="--sy: 0;">
       <h1 class="t wm" data-reveal style="left: calc(494 * var(--u)); top: 0; color: #fff;">HALO</h1>
@@ -90,7 +91,7 @@
   </section>
 
   <!-- 2. close-up with the first tagline -->
-  <section class="scene" style="--n: 559;">
+  <section class="scene">
     <img class="scene-bg" data-reveal="img" src="assets/halo/closeup.webp" alt="A black and white close-up of a face, with glittering flecks scattered across the cheekbone" width="2560" height="1707" style="object-position: 0 0;">
     <div class="scene-inner" style="--sy: 579;">
       <p class="t avenir" data-reveal style="left: calc(39 * var(--u)); top: calc(1088 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 400; color: #e0e0e0;">Futuristic. Fearless. Halo.</p>
@@ -98,7 +99,7 @@
   </section>
 
   <!-- 3. gradient wordmark and the brand line, on white -->
-  <section class="scene scene-center" style="--n: 318;">
+  <section class="scene scene-center">
     <p class="t wm clip" data-reveal aria-hidden="true" style="position: static; background-image: linear-gradient(to bottom, #000, #c40003 113.87%);">HALO</p>
     <p class="t" data-reveal style="position: static; width: calc(457 * var(--u)); font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 200; font-size: calc(22.32 * var(--u)); color: #000; white-space: normal;">
       <span style="display: block;">Halo is precision in beauty —</span>
@@ -107,7 +108,7 @@
   </section>
 
   <!-- 4. flowers portrait -->
-  <section class="scene" style="--n: 556;">
+  <section class="scene">
     <img class="scene-bg" data-reveal="img" data-parallax="0.06" src="assets/halo/flowers.webp" alt="A dark portrait of a person with the light falling across half of their face, framed by deep red and pale white flowers" width="2560" height="1707">
     <div class="scene-inner" style="--sy: 1456;">
       <p class="t avenir" data-reveal style="left: calc(84 * var(--u)); top: calc(1923 * var(--u)); font-size: calc(22.32 * var(--u)); font-weight: 200; color: #e0e0e0;">Shop Tomorrow, Today</p>
@@ -115,7 +116,7 @@
   </section>
 
   <!-- 5. eye in the light -->
-  <section class="scene" style="--n: 557;">
+  <section class="scene">
     <img class="scene-bg" data-reveal="img" data-parallax="0.06" src="assets/halo/eye.webp" alt="A face turned toward a single beam of light, one eye lit and the rest of the frame in deep shadow" width="2560" height="1707">
     <div class="scene-inner" style="--sy: 2011;">
       <p class="t avenir clip" data-reveal style="left: calc(475 * var(--u)); top: calc(2396 * var(--u)); font-size: calc(47.711 * var(--u)); font-weight: 200; background-image: linear-gradient(-89.9999991456416deg, rgb(255, 255, 255) 2.6799%, rgb(43, 43, 43) 97.703%);">Own the Light</p>
@@ -124,7 +125,7 @@
   </section>
 
   <!-- 6. two black and white portraits -->
-  <section class="scene" style="--n: 580;">
+  <section class="scene">
     <img class="scene-bg" data-reveal="img" src="assets/halo/left.webp" alt="A black and white portrait of a young woman holding a small branch of delicate flowers in front of her" width="1600" height="2400"
       style="left: 0; width: calc(418 * var(--u)); right: auto;">
     <img class="scene-bg" data-reveal="img" src="assets/halo/right.webp" alt="A black and white profile portrait of a man with his eyes closed and his face tilted up" width="1600" height="2400"

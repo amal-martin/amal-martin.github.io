@@ -44,7 +44,7 @@
      meant to cover the whole scene) lives in .scene-inner, keeping its original Figma top/left
      untouched since the wrapper's own -sy offset does the scene-local conversion. */
   .scene { position: relative; width: 100%; height: 100svh; overflow: hidden;
-    --u: min(calc(100cqw / 834), calc(100svh / var(--n, 834))); }
+    --u: calc(100cqw / 834); }
   .scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .scene-bg[data-parallax] { top: -6%; height: 112%; }
   .scene-inner { position: absolute; left: 0; top: calc(-1 * var(--sy, 0) * var(--u)); width: 100%; height: 100%; }
@@ -67,7 +67,7 @@
 <main class="frame" id="top">
 
   <!-- Scene A: black header + full-bleed street hero -->
-  <section class="scene" style="--n: 691;">
+  <section class="scene">
     <div class="scene-bg clip-box" data-reveal="img" data-parallax="0.06">
       <img src="assets/evora/street.webp" alt="A black and white close-up of two people in sunglasses, the nearer one out of focus, in a loose jacket" width="2400" height="1920" loading="lazy" style="left: 0%; top: -21.76%; width: 100%; height: 145.04%; object-fit: fill;">
     </div>
@@ -80,7 +80,7 @@
   </section>
 
   <!-- Scene B: Fall/Winter lookbook grid -->
-  <section class="scene" style="--n: 660;"><div class="scene-inner" style="--sy: 691;">
+  <section class="scene"><div class="scene-inner" style="--sy: 691;">
     <div class="ov" data-reveal style="left: calc(0 * var(--u)); top: calc(691 * var(--u)); width: calc(834 * var(--u)); height: calc(573 * var(--u)); background: #f8f5f0;"></div>
     <p class="t" data-reveal style="left: calc(151 * var(--u)); top: calc(754 * var(--u)); font-size: calc(23.512 * var(--u)); font-family: 'Gloock', Georgia, 'Times New Roman', serif; font-weight: 400; color: #000;">Fall / Winter 2025 — “A Dialogue in Black &amp; Light”</p>
     <img data-reveal="img" src="assets/evora/look1.webp" alt="A black and white portrait of a woman in a black halter top, one hand on her hip, against a dark backdrop" width="900" height="1350" loading="lazy" style="left: calc(79 * var(--u)); top: calc(850 * var(--u)); width: calc(209 * var(--u)); height: calc(267 * var(--u));">
@@ -93,7 +93,7 @@
   </div></section>
 
   <!-- Scene C: cat/man portrait trio -->
-  <section class="scene" style="--n: 692;"><div class="scene-inner" style="--sy: 1351;">
+  <section class="scene"><div class="scene-inner" style="--sy: 1351;">
     <img data-reveal="img" src="assets/evora/cat1.webp" alt="A black and white portrait of a person in a striped shirt with a small cat perched on their shoulder" width="1200" height="1754" loading="lazy" style="left: calc(44 * var(--u)); top: calc(1378 * var(--u)); width: calc(239 * var(--u)); height: calc(349 * var(--u));">
     <img data-reveal="img" src="assets/evora/cat2.webp" alt="A black and white portrait of a person with curly hair holding a black cat on their shoulder" width="1200" height="1754" loading="lazy" style="left: calc(304 * var(--u)); top: calc(1529 * var(--u)); width: calc(233 * var(--u)); height: calc(340 * var(--u)); --d: .08s;">
     <img data-reveal="img" src="assets/evora/man.webp" alt="A black and white portrait of a man in a leather jacket, one arm raised behind his head, against a pale column" width="1200" height="1800" loading="lazy" style="left: calc(558 * var(--u)); top: calc(1378 * var(--u)); width: calc(233 * var(--u)); height: calc(350 * var(--u)); --d: .16s;">
@@ -102,7 +102,7 @@
   </div></section>
 
   <!-- Scene D: full-bleed waiting-room photo -->
-  <section class="scene" style="--n: 556;">
+  <section class="scene">
     <img class="scene-bg" data-reveal="img" data-parallax="0.06" src="assets/evora/woman.webp" alt="A black and white photograph of a woman sitting in a chair in a waiting area, framed by blurred leaves" width="2560" height="1707" loading="lazy">
     <div class="scene-inner" style="--sy: 2043;">
       <p class="t" data-reveal aria-hidden="true" style="left: calc(597 * var(--u)); top: calc(440 * var(--u)); font-size: calc(63.187 * var(--u)); font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 400; color: #fff;">ÉVORA</p>
@@ -110,7 +110,7 @@
   </section>
 
   <!-- Scene E: "Eternal / Made to Matter" grey block -->
-  <section class="scene" style="--n: 866;"><div class="scene-inner" style="--sy: 2598;">
+  <section class="scene"><div class="scene-inner" style="--sy: 2598;">
     <div class="ov" data-reveal style="left: calc(0 * var(--u)); top: calc(2598 * var(--u)); width: calc(834 * var(--u)); height: calc(502 * var(--u)); background: #e5e5e5;"></div>
     <p class="t" data-reveal style="left: calc(455 * var(--u)); top: calc(2788 * var(--u)); font-size: calc(60 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 700; color: #0a0a0a;">Eternal</p>
     <p class="t" data-reveal style="left: calc(42 * var(--u)); top: calc(3155 * var(--u)); font-size: calc(50 * var(--u)); font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-weight: 700; color: #0a0a0a;">Made to Matter</p>
@@ -126,7 +126,7 @@
   </div></section>
 
   <!-- Scene F: black footer -->
-  <section class="scene" style="--n: 311;"><div class="scene-inner" style="--sy: 3465;">
+  <section class="scene"><div class="scene-inner" style="--sy: 3465;">
     <div class="ov" data-reveal style="left: calc(0 * var(--u)); top: calc(3465 * var(--u)); width: calc(834 * var(--u)); height: calc(311 * var(--u)); background: #0a0a0a;"></div>
     <div class="ov" data-reveal style="left: calc(261 * var(--u)); top: calc(3699.7 * var(--u)); width: calc(312.006 * var(--u)); height: calc(0.3 * var(--u)); background: #c6a66a;"></div>
     <p class="t" data-reveal style="left: calc(370 * var(--u)); top: calc(3726 * var(--u)); font-size: calc(14 * var(--u)); font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; color: rgba(255,255,255,0.8);">ÉVORA, 2025.</p>
