@@ -29,20 +29,13 @@
   html, body { margin: 0; background: #fff; -webkit-text-size-adjust: 100%; }
   body { -webkit-font-smoothing: antialiased; }
 
-  .frame { --u: calc(100cqw / 834); position: relative; width: 100%; background: #fff; }
+  .frame { --u: calc(100cqw / 834); position: relative; width: 100%; height: calc(2839 * var(--u)); overflow: hidden; background: #fff; }
   .frame img { position: absolute; display: block; object-fit: cover; }
   .frame .clip-box { position: absolute; overflow: hidden; }
   .frame .ov { position: absolute; }
   .frame .t { position: absolute; margin: 0; line-height: normal; white-space: nowrap; }
   .frame .t.wrap { white-space: normal; }
   .clip { -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
-
-  /* Each scene is capped to exactly one screen - see halo.html for the full rationale. */
-  .scene { position: relative; width: 100%; height: 100svh; overflow: hidden;
-    --u: calc(100cqw / 834); }
-  .scene-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .scene-bg[data-parallax] { top: -6%; height: 112%; }
-  .scene-inner { position: absolute; left: 0; top: calc(-1 * var(--sy, 0) * var(--u)); width: 100%; height: 100%; }
 
   /* a small way back to the portfolio; not part of the design */
   .back { position: fixed; left: 14px; top: 14px; z-index: 5; display: inline-flex; align-items: center; gap: 6px; padding: 9px 13px; border-radius: 999px;
@@ -60,58 +53,28 @@
 
 <div class="stage">
 <main class="frame" id="top">
-
-  <!-- 1: beach hero -->
-  <section class="scene">
-    <img class="scene-bg" data-reveal="img" data-parallax="0.06" src="assets/meloa/beach.webp" alt="A 3D cartoon girl in sunglasses, a white top and mint shorts, holding a striped coral towel beside a palm tree on a sandy beach under a lilac sky" width="2560" height="1463" loading="lazy">
-    <div class="scene-inner" style="--sy: 0;">
-      <h1 class="t" data-reveal style="left: calc(605 * var(--u)); top: calc(36 * var(--u)); font-size: calc(64.587 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #0a0a0a;">Meloa</h1>
-      <p class="t" data-reveal style="left: calc(612 * var(--u)); top: calc(115 * var(--u)); font-size: calc(19.967 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #fff; --d: .08s;">Every stitch, a hug.</p>
-      <div class="ov" data-reveal style="left: calc(606 * var(--u)); top: calc(412 * var(--u)); width: calc(214 * var(--u)); height: calc(50 * var(--u)); background: #f77c72; --d: .16s;"></div>
-      <p class="t" data-reveal style="left: calc(629 * var(--u)); top: calc(427 * var(--u)); font-size: calc(16.345 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #fff; --d: .2s;">Explore the Collection</p>
-    </div>
-  </section>
-
-  <!-- 2: intro copy -->
-  <section class="scene"><div class="scene-inner" style="--sy: 527;">
-    <p class="t" data-reveal style="left: calc(151 * var(--u)); top: calc(527 * var(--u)); font-size: calc(40 * var(--u)); font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; color: #000;">Soft beginnings, strong care.</p>
-    <p class="t wrap" data-reveal style="left: calc(62 * var(--u)); top: calc(613 * var(--u)); width: calc(710 * var(--u)); font-size: calc(18 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #4a4a4a; text-align: center;">Meloa creates gentle clothing for little ones, blending comfort, playfulness, and care in every thread. Clothes that move with them, grow with them, and hug them.</p>
-  </div></section>
-
-  <!-- 3: cozy cloud hoodie -->
-  <section class="scene">
-    <img class="scene-bg" data-reveal="img" data-parallax="0.05" src="assets/meloa/walk.webp" alt="A 3D cartoon girl in an orange jacket, lavender trousers and yellow sneakers walking past a large pink tree and holding a flower" width="2560" height="1463" loading="lazy">
-    <div class="scene-inner" style="--sy: 709;">
-      <p class="t" data-reveal style="left: calc(409 * var(--u)); top: calc(795 * var(--u)); font-size: calc(36 * var(--u)); font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; color: #000;">The Cozy Cloud Hoodie</p>
-      <p class="t wrap" data-reveal style="left: calc(417 * var(--u)); top: calc(885 * var(--u)); width: calc(372 * var(--u)); font-size: calc(18 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #4a4a4a;">As soft as a hug, as warm as sunshine. Designed for play, built for comfort.</p>
-      <div class="ov" data-reveal style="left: calc(507 * var(--u)); top: calc(985 * var(--u)); width: calc(148 * var(--u)); height: calc(50 * var(--u)); background: #8be0c5;"></div>
-      <p class="t" data-reveal style="left: calc(526 * var(--u)); top: calc(1000 * var(--u)); font-size: calc(18 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Own the Hug</p>
-    </div>
-  </section>
-
-  <!-- 4: shoe + collection intro -->
-  <section class="scene"><div class="scene-inner" style="--sy: 1186;">
-    <img data-reveal="img" src="assets/meloa/shoe.webp" alt="A blue and white children&#x27;s sneaker with a strap and a chunky sole" width="1000" height="1000" loading="lazy" style="left: calc(507 * var(--u)); top: calc(1186 * var(--u)); width: calc(308 * var(--u)); height: calc(308 * var(--u));">
-    <p class="t" data-reveal style="left: calc(68 * var(--u)); top: calc(1238 * var(--u)); font-size: calc(49.355 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">The Collection</p>
-    <p class="t" data-reveal style="left: calc(68 * var(--u)); top: calc(1336 * var(--u)); font-size: calc(18.228 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000; --d: .08s;">Sunny Steps, Starry Snug, Dreamy Days</p>
-  </div></section>
-
-  <!-- 5: rose garden walk -->
-  <section class="scene">
-    <img class="scene-bg" data-reveal="img" data-parallax="0.05" src="assets/meloa/rose.webp" alt="A 3D cartoon woman with an afro in an orange jacket, lavender trousers and yellow sneakers, holding a pink tulip as she walks past round pink trees" width="2560" height="1463" loading="lazy">
-    <div class="scene-inner" style="--sy: 1520;">
-      <p class="t" data-reveal style="left: calc(50 * var(--u)); top: calc(2054 * var(--u)); font-size: calc(32.903 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Care stitched into every piece.</p>
-    </div>
-  </section>
-
-  <!-- 6: knit + garden collage, footer -->
-  <section class="scene"><div class="scene-inner" style="--sy: 2084;">
-    <img data-reveal="img" src="assets/meloa/knit.webp" alt="A pink knitted swatch on a pair of golden knitting needles" width="1000" height="1000" loading="lazy" style="left: calc(480 * var(--u)); top: calc(2084 * var(--u)); width: calc(296 * var(--u)); height: calc(296 * var(--u));">
-    <p class="t wrap" data-reveal style="left: calc(50 * var(--u)); top: calc(2122 * var(--u)); width: calc(480 * var(--u)); font-size: calc(18.433 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000; --d: .08s;">We use gentle fabrics and thoughtful design, making childhood both comfortable and kind to the earth.</p>
-    <img data-reveal="img" src="assets/meloa/garden.webp" alt="A 3D cartoon girl in a mint top and yellow trousers standing among flowers and pink trees, with a city skyline behind" width="1000" height="1750" loading="lazy" style="left: calc(50 * var(--u)); top: calc(2321.42 * var(--u)); width: calc(277.524 * var(--u)); height: calc(485.578 * var(--u)); --d: .16s;">
-    <p class="t" data-reveal style="left: calc(404 * var(--u)); top: calc(2508 * var(--u)); font-size: calc(32.903 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Childhood is short.<br>Comfort lasts forever.</p>
-    <p class="t" data-reveal style="left: calc(705 * var(--u)); top: calc(2787 * var(--u)); font-size: calc(16.452 * var(--u)); font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; color: #000;">Meloa, 2025.</p>
-  </div></section>
+  <img data-reveal="img" data-parallax="0.06" src="assets/meloa/beach.webp" alt="A 3D cartoon girl in sunglasses, a white top and mint shorts, holding a striped coral towel beside a palm tree on a sandy beach under a lilac sky" width="2560" height="1463" loading="lazy" style="left: calc(0 * var(--u)); top: calc(0 * var(--u)); width: calc(834 * var(--u)); height: calc(477 * var(--u));">
+  <h1 class="t" data-reveal style="left: calc(605 * var(--u)); top: calc(36 * var(--u)); font-size: calc(64.587 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #0a0a0a;">Meloa</h1>
+  <p class="t" data-reveal style="left: calc(612 * var(--u)); top: calc(115 * var(--u)); font-size: calc(19.967 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #fff; --d: .08s;">Every stitch, a hug.</p>
+  <div class="ov" data-reveal style="left: calc(606 * var(--u)); top: calc(412 * var(--u)); width: calc(214 * var(--u)); height: calc(50 * var(--u)); background: #f77c72; --d: .16s;"></div>
+  <p class="t" data-reveal style="left: calc(629 * var(--u)); top: calc(427 * var(--u)); font-size: calc(16.345 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #fff; --d: .2s;">Explore the Collection</p>
+  <p class="t" data-reveal style="left: calc(151 * var(--u)); top: calc(527 * var(--u)); font-size: calc(40 * var(--u)); font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; color: #000;">Soft beginnings, strong care.</p>
+  <p class="t wrap" data-reveal style="left: calc(62 * var(--u)); top: calc(613 * var(--u)); width: calc(710 * var(--u)); font-size: calc(18 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #4a4a4a; text-align: center;">Meloa creates gentle clothing for little ones, blending comfort, playfulness, and care in every thread. Clothes that move with them, grow with them, and hug them.</p>
+  <img data-reveal="img" data-parallax="0.05" src="assets/meloa/walk.webp" alt="A 3D cartoon girl in an orange jacket, lavender trousers and yellow sneakers walking past a large pink tree and holding a flower" width="2560" height="1463" loading="lazy" style="left: calc(0 * var(--u)); top: calc(709 * var(--u)); width: calc(834 * var(--u)); height: calc(477 * var(--u));">
+  <p class="t" data-reveal style="left: calc(409 * var(--u)); top: calc(795 * var(--u)); font-size: calc(36 * var(--u)); font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; color: #000;">The Cozy Cloud Hoodie</p>
+  <div class="ov" data-reveal style="left: calc(507 * var(--u)); top: calc(985 * var(--u)); width: calc(148 * var(--u)); height: calc(50 * var(--u)); background: #8be0c5;"></div>
+  <p class="t" data-reveal style="left: calc(526 * var(--u)); top: calc(1000 * var(--u)); font-size: calc(18 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Own the Hug</p>
+  <img data-reveal="img" data-parallax="0.05" src="assets/meloa/rose.webp" alt="A 3D cartoon woman with an afro in an orange jacket, lavender trousers and yellow sneakers, holding a pink tulip as she walks past round pink trees" width="2560" height="1463" loading="lazy" style="left: calc(0 * var(--u)); top: calc(1520 * var(--u)); width: calc(834 * var(--u)); height: calc(476 * var(--u));">
+  <img data-reveal="img" src="assets/meloa/shoe.webp" alt="A blue and white children&#x27;s sneaker with a strap and a chunky sole" width="1000" height="1000" loading="lazy" style="left: calc(507 * var(--u)); top: calc(1186 * var(--u)); width: calc(308 * var(--u)); height: calc(308 * var(--u));">
+  <img data-reveal="img" src="assets/meloa/knit.webp" alt="A pink knitted swatch on a pair of golden knitting needles" width="1000" height="1000" loading="lazy" style="left: calc(480 * var(--u)); top: calc(2084 * var(--u)); width: calc(296 * var(--u)); height: calc(296 * var(--u));">
+  <img data-reveal="img" src="assets/meloa/garden.webp" alt="A 3D cartoon girl in a mint top and yellow trousers standing among flowers and pink trees, with a city skyline behind" width="1000" height="1750" loading="lazy" style="left: calc(50 * var(--u)); top: calc(2321.42 * var(--u)); width: calc(277.524 * var(--u)); height: calc(485.578 * var(--u));">
+  <p class="t wrap" data-reveal style="left: calc(417 * var(--u)); top: calc(885 * var(--u)); width: calc(372 * var(--u)); font-size: calc(18 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #4a4a4a;">As soft as a hug, as warm as sunshine. Designed for play, built for comfort.</p>
+  <p class="t" data-reveal style="left: calc(68 * var(--u)); top: calc(1238 * var(--u)); font-size: calc(49.355 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">The Collection</p>
+  <p class="t" data-reveal style="left: calc(50 * var(--u)); top: calc(2054 * var(--u)); font-size: calc(32.903 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Care stitched into every piece.</p>
+  <p class="t" data-reveal style="left: calc(404 * var(--u)); top: calc(2508 * var(--u)); font-size: calc(32.903 * var(--u)); font-family: 'Fredoka One', 'Fredoka', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Childhood is short.<br>Comfort lasts forever.</p>
+  <p class="t" data-reveal style="left: calc(68 * var(--u)); top: calc(1336 * var(--u)); font-size: calc(18.228 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">Sunny Steps, Starry Snug, Dreamy Days</p>
+  <p class="t wrap" data-reveal style="left: calc(50 * var(--u)); top: calc(2122 * var(--u)); width: calc(480 * var(--u)); font-size: calc(18.433 * var(--u)); font-family: 'Quicksand', 'Nunito', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; color: #000;">We use gentle fabrics and thoughtful design, making childhood both comfortable and kind to the earth.</p>
+  <p class="t" data-reveal style="left: calc(705 * var(--u)); top: calc(2787 * var(--u)); font-size: calc(16.452 * var(--u)); font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; color: #000;">Meloa, 2025.</p>
 </main>
 </div>
 
